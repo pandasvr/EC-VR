@@ -1,17 +1,3 @@
-<<<<<<< HEAD
-fileFormatVersion: 2
-guid: 8c81a27fd18a29444be92481fe681f4b
-timeCreated: 1544852180
-licenseType: Store
-MonoImporter:
-  serializedVersion: 2
-  defaultReferences: []
-  executionOrder: 0
-  icon: {instanceID: 0}
-  userData: 
-  assetBundleName: 
-  assetBundleVariant: 
-=======
 fileFormatVersion: 2
 guid: 8c81a27fd18a29444be92481fe681f4b
 timeCreated: 1434650764
@@ -24,4 +10,3 @@ MonoImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
->>>>>>> LoginUI

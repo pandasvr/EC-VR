@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-﻿//======= Copyright (c) Valve Corporation, All rights reserved. ===============
-=======
 //======= Copyright (c) Valve Corporation, All rights reserved. ===============
->>>>>>> LoginUI
 //
 // Purpose: Demonstrates the use of the controller hint system
 //
@@ -12,11 +8,7 @@ using UnityEngine;
 using System.Collections;
 using Valve.VR;
 
-<<<<<<< HEAD
-namespace Valve.VR.InteractionSystem.Sample
-=======
 namespace Valve.VR.InteractionSystem
->>>>>>> LoginUI
 {
 	//-------------------------------------------------------------------------
 	public class ControllerHintsExample : MonoBehaviour
@@ -77,21 +69,6 @@ namespace Valve.VR.InteractionSystem
 			ControllerButtonHints.HideAllButtonHints( hand );
 
 			while ( true )
-<<<<<<< HEAD
-            {
-                for (int actionIndex = 0; actionIndex < SteamVR_Input.actionsIn.Length; actionIndex++)
-                {
-                    ISteamVR_Action_In action = SteamVR_Input.actionsIn[actionIndex];
-                    if (action.GetActive(hand.handType))
-                    {
-                        ControllerButtonHints.ShowButtonHint(hand, action);
-                        yield return new WaitForSeconds(1.0f);
-                        ControllerButtonHints.HideButtonHint(hand, action);
-                        yield return new WaitForSeconds(0.5f);
-                    }
-                    yield return null;
-                }
-=======
 			{
 				ControllerButtonHints.ShowButtonHint( hand, EVRButtonId.k_EButton_ApplicationMenu );
 				yield return new WaitForSeconds( 1.0f );
@@ -103,7 +80,6 @@ namespace Valve.VR.InteractionSystem
 				yield return new WaitForSeconds( 1.0f );
 				ControllerButtonHints.ShowButtonHint( hand, EVRButtonId.k_EButton_SteamVR_Touchpad );
 				yield return new WaitForSeconds( 1.0f );
->>>>>>> LoginUI
 
 				ControllerButtonHints.HideAllButtonHints( hand );
 				yield return new WaitForSeconds( 1.0f );
@@ -119,24 +95,6 @@ namespace Valve.VR.InteractionSystem
 			ControllerButtonHints.HideAllTextHints( hand );
 
 			while ( true )
-<<<<<<< HEAD
-            {
-                for (int actionIndex = 0; actionIndex < SteamVR_Input.actionsIn.Length; actionIndex++)
-                {
-                    ISteamVR_Action_In action = SteamVR_Input.actionsIn[actionIndex];
-                    if (action.GetActive(hand.handType))
-                    {
-                        ControllerButtonHints.ShowTextHint(hand, action, action.GetShortName());
-                        yield return new WaitForSeconds(3.0f);
-                        ControllerButtonHints.HideTextHint(hand, action);
-                        yield return new WaitForSeconds(0.5f);
-                    }
-                    yield return null;
-                }
-
-                ControllerButtonHints.HideAllTextHints(hand);
-                yield return new WaitForSeconds(3.0f);
-=======
 			{
 				ControllerButtonHints.ShowTextHint( hand, EVRButtonId.k_EButton_ApplicationMenu, "Application" );
 				yield return new WaitForSeconds( 3.0f );
@@ -151,7 +109,6 @@ namespace Valve.VR.InteractionSystem
 
 				ControllerButtonHints.HideAllTextHints( hand );
 				yield return new WaitForSeconds( 3.0f );
->>>>>>> LoginUI
 			}
 		}
 	}

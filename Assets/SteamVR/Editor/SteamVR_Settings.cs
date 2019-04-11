@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-﻿//======= Copyright (c) Valve Corporation, All rights reserved. ===============
-//
-// Moved to SteamVR/Scripts/SteamVR_Settings.cs
-//
-//=============================================================================
-=======
 ﻿//======= Copyright (c) Valve Corporation, All rights reserved. ===============
 //
 // Purpose: Prompt developers to use settings most compatible with SteamVR.
@@ -693,4 +686,3 @@ public class SteamVR_Settings : EditorWindow
 	}
 }
 
->>>>>>> LoginUI

@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-//======= Copyright (c) Valve Corporation, All rights reserved. ===============
-//removed and added to the SteamVR_Settings asset so it can be configured per project
-=======
 //======= Copyright (c) Valve Corporation, All rights reserved. ===============
 //
 // Purpose: Preferences pane for how SteamVR plugin behaves.
@@ -50,4 +46,3 @@ public class SteamVR_Preferences
 	}
 }
 
->>>>>>> LoginUI

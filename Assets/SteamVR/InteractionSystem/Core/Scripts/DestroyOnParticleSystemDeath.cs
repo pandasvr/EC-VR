@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-﻿//======= Copyright (c) Valve Corporation, All rights reserved. ===============
-=======
 //======= Copyright (c) Valve Corporation, All rights reserved. ===============
->>>>>>> LoginUI
 //
 // Purpose: Destroys this object when its particle system dies
 //
