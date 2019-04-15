@@ -4,7 +4,7 @@ $pdo = PdoUnity::getPdoUnity();
 
 $name = $_REQUEST['name'];                              
 
-$resultat = $pdo->userConnect($name);
+$resultat = $pdo->signin($name);
 
-echo $resultat['passwordUser'];
+echo $resultat['userPassword'];
 ?>

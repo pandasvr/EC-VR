@@ -8,9 +8,9 @@ $userPassword = $_REQUEST['userPassword'];
 $resultat = $pdo->signup($userName, $userPassword);
 
 if($resultat){
-	$return = "true";
+	$return = true;
 }else{
-	$return = "false";
+	$return = false;
 }
 
 echo $return;
