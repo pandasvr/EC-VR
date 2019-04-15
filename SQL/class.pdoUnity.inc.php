@@ -38,10 +38,10 @@ class PdoUnity
 /**
  * Fonction qui vérifie le login et le password pour la connexion au site
  */
-	public function userConnect($login,$password)
+	public function userConnect($login)
 	{
-		$req="SELECT * FROM users where nameUser = '".$login."' AND passwordUser = '".$password."'";
-		$resultat=PdoUnity::$myPdo->query($req)->fetchAll();
+		$req="SELECT * FROM users where nameUser = '".$login."'";
+		$resultat=PdoUnity::$myPdo->query($req)->fetch();
 		return $resultat;
 	}
 }

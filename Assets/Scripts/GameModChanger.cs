@@ -5,25 +5,26 @@ using VRTK;
 
 public class GameModChanger : MonoBehaviour
 {
-    public GameObject NonVRCamera;
+    public GameObject UIVR;
+    public GameObject UIDesktop;
     public GameObject VRTK_SDKManager;
-    public Canvas UICanvas;
-    public VRTK_UICanvas UICanvasScript;
-    private Vector3 ScaleTemp;
-    private Vector3 PositionTemp;
-
-    public bool isVRActive;
+    public GameObject CameraDesktop;
+    
+    
+    private bool isVRActive;
 
     // Start is called before the first frame update
     void Start()
     {
+        //Récupération des variables
+        VRTK_SDKManager = GameObject.FindGameObjectWithTag("VRTKManager");
+        
+        //Initialisation de l'UI en mode VR
         isVRActive = true;
         VRTK_SDKManager.SetActive(true);
-        NonVRCamera.SetActive(false);
-        UICanvas.renderMode = RenderMode.WorldSpace;
-        //Scale par defaut
-        ScaleTemp = UICanvas.transform.localScale;
-        PositionTemp = UICanvas.transform.localPosition;
+        UIVR.SetActive(true);
+        UIDesktop.SetActive(false);
+        CameraDesktop.SetActive(false);
     }
 
     // Update is called once per frame
@@ -35,9 +36,9 @@ public class GameModChanger : MonoBehaviour
             {
                 Debug.Log("Desactivation mode VR");
                 VRTK_SDKManager.SetActive(false);
-                NonVRCamera.SetActive(true);
-                UICanvas.renderMode = RenderMode.ScreenSpaceOverlay;
-                UICanvasScript.enabled = false;
+                UIVR.SetActive(false);
+                UIDesktop.SetActive(true);
+                CameraDesktop.SetActive(true);
 
                 //Libère et rend visible la souris
                 Cursor.lockState = CursorLockMode.None;
@@ -50,11 +51,10 @@ public class GameModChanger : MonoBehaviour
             {
                 Debug.Log("Activation mode VR");
                 VRTK_SDKManager.SetActive(true);
-                NonVRCamera.SetActive(false);
-                UICanvas.renderMode = RenderMode.WorldSpace;
-                UICanvasScript.enabled = true;
-                UICanvas.transform.localScale = ScaleTemp;
-                UICanvas.transform.localPosition = PositionTemp;
+                VRTK_SDKManager.SetActive(true);
+                UIVR.SetActive(true);
+                UIDesktop.SetActive(false);
+                CameraDesktop.SetActive(false);
 
                 //Cache et bloque la souris
                 Cursor.lockState = CursorLockMode.Locked;
