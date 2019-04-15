@@ -46,7 +46,7 @@ public class SignUp : MonoBehaviour
         }
         else {
             Debug.Log("Post request complete!" + " Response Code: " + www.responseCode);
-            string responseText = www.downloadHandler.text;
+            bool responseText = BitConverter.ToBoolean(www.downloadHandler.data, 0);
             Debug.Log("Response Text:" + responseText);
         }
     }

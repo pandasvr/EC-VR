@@ -11,6 +11,8 @@ public class SignIn : MonoBehaviour
     public InputField fieldPassword;
 
     private bool isValidPassword;
+    private String userPassword;
+    private String userName;
 
     //Création d'une coroutine pour la connexion d'un utilisateur
     public void Call()
@@ -22,12 +24,14 @@ public class SignIn : MonoBehaviour
     IEnumerator ServerSend()
     {
         //Récupération des valeurs du formulaire
-        //hashedPassword = Hashing.HashPassword(fieldPassword.text);
-        WWWForm form = new WWWForm();
-        form.AddField("name", fieldName.text);
+        userPassword = Hashing.HashPassword(fieldPassword.text);
+        userName = fieldName.text;
         
-        Debug.Log("nameField :" + fieldName.text);
-        Debug.Log("passwordField :" + fieldPassword.text);
+        WWWForm form = new WWWForm();
+        form.AddField("name", userName);
+        
+        Debug.Log("nameField :" + userName);
+        Debug.Log("passwordField :" + userPassword);
 
         //Envoie des données au serveur
         UnityWebRequest www = UnityWebRequest.Post("http://127.0.0.1/edsa-unitySQL/signin.php", form);
@@ -44,7 +48,7 @@ public class SignIn : MonoBehaviour
             Debug.Log("Post request complete!" + " Response Code: " + www.responseCode);
             string responseText = www.downloadHandler.text;
             Debug.Log("Response Text:" + responseText);
-            isValidPassword = Hashing.ValidatePassword(responseText, fieldPassword.text);
+            isValidPassword = Hashing.ValidatePassword(fieldPassword.text, responseText);
             
             if (isValidPassword)
             {
