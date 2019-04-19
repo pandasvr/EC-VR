@@ -48,11 +48,12 @@ class PdoUnity
 /**
  * Fonction qui vérifie le userName et le password pour la connexion au site
  */
-	public function signup($userName, $userPassword)
+	public function signup($userName, $hashPassword, $userEmail)
 	{
-		$resultat=PdoUnity::$myPdo->prepare("INSERT INTO users(userName, userPassword) VALUES (:userName, :userPassword)");
+		$resultat=PdoUnity::$myPdo->prepare("INSERT INTO users(userName, hashPassword, userEmail) VALUES (:userName, :hashPassword, :userEmail)");
 		$resultat->bindParam(':userName', $userName);
-		$resultat->bindParam(':userPassword', $userPassword);
+		$resultat->bindParam(':hashPassword', $hashPassword);
+		$resultat->bindParam(':userEmail', $userEmail);
 		$resultat->execute();
 		return $resultat;
 	}
