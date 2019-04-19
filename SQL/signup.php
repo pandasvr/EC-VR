@@ -3,9 +3,11 @@ require_once("class.pdoUnity.inc.php");
 $pdo = PdoUnity::getPdoUnity();
 
 $userName = $_REQUEST['userName'];
-$userPassword = $_REQUEST['userPassword'];
+$hashPassword = $_REQUEST['hashPassword'];
+$userEmail = $_REQUEST['userEmail'];
 
-$resultat = $pdo->signup($userName, $userPassword);
+
+$resultat = $pdo->signup($userName, $hashPassword, $userEmail);
 
 if($resultat){
 	$return = true;

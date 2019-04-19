@@ -6,5 +6,5 @@ $name = $_REQUEST['name'];
 
 $resultat = $pdo->signin($name);
 
-echo $resultat['userPassword'];
+echo $resultat['hashPassword'];
 ?>
