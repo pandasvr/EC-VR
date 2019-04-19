@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -8,6 +9,9 @@ public class SignUp : MonoBehaviour
 {
     public InputField fieldName;
     public InputField fieldPassword;
+
+    private String userName;
+    private String userPassword;
 
     //Création d'une coroutine pour l'inscription d'un utilisateur
     public void Call()
@@ -19,12 +23,15 @@ public class SignUp : MonoBehaviour
     IEnumerator ServerSend()
     {
         //Récupération des valeurs du formulaire
-        WWWForm form = new WWWForm();
-        form.AddField("name", fieldName.text);
-        form.AddField("password", fieldPassword.text);
+        userName = fieldName.text;
+        userPassword = Hashing.HashPassword(fieldPassword.text);
         
-        Debug.Log("nameField :" + fieldName.text);
-        Debug.Log("passwordField :" + fieldPassword.text);
+        WWWForm form = new WWWForm();
+        form.AddField("userName", userName);
+        form.AddField("userPassword", userPassword);
+        
+        Debug.Log("nameField :" + userName);
+        Debug.Log("passwordField :" + userPassword);
 
         //Envoie des données au serveur
         UnityWebRequest www = UnityWebRequest.Post("http://127.0.0.1/edsa-unitySQL/signup.php", form);
@@ -39,7 +46,7 @@ public class SignUp : MonoBehaviour
         }
         else {
             Debug.Log("Post request complete!" + " Response Code: " + www.responseCode);
-            string responseText = www.downloadHandler.text;
+            bool responseText = BitConverter.ToBoolean(www.downloadHandler.data, 0);
             Debug.Log("Response Text:" + responseText);
         }
     }

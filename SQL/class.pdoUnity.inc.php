@@ -36,12 +36,24 @@ class PdoUnity
 
 	
 /**
- * Fonction qui vérifie le login et le password pour la connexion au site
+ * Fonction qui vérifie le userName et le password pour la connexion au site
  */
-	public function userConnect($login)
+	public function signin($userName)
 	{
-		$req="SELECT * FROM users where nameUser = '".$login."'";
+		$req="SELECT * FROM users where userName = '".$userName."'";
 		$resultat=PdoUnity::$myPdo->query($req)->fetch();
+		return $resultat;
+	}
+
+/**
+ * Fonction qui vérifie le userName et le password pour la connexion au site
+ */
+	public function signup($userName, $userPassword)
+	{
+		$resultat=PdoUnity::$myPdo->prepare("INSERT INTO users(userName, userPassword) VALUES (:userName, :userPassword)");
+		$resultat->bindParam(':userName', $userName);
+		$resultat->bindParam(':userPassword', $userPassword);
+		$resultat->execute();
 		return $resultat;
 	}
 }
