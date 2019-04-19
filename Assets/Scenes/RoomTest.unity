@@ -336,6 +336,37 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 33202555}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &59044433
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 59044434}
+  m_Layer: 0
+  m_Name: Menu
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &59044434
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 59044433}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 467140082}
+  m_Father: {fileID: 417959536}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &128783745
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1697,10 +1728,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 417959535}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 5}
+  m_LocalPosition: {x: 0, y: 2, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 467140082}
+  - {fileID: 59044434}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1718,13 +1749,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameObjectToFollow: {fileID: 558916778}
   gameObjectToChange: {fileID: 417959535}
-  followsPosition: 0
-  smoothsPosition: 0
-  maxAllowedPerFrameDistanceDifference: 0.003
+  followsPosition: 1
+  smoothsPosition: 1
+  maxAllowedPerFrameDistanceDifference: 50
   followsRotation: 1
-  smoothsRotation: 0
-  maxAllowedPerFrameAngleDifference: 1.5
-  followsScale: 0
+  smoothsRotation: 1
+  maxAllowedPerFrameAngleDifference: 200
+  followsScale: 1
   smoothsScale: 0
   maxAllowedPerFrameSizeDifference: 0.003
   _moment: 3
@@ -1835,10 +1866,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
+  m_BlockingObjects: 3
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 0
 --- !u!114 &467140080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1894,7 +1925,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1270502174}
-  m_Father: {fileID: 417959536}
+  m_Father: {fileID: 59044434}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2141,7 +2172,6 @@ GameObject:
   m_Component:
   - component: {fileID: 558916780}
   - component: {fileID: 558916779}
-  - component: {fileID: 558916781}
   m_Layer: 0
   m_Name: HeadSetFollower
   m_TagString: Untagged
@@ -2176,30 +2206,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &558916781
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 558916778}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe5040c2eaa9ff147b80ded004191c67, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameObjectToFollow: {fileID: 0}
-  gameObjectToChange: {fileID: 0}
-  followsPosition: 1
-  smoothsPosition: 0
-  maxAllowedPerFrameDistanceDifference: 0.003
-  followsRotation: 1
-  smoothsRotation: 0
-  maxAllowedPerFrameAngleDifference: 1.5
-  followsScale: 0
-  smoothsScale: 0
-  maxAllowedPerFrameSizeDifference: 0.003
-  _moment: 3
 --- !u!1 &591298033
 GameObject:
   m_ObjectHideFlags: 0
@@ -3350,7 +3356,7 @@ MonoBehaviour:
   m_FontData:
     m_Font: {fileID: 12800000, guid: 6facee79595f3564182e2d74499f4ab5, type: 3}
     m_FontSize: 14
-    m_FontStyle: 0
+    m_FontStyle: 1
     m_BestFit: 1
     m_MinSize: 10
     m_MaxSize: 22
@@ -3694,7 +3700,7 @@ RectTransform:
   m_GameObject: {fileID: 1270502171}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 3.7469091}
-  m_LocalScale: {x: 0.0019999999, y: 0.0019999999, z: 1}
+  m_LocalScale: {x: 0.002, y: 0.002, z: 1}
   m_Children:
   - {fileID: 318180851}
   - {fileID: 1345470319}
