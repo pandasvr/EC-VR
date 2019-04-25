@@ -10,13 +10,13 @@ public class SignUp : MonoBehaviour
 {
     public InputField fieldName;
     public InputField fieldPassword;
+    public InputField fieldEmail;
 
-    private String userName;
-    private String userPassword;
-    private String hashPassword;
-    private String cryptPassword;
-
-    private String tempEmail = "test@test.com";
+    private string userName;
+    private string userEmail;
+    private string userPassword;
+    private string hashPassword;
+    private string cryptPassword;
 
     //Création d'une coroutine pour l'inscription d'un utilisateur
     public void Call()
@@ -45,23 +45,24 @@ public class SignUp : MonoBehaviour
         //Récupération des valeurs du formulaire
         userName = fieldName.text;
         userPassword = fieldPassword.text;
+        userEmail = fieldEmail.text;
 
         //Hash password
         hashPassword = Hashing.HashPassword(userPassword);
 
         //Encrypt hashed password
-        cryptPassword = Convert.ToBase64String(Crypting.Encrypt(hashPassword, publicKeys));
+        cryptPassword = Crypting.Encrypt(hashPassword);
         
         //Create form values for send
         WWWForm form = new WWWForm();
         form.AddField("userName", userName);
-        form.AddField("hashPassword", cryptPassword);
-        form.AddField("userEmail", tempEmail);
+        form.AddField("cryptPassword", cryptPassword);
+        form.AddField("userEmail", userEmail);
         
         Debug.Log("nameField :" + userName);
         Debug.Log("hashPassword :" + hashPassword);
         Debug.Log("cryptPassword :" + cryptPassword);
-        Debug.Log("userEmail :" + tempEmail);
+        Debug.Log("userEmail :" + userEmail);
 
         //Envoie des données au serveur
         UnityWebRequest www = UnityWebRequest.Post("http://127.0.0.1/edsa-unitySQL/signup.php", form);
