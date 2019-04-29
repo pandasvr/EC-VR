@@ -33,6 +33,16 @@ public class SignUp : MonoBehaviour
         StartCoroutine(ServerSend());
     }
 
+    //Cette fonction vérifie la validité des données entrées
+    public bool ValidEntries(string theUserNameToCheck, string theUserEmailToCheck, string theUserPasswordToCheck)
+    {
+        
+        return ( (theUserNameToCheck != "" && theUserPasswordToCheck != "" &&
+                 theUserEmailToCheck != "") //aucun des champs renseignés n'est vide
+                && (theUserPasswordToCheck.Length >= 4) //le mot de passe est au moins de longueur 4
+                && (theUserEmailToCheck.Contains("@")) //un arobaz est présent dans le mail
+            );
+    }
     
     //Inscription de l'utilisateur
     IEnumerator ServerSend()
@@ -42,8 +52,8 @@ public class SignUp : MonoBehaviour
         userPassword = fieldPassword.text;
         userEmail = fieldEmail.text;
         
-        //on ne rentre les données dans la BDD que si les trois champs sont remplis
-        if (userName!="" && userPassword!="" && userEmail!="")
+        //on ne rentre les données dans la BDD que si les champs sont valides
+        if (ValidEntries(userName, userEmail, userPassword))
         {
             Debug.Log(userName);
             
