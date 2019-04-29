@@ -52,67 +52,97 @@ public class SignUp : MonoBehaviour
         userPassword = fieldPassword.text;
         userEmail = fieldEmail.text;
         
-        //on ne rentre les données dans la BDD que si les champs sont valides
+        
+        //on ne peut pas accéder à l'étape suivante si les champs ne vérifient pas les conditions de la fonction ValidEntries
         if (ValidEntries(userName, userEmail, userPassword))
         {
-            Debug.Log(userName);
-            
-            //Hash password
-            hashPassword = Hashing.HashPassword(userPassword);
-
-            //Encrypt hashed password
-            cryptPassword = Crypting.Encrypt(hashPassword);
-
-            //Create form values for send
-            WWWForm form = new WWWForm();
-            form.AddField("userName", userName);
-            form.AddField("cryptPassword", cryptPassword);
-            form.AddField("userEmail", userEmail);
-
-            Debug.Log("nameField :" + userName);
-            Debug.Log("hashPassword :" + hashPassword);
-            Debug.Log("cryptPassword :" + cryptPassword);
-            Debug.Log("userEmail :" + userEmail);
+            //vérification que le username choisi est unique:
+            WWWForm formUserName = new WWWForm();
+            formUserName.AddField("userName", userName);
 
             //Envoie des données au serveur
-            UnityWebRequest www = UnityWebRequest.Post("http://127.0.0.1/edsa-unitySQL/signup.php", form);
-
+            UnityWebRequest wwwUserName = UnityWebRequest.Post("http://127.0.0.1/edsa-unitySQL/conditionUniqueUserName.php", formUserName);
+            
             //Récupération du retour serveur
-            www.downloadHandler = new DownloadHandlerBuffer();
-            yield return www.SendWebRequest();
+            wwwUserName.downloadHandler = new DownloadHandlerBuffer();
+            yield return wwwUserName.SendWebRequest();
+            
+            Debug.Log("reponse username :" + wwwUserName.downloadHandler.text);
 
-            //Vérification du retour
-            if (www.isNetworkError || www.isHttpError)
+            string reponseUserName = wwwUserName.downloadHandler.text;
+            
+            Debug.Log("reponse username :" + reponseUserName);
+            
+            //Si notre username est bien unique, les données sont envoyées au serveur:
+            if (reponseUserName == "false")
             {
-                Debug.Log(www.error);
-            }
-            else
-            {
-                Debug.Log("Post request complete!" + " Response Code: " + www.responseCode);
-                bool responseText = BitConverter.ToBoolean(www.downloadHandler.data, 0);
-                Debug.Log("Response Text:" + responseText);
+                Debug.Log(userName);
 
-                if (responseText)
+                //Hash password
+                hashPassword = Hashing.HashPassword(userPassword);
+
+                //Encrypt hashed password
+                cryptPassword = Crypting.Encrypt(hashPassword);
+
+                //Create form values for send
+                WWWForm form = new WWWForm();
+                form.AddField("userName", userName);
+                form.AddField("cryptPassword", cryptPassword);
+                form.AddField("userEmail", userEmail);
+
+                Debug.Log("nameField :" + userName);
+                Debug.Log("hashPassword :" + hashPassword);
+                Debug.Log("cryptPassword :" + cryptPassword);
+                Debug.Log("userEmail :" + userEmail);
+
+                //Envoie des données au serveur
+                UnityWebRequest www = UnityWebRequest.Post("http://127.0.0.1/edsa-unitySQL/signup.php", form);
+
+                //Récupération du retour serveur
+                www.downloadHandler = new DownloadHandlerBuffer();
+                yield return www.SendWebRequest();
+
+                //Vérification du retour
+                if (www.isNetworkError || www.isHttpError)
                 {
-                    Debug.Log("Inscriptions réussie");
-                    InscriptionPanel.SetActive(false);
-                    LoginPanel.SetActive(true);
-                    InfoTextLogin.text = "Inscription réussi !";
-                    InfoTextLogin.color = Color.green;
-                    InfoTextLogin.enabled = true;
-
-                    if (InfoTextLogin.IsActive())
-                    {
-                        InfoTextInscription.enabled = false;
-                    }
+                    Debug.Log(www.error);
                 }
                 else
                 {
-                    Debug.Log("Inscriptions échouée");
-                    InfoTextInscription.text = "Une erreur est survenue";
-                    InfoTextInscription.color = Color.red;
-                    InfoTextInscription.enabled = true;
+                    Debug.Log("Post request complete!" + " Response Code: " + www.responseCode);
+                    bool responseText = BitConverter.ToBoolean(www.downloadHandler.data, 0);
+                    Debug.Log("Response Text:" + responseText);
+
+                    if (responseText)
+                    {
+                        Debug.Log("Inscriptions réussie");
+                        InscriptionPanel.SetActive(false);
+                        LoginPanel.SetActive(true);
+                        InfoTextLogin.text = "Inscription réussi !";
+                        InfoTextLogin.color = Color.green;
+                        InfoTextLogin.enabled = true;
+
+                        if (InfoTextLogin.IsActive())
+                        {
+                            InfoTextInscription.enabled = false;
+                        }
+                    }
+                    else
+                    {
+                        Debug.Log("Inscriptions échouée");
+                        InfoTextInscription.text = "Une erreur est survenue";
+                        InfoTextInscription.color = Color.red;
+                        InfoTextInscription.enabled = true;
+                    }
                 }
+            }
+            //si le username est déjà pris:
+            else
+            {
+                InfoTextInscription.text = "Ce nom d'utilisateur est déjà pris";
+                InfoTextInscription.color = Color.red;
+                InfoTextInscription.enabled = true;
+                InfoTextInscription.gameObject.SetActive(true);
             }
         }
         
