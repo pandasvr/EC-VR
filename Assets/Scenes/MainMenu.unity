@@ -31210,6 +31210,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fieldName: {fileID: 2126457589}
   fieldPassword: {fileID: 1927559860}
+  fieldEmail: {fileID: 0}
 --- !u!114 &904644011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78010,7 +78011,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 46, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &5808742580614840592

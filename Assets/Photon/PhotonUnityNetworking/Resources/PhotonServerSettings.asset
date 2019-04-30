@@ -19,10 +19,10 @@ MonoBehaviour:
     AppVersion: 
     UseNameServer: 0
     FixedRegion: 
-    Server: 192.168.0.108
+    Server: 192.168.0.104
     Port: 5055
     Protocol: 0
-    EnableLobbyStatistics: 0
+    EnableLobbyStatistics: 1
     NetworkLogging: 1
   StartInOfflineMode: 0
   PunLogging: 0
