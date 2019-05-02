@@ -8,40 +8,35 @@ using UnityEngine.UI;
 
 public class SignUp : MonoBehaviour
 {
+    //champs reliés à l'UI de l'application
     public InputField fieldName;
     public InputField fieldPassword;
     public InputField fieldEmail;
+    
+    public GameObject InscriptionPanel;
+    public GameObject LoginPanel;
+    public Text InfoTextLogin;
+    public Text InfoTextInscription;
 
+    //champs pour récupérer les informations entrées dans l'UI 
     private string userName;
     private string userEmail;
     private string userPassword;
+    //champs dédiés à la sécurisation du mdp
     private string hashPassword;
     private string cryptPassword;
 
+    
     //Création d'une coroutine pour l'inscription d'un utilisateur
     public void Call()
     {
         StartCoroutine(ServerSend());
     }
 
+    
     //Inscription de l'utilisateur
     IEnumerator ServerSend()
     {
-        CspParameters cspParams = new CspParameters();
-
-        // Les clés publique et privée
-        RSAParameters privateKeys;
-        RSAParameters publicKeys;
-
-        using (var rsa = new RSACryptoServiceProvider(cspParams))
-        {
-            // Génère la clé publique et la clé privée
-            privateKeys = rsa.ExportParameters(true);
-            publicKeys = rsa.ExportParameters(false);
-
-            rsa.Clear();
-        }
-        
         //Récupération des valeurs du formulaire
         userName = fieldName.text;
         userPassword = fieldPassword.text;
@@ -79,6 +74,28 @@ public class SignUp : MonoBehaviour
             Debug.Log("Post request complete!" + " Response Code: " + www.responseCode);
             bool responseText = BitConverter.ToBoolean(www.downloadHandler.data, 0);
             Debug.Log("Response Text:" + responseText);
+
+            if (responseText)
+            {
+                Debug.Log("Inscriptions réussie");
+                InscriptionPanel.SetActive(false);
+                LoginPanel.SetActive(true);
+                InfoTextLogin.text = "Inscription réussi !";
+                InfoTextLogin.color = Color.green;
+                InfoTextLogin.enabled = true;
+
+                if (InfoTextLogin.IsActive())
+                {
+                    InfoTextInscription.enabled = false;
+                }
+            }
+            else
+            {
+                Debug.Log("Inscriptions échouée");
+                InfoTextInscription.text = "Une erreur est survenue";
+                InfoTextInscription.color = Color.red;
+                InfoTextInscription.enabled = true;
+            }
         }
     }
 }
