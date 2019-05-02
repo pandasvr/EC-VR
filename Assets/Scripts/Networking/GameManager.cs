@@ -2,6 +2,7 @@
 using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.XR;
 
 namespace Networking
 {
@@ -23,6 +24,7 @@ namespace Networking
                 // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
                 PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(0f,0f,0f), Quaternion.identity, 0);
             }
+
         }
 
         #region Photon Callbacks
@@ -32,8 +34,8 @@ namespace Networking
         /// Called when the local player left the room. We need to load the launcher scene.
         /// </summary>
         public override void OnLeftRoom()
-        {
-            SceneManager.LoadScene("HUB");
+        {        
+            SceneManager.LoadScene("MainMenu");
         }
 
         #endregion
