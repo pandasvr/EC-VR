@@ -1,7 +1,9 @@
-﻿using Photon.Pun;
+﻿using System;
+using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.XR;
+using Random = UnityEngine.Random;
 
 namespace Networking
 {
@@ -21,6 +23,8 @@ namespace Networking
         private const string GameVersion = "0.1";
         
         private VrSettings scriptVrSettings;
+        private bool isCreateRoom = false;
+        private bool isJoinRoom = false;
 
         [Tooltip("The maximum number of players per room. When a room is full, it can't be joined by new players, and so new room will be created")]
         public byte maxPlayersPerRoom = 4;
@@ -50,6 +54,7 @@ namespace Networking
             scriptVrSettings = this.GetComponent<VrSettings>();
             
             //TODO: Méthode de déconnexion de la VR à revoir
+            //Deconnecte la VR par défaut sur la scène
             scriptVrSettings.StopVR();
             
         }
@@ -68,34 +73,73 @@ namespace Networking
 
         #region Public Methods
 
-
-        /// <summary>
-        /// Start the connection process.
-        /// - If already connected, we attempt joining a random room
-        /// - if not yet connected, Connect this application instance to Photon Cloud Network
-        /// </summary>
-        public void Connect()
+        
+        public void CreateNewRoom()
         {
             // keep track of the will to join a room, because when we come back from the game we will get a callback that we are connected, so we need to know what to do then
             isConnecting = true;
             
+            //L'utilisateur tente de créer une room
+            isCreateRoom = true;
+            
             //TODO : Récupérer le vrai Identifiant de l'utilisateur
             //On donne un identifiant Random à l'utilisateur qui se connecte
-            PhotonNetwork.NickName = playerName();
-            Debug.Log("Identifiant temporaire de l'utilisateur : " + PhotonNetwork.NickName);
+            if (PhotonNetwork.NickName == null)
+            {
+                PhotonNetwork.NickName = playerName();
+                Debug.Log("Identifiant temporaire de l'utilisateur : " + PhotonNetwork.NickName);
+            }
             
             // we check if we are connected or not, we join if we are , else we initiate the connection to the server.
             if (PhotonNetwork.IsConnected)
             {
-                // #Critical we need at this point to attempt joining a Random Room. If it fails, we'll get notified in OnJoinRandomFailed() and we'll create one.
+                //Création d'un nouveau salon
+                var roomName = RoomName();
+                isCreateRoom = false;
+                PhotonNetwork.CreateRoom(roomName, new RoomOptions { MaxPlayers = maxPlayersPerRoom });
+                Debug.Log("Création du salon : " + roomName);
+            }
+            else
+            {
+                // #Critical, we must first and foremost connect to Photon Online Server.
+                Debug.Log("#Critical, we must first and foremost connect to Photon Online Server.");
+                PhotonNetwork.GameVersion = GameVersion;
+                PhotonNetwork.ConnectUsingSettings();
+            }  
+        }
+
+        //TODO : Faire en sorte que le script rejoindre un salon défini par l'utilisateur
+        //Script permettant de se connecter à un salon disponible aléatoirement
+        public void JoinRoomSelected()
+        {
+            // keep track of the will to join a room, because when we come back from the game we will get a callback that we are connected, so we need to know what to do then
+            isConnecting = true;
+            
+            //L'utilisateur tente de rejoindre une room
+            isJoinRoom = true;
+            
+            //TODO : Récupérer le vrai Identifiant de l'utilisateur
+            //On donne un identifiant Random à l'utilisateur qui se connecte
+            if (PhotonNetwork.NickName == null)
+            {
+                PhotonNetwork.NickName = playerName();
+                Debug.Log("Identifiant temporaire de l'utilisateur : " + PhotonNetwork.NickName);
+            }
+            
+            // we check if we are connected or not, we join if we are , else we initiate the connection to the server.
+            if (PhotonNetwork.IsConnected)
+            {
+                //Rejoin un salon aléatoire disponible
+                isJoinRoom = false;
                 PhotonNetwork.JoinRandomRoom();
             }
             else
             {
                 // #Critical, we must first and foremost connect to Photon Online Server.
+                Debug.Log("#Critical, we must first and foremost connect to Photon Online Server.");
                 PhotonNetwork.GameVersion = GameVersion;
                 PhotonNetwork.ConnectUsingSettings();
-            }
+            }  
         }
         
         #endregion
@@ -103,6 +147,11 @@ namespace Networking
         private string playerName()
         {
             return "Player#" + Random.Range(1, 9999);
+        }
+
+        private string RoomName()
+        {
+            return "Salon#" + Random.Range(1, 9999);
         }
         
         #region MonoBehaviourPunCallbacks Callbacks
@@ -115,8 +164,18 @@ namespace Networking
             // we don't want to do anything.
             if (isConnecting)
             {
-                // #Critical: The first we try to do is to join a potential existing room. If there is, good, else, we'll be called back with OnJoinRandomFailed()
-                PhotonNetwork.JoinRandomRoom();
+                if (isJoinRoom == true)
+                {
+                    isJoinRoom = false;
+                    //Retour à la phase "Rejoindre un salon"
+                    JoinRoomSelected();
+                }
+                else if (isCreateRoom == true)
+                {
+                    isCreateRoom = false;
+                    //Retour à la phase de création de salon
+                    CreateNewRoom();
+                }
             }   
         }
 
@@ -131,10 +190,7 @@ namespace Networking
         
         public override void OnJoinRandomFailed(short returnCode, string message)
         {
-            Debug.Log("PUN Basics Tutorial/Launcher:OnJoinRandomFailed() was called by PUN. No random room available, so we create one.\nCalling: PhotonNetwork.CreateRoom");
-
-            // #Critical: we failed to join a random room, maybe none exists or they are all full. No worries, we create a new room.
-            PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = maxPlayersPerRoom });
+            Debug.Log("PUN Basics Tutorial/Launcher:OnJoinRandomFailed() was called by PUN. No random room available.");
         }
 
         public override void OnJoinedRoom()
