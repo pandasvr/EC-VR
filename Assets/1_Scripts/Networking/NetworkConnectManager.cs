@@ -104,7 +104,7 @@ namespace Networking
             {
                 // #Critical, we must first and foremost connect to Photon Online Server.
                 Debug.Log("#Critical, we must first and foremost connect to Photon Online Server.");
-                PhotonNetwork.GameVersion = GameVersion;
+                PhotonNetwork.GameVersion = GameVersion;// Setting this updates the AppVersion, which separates your playerbase in matchmaking
                 PhotonNetwork.ConnectUsingSettings();
             }  
         }
