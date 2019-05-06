@@ -61,7 +61,7 @@ public class SignUp : MonoBehaviour
             formUserName.AddField("userName", userName);
 
             //Envoie des données au serveur
-            UnityWebRequest wwwUserName = UnityWebRequest.Post("http://127.0.0.1/edsa-unitySQL/conditionUniqueUserName.php", formUserName);
+            UnityWebRequest wwwUserName = UnityWebRequest.Post("http://192.168.0.104/edsa-ecvr/conditionUniqueUserName.php", formUserName);
             
             //Récupération du retour serveur
             wwwUserName.downloadHandler = new DownloadHandlerBuffer();
