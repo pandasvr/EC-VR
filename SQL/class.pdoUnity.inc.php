@@ -1,27 +1,31 @@
 <?php
 class PdoUnity
 {   		
-      	private static $server='mysql:host=localhost';
+      	private static $server='mysql:host=192.168.0.104';
       	private static $bdd='dbname=ecvr_db';
-      	private static $user='root';
-      	private static $pw='';
-		private static $myPdo;
+      	private static $user='ecvr_db';
+      	private static $pw='!CapgeminiPandas4';
+		private static $myPdo; //PHP Base de Données
 		private static $myPdoUnity = null;
 /**
  * Constructeur privé, crée l'instance de PDO qui sera sollicitée
  * pour toutes les méthodes de la classe
  */				
+	//constructeur 
 	private function __construct()
 	{
-    		PdoUnity::$myPdo = new PDO(PdoUnity::$server.';'.PdoUnity::$bdd, PdoUnity::$user, PdoUnity::$pw); 
-			PdoUnity::$myPdo->query("SET CHARACTER SET utf8");
-			PdoUnity::$myPdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			PdoUnity::$myPdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+    		PdoUnity::$myPdo = new PDO(PdoUnity::$server.';'.PdoUnity::$bdd, PdoUnity::$user, PdoUnity::$pw); //
+			PdoUnity::$myPdo->query("SET CHARACTER SET utf8"); 
+			PdoUnity::$myPdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
+			PdoUnity::$myPdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);//Pour faire apparaitreles différentes erreurs liées au code ou aux requêtes. 
 	}
+
+	//destructeur 
 	public function _destruct()
 	{
 		PdoUnity::$myPdo = null;
 	}
+	
 /**
  * Fonction statique qui crée l'unique instance de la classe
  */
@@ -57,5 +61,16 @@ class PdoUnity
 		$resultat->execute();
 		return $resultat;
 	}
+
+/**
+ * Fonction qui vérifie que le userName n'existe pas déjà
+ */
+	public function requestUsername($userName)
+	{
+		$req="SELECT * FROM users where userName = '".$userName."'";
+		$resultat=PdoUnity::$myPdo->query($req)->fetch();
+		return $resultat;
+	}
+
 }
 ?>
