@@ -96,7 +96,7 @@ public class SignUp : MonoBehaviour
                 Debug.Log("userEmail :" + userEmail);
 
                 //Envoie des données au serveur
-                UnityWebRequest www = UnityWebRequest.Post("http://127.0.0.1/edsa-unitySQL/signup.php", form);
+                UnityWebRequest www = UnityWebRequest.Post("http://192.168.0.104/edsa-ecvr/signup.php", form);
 
                 //Récupération du retour serveur
                 www.downloadHandler = new DownloadHandlerBuffer();
