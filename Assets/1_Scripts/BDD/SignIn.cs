@@ -7,6 +7,9 @@ using UnityEngine.UI;
 
 public class SignIn : MonoBehaviour
 {
+    //Adresse IP du serveur
+    public string adresseIP;
+    
     //champs noms et password récupérés depuis l'UI d'unity
     public InputField fieldName;
     public InputField fieldPassword;
@@ -29,20 +32,19 @@ public class SignIn : MonoBehaviour
     //Connexion de l'utilisateur
     IEnumerator ServerSend()
     {
+        //Création url envoie serveur
+        string urlSignin = "http://" + adresseIP + "/edsa-ecvr/signin.php";
+        
         //Récupération des valeurs du formulaire
         userPassword = Hashing.HashPassword(fieldPassword.text); //on hache directement le mot de passe récupéré
         userName = fieldName.text;// on récupère directement le username
         
+        //Création du formulaire de donnée
         WWWForm form = new WWWForm();
         form.AddField("name", userName);
         
-        Debug.Log("nameField :" + userName);
-        Debug.Log("passwordField :" + userPassword);
-
-        
         //Envoie des données au serveur
-        UnityWebRequest www = UnityWebRequest.Post("http://192.168.0.104/edsa-ecvr/signin.php", form);
-        
+        UnityWebRequest www = UnityWebRequest.Post(urlSignin, form);
         
         //Récupération du retour serveur
         www.downloadHandler = new DownloadHandlerBuffer();
@@ -87,7 +89,6 @@ public class SignIn : MonoBehaviour
                     
                     if (InfoText.enabled)
                     {
-                        InfoText.enabled = false;
                         InfoText.gameObject.SetActive(false);
                     }
                 }
