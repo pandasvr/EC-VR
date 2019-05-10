@@ -605,7 +605,7 @@ namespace Photon.Pun.Demo.Cockpit
 			if (debug)  Debug.Log("PunCockpit:OnDropdownConnectAs(" + dropdownIndex + ")");
 
             this.UserId = this.FriendsList[dropdownIndex].UserId;
-            PlayerPrefs.SetString(UserIdUiForm.UserIdPlayerPref, this.UserId);
+            UnityEngine.PlayerPrefs.SetString(UserIdUiForm.UserIdPlayerPref, this.UserId);
 
             StartCoroutine(OnDropdownConnectAs_CB());
         }
