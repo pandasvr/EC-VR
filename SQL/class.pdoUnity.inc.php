@@ -52,12 +52,13 @@ class PdoUnity
 /**
  * Fonction qui vérifie le userName et le password pour la connexion au site
  */
-	public function signup($userName, $cryptPassword, $userEmail)
+	public function signup($userName, $cryptPassword, $userEmail, $userLevel)
 	{
-		$resultat=PdoUnity::$myPdo->prepare("INSERT INTO users(userName, cryptPassword, userEmail) VALUES (:userName, :cryptPassword, :userEmail)");
+		$resultat=PdoUnity::$myPdo->prepare("INSERT INTO users(userName, cryptPassword, userEmail, userLevel) VALUES (:userName, :cryptPassword, :userEmail, :userLevel)");
 		$resultat->bindParam(':userName', $userName);
 		$resultat->bindParam(':cryptPassword', $cryptPassword);
 		$resultat->bindParam(':userEmail', $userEmail);
+		$resultat->bindParam(':userLevel', $userLevel);
 		$resultat->execute();
 		return $resultat;
 	}
