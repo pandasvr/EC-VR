@@ -57,18 +57,22 @@ public class SignIn : MonoBehaviour
             Debug.Log("Post request complete!" + " Response Code: " + www.responseCode);
             var responseJson = www.downloadHandler.text;
             Debug.Log("Json response :" + responseJson);
-            
-            var r_username = JObject.Parse(responseJson)["userName"].ToString();
-            Debug.Log("Response username :" + r_username);
-            var r_userPassword = JObject.Parse(responseJson)["cryptPassword"].ToString();
-            Debug.Log("Response password :" + r_userPassword);
-            var r_userEmail = JObject.Parse(responseJson)["userEmail"].ToString();
-            Debug.Log("Response user email :" + r_userEmail);
-            var r_userLevel = JObject.Parse(responseJson)["userLevel"].ToString();
-            Debug.Log("Response user level :" + r_userLevel);
 
-            if (!string.IsNullOrEmpty(r_username))
+            if (!string.IsNullOrEmpty(responseJson))
             {
+                //Récupération des item JSON reçu depuis le serveur
+                var r_userName = JObject.Parse(responseJson)["userName"].ToString();
+                Debug.Log("Response username :" + r_userName);
+                var r_userPassword = JObject.Parse(responseJson)["cryptPassword"].ToString();
+                Debug.Log("Response password :" + r_userPassword);
+                var r_userEmail = JObject.Parse(responseJson)["userEmail"].ToString();
+                Debug.Log("Response user email :" + r_userEmail);
+                var r_userLevel = JObject.Parse(responseJson)["userLevel"].ToString();
+                Debug.Log("Response user level :" + r_userLevel);
+                
+                //création des playerPref servant de variables globales
+                PlayerPrefs.SaveUser(r_userName, r_userEmail, r_userLevel);
+                
                 decryptedPassword = Crypting.Decrypt(r_userPassword);
                 Debug.Log("Response Text decrypt :" + decryptedPassword);
                 isValidPassword = Hashing.ValidatePassword(fieldPassword.text, decryptedPassword);

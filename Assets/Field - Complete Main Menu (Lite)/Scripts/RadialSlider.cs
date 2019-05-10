@@ -27,7 +27,7 @@ public class RadialSlider: MonoBehaviour, IPointerEnterHandler, IPointerDownHand
 	{
 		if (saveValue == true)
 		{
-			currentValue = PlayerPrefs.GetFloat (sliderID + "RadialValue");
+			currentValue = UnityEngine.PlayerPrefs.GetFloat (sliderID + "RadialValue");
 		}
 			
 		valueText.text = currentValue.ToString();
@@ -93,7 +93,7 @@ public class RadialSlider: MonoBehaviour, IPointerEnterHandler, IPointerDownHand
 
 					if (saveValue == true)
 					{
-						PlayerPrefs.SetFloat (sliderID + "RadialValue", currentValue);
+						UnityEngine.PlayerPrefs.SetFloat (sliderID + "RadialValue", currentValue);
 					}
 				}
 				yield return 0;

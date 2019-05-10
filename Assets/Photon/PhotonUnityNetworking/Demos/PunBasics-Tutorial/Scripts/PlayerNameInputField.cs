@@ -38,9 +38,9 @@ namespace Photon.Pun.Demo.PunBasics
 
 			if (_inputField!=null)
 			{
-				if (PlayerPrefs.HasKey(playerNamePrefKey))
+				if (UnityEngine.PlayerPrefs.HasKey(playerNamePrefKey))
 				{
-					defaultName = PlayerPrefs.GetString(playerNamePrefKey);
+					defaultName = UnityEngine.PlayerPrefs.GetString(playerNamePrefKey);
 					_inputField.text = defaultName;
 				}
 			}
@@ -66,7 +66,7 @@ namespace Photon.Pun.Demo.PunBasics
 		    }
 			PhotonNetwork.NickName = value;
 
-			PlayerPrefs.SetString(playerNamePrefKey, value);
+			UnityEngine.PlayerPrefs.SetString(playerNamePrefKey, value);
 		}
 		
 		#endregion
