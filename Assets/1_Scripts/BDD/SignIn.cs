@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Newtonsoft.Json.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
@@ -54,12 +55,21 @@ public class SignIn : MonoBehaviour
         }
         else {
             Debug.Log("Post request complete!" + " Response Code: " + www.responseCode);
-            string responseText = www.downloadHandler.text;
-            Debug.Log("Response Text encrypt :" + responseText);
+            var responseJson = www.downloadHandler.text;
+            Debug.Log("Json response :" + responseJson);
+            
+            var r_username = JObject.Parse(responseJson)["userName"].ToString();
+            Debug.Log("Response username :" + r_username);
+            var r_userPassword = JObject.Parse(responseJson)["cryptPassword"].ToString();
+            Debug.Log("Response password :" + r_userPassword);
+            var r_userEmail = JObject.Parse(responseJson)["userEmail"].ToString();
+            Debug.Log("Response user email :" + r_userEmail);
+            var r_userLevel = JObject.Parse(responseJson)["userLevel"].ToString();
+            Debug.Log("Response user level :" + r_userLevel);
 
-            if (!string.IsNullOrEmpty(responseText))
+            if (!string.IsNullOrEmpty(r_username))
             {
-                decryptedPassword = Crypting.Decrypt(responseText);
+                decryptedPassword = Crypting.Decrypt(r_userPassword);
                 Debug.Log("Response Text decrypt :" + decryptedPassword);
                 isValidPassword = Hashing.ValidatePassword(fieldPassword.text, decryptedPassword);
 

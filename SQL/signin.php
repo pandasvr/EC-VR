@@ -6,5 +6,5 @@ $name = $_REQUEST['name'];
 
 $resultat = $pdo->signin($name);
 
-echo $resultat['cryptPassword'];
+echo json_encode($resultat);
 ?>
