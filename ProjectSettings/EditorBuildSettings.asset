@@ -6,14 +6,14 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/RoomTest.unity
-    guid: 184a63d6f5b63fb4883d413c5166f381
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 0
-    path: Assets/Scenes/PUN2_Scenes/HUB.unity
-    guid: faac036a1e712e141a05ee8ca5ec453f
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 0
-    path: Assets/Scenes/PUN2_Scenes/Salon 1.unity
-    guid: 14e717be86c9c97459cf6199ae69b0f2
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
@@ -23,4 +23,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/0_Scenes/Salon 2.unity
     guid: 16cdb7e8bf68d33479b7701ebe4250a4
+  - enabled: 0
+    path: Assets/Photon/PhotonVoice/Demos/DemoVoicePun/DemoVoicePun-Scene.unity
+    guid: a3f3c3b3816924199acba595045624d2
+  - enabled: 0
+    path: Assets/Photon/PhotonVoice/Demos/DemoVoiceMinimal/DemoVoiceMinimal-Scene.unity
+    guid: 2da9606550d4940d6b7d040e3913bdd8
   m_configObjects: {}
