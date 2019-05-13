@@ -4557,7 +4557,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000061035156, y: -143}
+  m_AnchoredPosition: {x: -0.000061035156, y: 391}
   m_SizeDelta: {x: 240, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &576784588
@@ -6363,7 +6363,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2135327213}
   m_HandleRect: {fileID: 2135327212}
   m_Direction: 2
-  m_Value: 0.00011380637
+  m_Value: 1
   m_Size: 0.53
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -7806,8 +7806,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00005786121, y: 516.94116}
-  m_SizeDelta: {x: 0, y: 1100}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -0.00005786121, y: 1100}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &861085293
 GameObject:
@@ -15074,7 +15074,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000061035156, y: -323}
+  m_AnchoredPosition: {x: -0.000061035156, y: 206}
   m_SizeDelta: {x: 240, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1898919656
@@ -16694,7 +16694,6 @@ GameObject:
   - component: {fileID: 2025155896}
   - component: {fileID: 2025155898}
   - component: {fileID: 2025155897}
-  - component: {fileID: 2025155899}
   m_Layer: 0
   m_Name: Panel_PersonnalMenu
   m_TagString: Untagged
@@ -16763,20 +16762,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2025155895}
   m_CullTransparentMesh: 0
---- !u!114 &2025155899
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2025155895}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1518a5e598c7da244bc4850d3ae63354, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clickOnPointerCollision: 0
-  autoActivateWithinDistance: 0
 --- !u!1 &2056857540
 GameObject:
   m_ObjectHideFlags: 0
