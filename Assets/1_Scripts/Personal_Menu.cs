@@ -14,6 +14,14 @@ using UnityEngine;
             personnalMenuPanel.SetActive(true);
             personnalMenuPanel.gameObject.SetActive(true);
         }
+
+        void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Home))
+            {
+                ActivePersonalMenu();
+            }
+        }
         
         
     }
