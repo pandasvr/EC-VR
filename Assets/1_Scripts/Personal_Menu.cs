@@ -6,22 +6,23 @@ using UnityEngine;
     {    
         
         public GameObject personnalMenuPanel;
-
+        protected bool personalMenuOn = false;
         
         // Update is called once per frame
         public void ActivePersonalMenu()
         {
-            personnalMenuPanel.SetActive(true);
-            personnalMenuPanel.gameObject.SetActive(true);
+            personalMenuOn = !personalMenuOn;
+            personnalMenuPanel.SetActive(personalMenuOn);
+            personnalMenuPanel.gameObject.SetActive(personalMenuOn);
         }
 
-        void Update()
+       /* void Update()
         {
             if (Input.GetKeyDown(KeyCode.Home))
             {
                 ActivePersonalMenu();
             }
-        }
+        }*/
         
         
     }
