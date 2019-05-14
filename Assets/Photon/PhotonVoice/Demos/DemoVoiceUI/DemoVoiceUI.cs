@@ -79,7 +79,7 @@ namespace Photon.Voice.DemoVoiceUI
 
             if (this.localNicknameText != null)
             {
-                string savedNick = PlayerPrefs.GetString("vNick");
+                string savedNick = UnityEngine.PlayerPrefs.GetString("vNick");
                 if (!string.IsNullOrEmpty(savedNick))
                 {
                     //Debug.LogFormat("Saved nick = {0}", savedNick);
@@ -152,7 +152,7 @@ namespace Photon.Voice.DemoVoiceUI
 
             //Debug.LogFormat("UpdateSyncedNickname() name: {0}", nickname);
             this.voiceConnection.Client.LocalPlayer.NickName = nickname;
-            PlayerPrefs.SetString("vNick", nickname);
+            UnityEngine.PlayerPrefs.SetString("vNick", nickname);
         }
 
 

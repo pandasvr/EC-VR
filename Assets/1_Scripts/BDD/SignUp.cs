@@ -8,6 +8,9 @@ using UnityEngine.UI;
 
 public class SignUp : MonoBehaviour
 {
+    //Adresse IP du serveur
+    public string adresseIP;
+    
     //champs reliés à l'UI de l'application
     public InputField fieldName;
     public InputField fieldPassword;
@@ -15,7 +18,7 @@ public class SignUp : MonoBehaviour
     
     public GameObject InscriptionPanel;
     public GameObject LoginPanel;
-    public Text InfoTextLogin;
+    
     public Text InfoTextInscription;
 
     //champs pour récupérer les informations entrées dans l'UI 
@@ -36,7 +39,6 @@ public class SignUp : MonoBehaviour
     //Cette fonction vérifie la validité des données entrées
     public bool ValidEntries(string theUserNameToCheck, string theUserEmailToCheck, string theUserPasswordToCheck)
     {
-        
         return ( (theUserNameToCheck != "" && theUserPasswordToCheck != "" &&
                  theUserEmailToCheck != "") //aucun des champs renseignés n'est vide
                 && (theUserPasswordToCheck.Length >= 4) //le mot de passe est au moins de longueur 4
@@ -47,6 +49,10 @@ public class SignUp : MonoBehaviour
     //Inscription de l'utilisateur
     IEnumerator ServerSend()
     {
+        //Création des url d'envoie au seveur
+        string urlConditionUniqueUserName = "http://" + adresseIP + "/edsa-ecvr/conditionUniqueUserName.php";
+        string urlSignup = "http://" + adresseIP + "/edsa-ecvr/signup.php";
+        
         //Récupération des valeurs du formulaire
         userName = fieldName.text;
         userPassword = fieldPassword.text;
@@ -61,14 +67,12 @@ public class SignUp : MonoBehaviour
             formUserName.AddField("userName", userName);
 
             //Envoie des données au serveur
-            UnityWebRequest wwwUserName = UnityWebRequest.Post("http://192.168.0.104/edsa-ecvr/conditionUniqueUserName.php", formUserName);
+            UnityWebRequest wwwUserName = UnityWebRequest.Post(urlConditionUniqueUserName, formUserName);
             
             //Récupération du retour serveur
             wwwUserName.downloadHandler = new DownloadHandlerBuffer();
             yield return wwwUserName.SendWebRequest();
             
-            Debug.Log("reponse username :" + wwwUserName.downloadHandler.text);
-
             string reponseUserName = wwwUserName.downloadHandler.text;
             
             Debug.Log("reponse username :" + reponseUserName);
@@ -96,7 +100,7 @@ public class SignUp : MonoBehaviour
                 Debug.Log("userEmail :" + userEmail);
 
                 //Envoie des données au serveur
-                UnityWebRequest www = UnityWebRequest.Post("http://192.168.0.104/edsa-ecvr/signup.php", form);
+                UnityWebRequest www = UnityWebRequest.Post(urlSignup, form);
 
                 //Récupération du retour serveur
                 www.downloadHandler = new DownloadHandlerBuffer();
@@ -115,24 +119,17 @@ public class SignUp : MonoBehaviour
 
                     if (responseText)
                     {
-                        Debug.Log("Inscriptions réussie");
-                        InscriptionPanel.SetActive(false);
-                        LoginPanel.SetActive(true);
-                        InfoTextLogin.text = "Inscription réussi !";
-                        InfoTextLogin.color = Color.green;
-                        InfoTextLogin.enabled = true;
-
-                        if (InfoTextLogin.IsActive())
-                        {
-                            InfoTextInscription.enabled = false;
-                        }
+                        Debug.Log("Inscription réussie");
+                        InfoTextInscription.text = "Inscription réussie !";
+                        InfoTextInscription.color = Color.green;
+                        InfoTextInscription.gameObject.SetActive(true);
                     }
                     else
                     {
                         Debug.Log("Inscriptions échouée");
                         InfoTextInscription.text = "Une erreur est survenue";
                         InfoTextInscription.color = Color.red;
-                        InfoTextInscription.enabled = true;
+                        InfoTextInscription.gameObject.SetActive(true);
                     }
                 }
             }
@@ -155,5 +152,13 @@ public class SignUp : MonoBehaviour
             InfoTextInscription.enabled = true;
             InfoTextInscription.gameObject.SetActive(true);
         }
+    }
+    
+    public void ViderFormulaire()
+    {
+        InfoTextInscription.gameObject.SetActive(false);
+        fieldName.text = "";
+        fieldPassword.text = "";
+        fieldEmail.text = "";
     }
 }

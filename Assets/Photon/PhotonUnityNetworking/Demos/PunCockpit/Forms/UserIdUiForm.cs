@@ -28,7 +28,7 @@ namespace Photon.Pun.Demo.Cockpit.Forms
         public void Start()
         {
 
-            string prefsName = PlayerPrefs.GetString(UserIdUiForm.UserIdPlayerPref);
+            string prefsName = UnityEngine.PlayerPrefs.GetString(UserIdUiForm.UserIdPlayerPref);
             if (!string.IsNullOrEmpty(prefsName))
             {
                 this.idInput.text = prefsName;
@@ -47,7 +47,7 @@ namespace Photon.Pun.Demo.Cockpit.Forms
 
         public void SubmitForm()
         {
-            PlayerPrefs.SetString(UserIdUiForm.UserIdPlayerPref, idInput.text);
+            UnityEngine.PlayerPrefs.SetString(UserIdUiForm.UserIdPlayerPref, idInput.text);
             OnSubmit.Invoke(idInput.text);
         }
     }

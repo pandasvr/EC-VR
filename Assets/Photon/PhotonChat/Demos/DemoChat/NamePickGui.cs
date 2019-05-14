@@ -15,7 +15,7 @@ public class NamePickGui : MonoBehaviour
         this.chatNewComponent = FindObjectOfType<ChatGui>();
 
 
-        string prefsName = PlayerPrefs.GetString(NamePickGui.UserNamePlayerPref);
+        string prefsName = UnityEngine.PlayerPrefs.GetString(NamePickGui.UserNamePlayerPref);
         if (!string.IsNullOrEmpty(prefsName))
         {
             this.idInput.text = prefsName;
@@ -39,6 +39,6 @@ public class NamePickGui : MonoBehaviour
 		chatNewComponent.Connect();
         enabled = false;
 
-        PlayerPrefs.SetString(NamePickGui.UserNamePlayerPref, chatNewComponent.UserName);
+        UnityEngine.PlayerPrefs.SetString(NamePickGui.UserNamePlayerPref, chatNewComponent.UserName);
     }
 }

@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections;
+using Newtonsoft.Json.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
 public class SignIn : MonoBehaviour
 {
+    //Adresse IP du serveur
+    public string adresseIP;
+    
     //champs noms et password récupérés depuis l'UI d'unity
     public InputField fieldName;
     public InputField fieldPassword;
@@ -28,20 +32,19 @@ public class SignIn : MonoBehaviour
     //Connexion de l'utilisateur
     IEnumerator ServerSend()
     {
+        //Création url envoie serveur
+        string urlSignin = "http://" + adresseIP + "/edsa-ecvr/signin.php";
+        
         //Récupération des valeurs du formulaire
         userPassword = Hashing.HashPassword(fieldPassword.text); //on hache directement le mot de passe récupéré
         userName = fieldName.text;// on récupère directement le username
         
+        //Création du formulaire de donnée
         WWWForm form = new WWWForm();
         form.AddField("name", userName);
         
-        Debug.Log("nameField :" + userName);
-        Debug.Log("passwordField :" + userPassword);
-
-        
         //Envoie des données au serveur
-        UnityWebRequest www = UnityWebRequest.Post("http://192.168.0.104/edsa-ecvr/signin.php", form);
-        
+        UnityWebRequest www = UnityWebRequest.Post(urlSignin, form);
         
         //Récupération du retour serveur
         www.downloadHandler = new DownloadHandlerBuffer();
@@ -54,12 +57,25 @@ public class SignIn : MonoBehaviour
         }
         else {
             Debug.Log("Post request complete!" + " Response Code: " + www.responseCode);
-            string responseText = www.downloadHandler.text;
-            Debug.Log("Response Text encrypt :" + responseText);
+            var responseJson = www.downloadHandler.text;
+            Debug.Log("Json response :" + responseJson);
 
-            if (!string.IsNullOrEmpty(responseText))
+            if (!string.IsNullOrEmpty(responseJson))
             {
-                decryptedPassword = Crypting.Decrypt(responseText);
+                //Récupération des item JSON reçu depuis le serveur
+                var r_userName = JObject.Parse(responseJson)["userName"].ToString();
+                Debug.Log("Response username :" + r_userName);
+                var r_userPassword = JObject.Parse(responseJson)["cryptPassword"].ToString();
+                Debug.Log("Response password :" + r_userPassword);
+                var r_userEmail = JObject.Parse(responseJson)["userEmail"].ToString();
+                Debug.Log("Response user email :" + r_userEmail);
+                var r_userLevel = JObject.Parse(responseJson)["userLevel"].ToString();
+                Debug.Log("Response user level :" + r_userLevel);
+                
+                //création des playerPref servant de variables globales
+                PlayerPrefs.SaveUser(r_userName, r_userEmail, r_userLevel);
+                
+                decryptedPassword = Crypting.Decrypt(r_userPassword);
                 Debug.Log("Response Text decrypt :" + decryptedPassword);
                 isValidPassword = Hashing.ValidatePassword(fieldPassword.text, decryptedPassword);
 
@@ -73,7 +89,6 @@ public class SignIn : MonoBehaviour
                     
                     if (InfoText.enabled)
                     {
-                        InfoText.enabled = false;
                         InfoText.gameObject.SetActive(false);
                     }
                 }
