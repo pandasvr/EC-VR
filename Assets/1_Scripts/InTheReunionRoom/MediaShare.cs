@@ -8,6 +8,7 @@ public class MediaShare : MonoBehaviour
     protected SteamVR_TrackedController controller;
     public GameObject projectionScreen;
     protected VideoPlayer Video;
+    protected bool videoIsOn= false;
     
         // Start is called before the first frame update
     void Start()
@@ -17,12 +18,13 @@ public class MediaShare : MonoBehaviour
     
     public void VideoButton()
     {
-        //Video.enable();
-        Video.Play();
+        videoIsOn = !videoIsOn;
+        Video.gameObject.SetActive(videoIsOn);
+        if (videoIsOn)
+        {
+            Video.Play();
+        }
+        
     }
-    /*
-    void jpgButton()
-    {
-        projectionScreen.GetComponent<>()
-    }*/
+   
 }
