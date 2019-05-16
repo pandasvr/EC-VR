@@ -15,6 +15,7 @@ public class SignUp : MonoBehaviour
     public InputField fieldName;
     public InputField fieldPassword;
     public InputField fieldEmail;
+    public Dropdown fieldUserLevel;
     
     public GameObject InscriptionPanel;
     public GameObject LoginPanel;
@@ -25,6 +26,8 @@ public class SignUp : MonoBehaviour
     private string userName;
     private string userEmail;
     private string userPassword;
+    private int userLevel;
+    
     //champs dédiés à la sécurisation du mdp
     private string hashPassword;
     private string cryptPassword;
@@ -42,7 +45,8 @@ public class SignUp : MonoBehaviour
         return ( (theUserNameToCheck != "" && theUserPasswordToCheck != "" &&
                  theUserEmailToCheck != "") //aucun des champs renseignés n'est vide
                 && (theUserPasswordToCheck.Length >= 4) //le mot de passe est au moins de longueur 4
-                && (theUserEmailToCheck.Contains("@")) //un arobaz est présent dans le mail
+                && (theUserEmailToCheck.Contains("@") //un arobaz est présent dans le mail
+                && fieldUserLevel.value != 0) //Le champ "role" est renseigné
             );
     }
     
@@ -57,6 +61,7 @@ public class SignUp : MonoBehaviour
         userName = fieldName.text;
         userPassword = fieldPassword.text;
         userEmail = fieldEmail.text;
+        userLevel = fieldUserLevel.value;
         
         
         //on ne peut pas accéder à l'étape suivante si les champs ne vérifient pas les conditions de la fonction ValidEntries
@@ -93,11 +98,13 @@ public class SignUp : MonoBehaviour
                 form.AddField("userName", userName);
                 form.AddField("cryptPassword", cryptPassword);
                 form.AddField("userEmail", userEmail);
+                form.AddField("userLevel", userLevel);
 
                 Debug.Log("nameField :" + userName);
                 Debug.Log("hashPassword :" + hashPassword);
                 Debug.Log("cryptPassword :" + cryptPassword);
                 Debug.Log("userEmail :" + userEmail);
+                Debug.Log("userLevel :" + userEmail);
 
                 //Envoie des données au serveur
                 UnityWebRequest www = UnityWebRequest.Post(urlSignup, form);

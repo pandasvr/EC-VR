@@ -71,9 +71,11 @@ public class SignIn : MonoBehaviour
                 Debug.Log("Response user email :" + r_userEmail);
                 var r_userLevel = JObject.Parse(responseJson)["userLevel"].ToString();
                 Debug.Log("Response user level :" + r_userLevel);
+                var r_labelUserLevel = JObject.Parse(responseJson)["labelUserLevel"].ToString();
+                Debug.Log("Response label user level :" + r_userLevel);
                 
                 //création des playerPref servant de variables globales
-                PlayerPrefs.SaveUser(r_userName, r_userEmail, r_userLevel);
+                PlayerPrefs.SaveUser(r_userName, r_userEmail, r_userLevel, r_labelUserLevel);
                 
                 decryptedPassword = Crypting.Decrypt(r_userPassword);
                 Debug.Log("Response Text decrypt :" + decryptedPassword);

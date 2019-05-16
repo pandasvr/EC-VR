@@ -2,6 +2,7 @@
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.XR;
 using Random = UnityEngine.Random;
 
@@ -9,6 +10,16 @@ namespace Networking
 {
     public class NetworkConnectManager :  MonoBehaviourPunCallbacks
     {
+        #region Public Fields
+
+        [Tooltip("The maximum number of players per room. When a room is full, it can't be joined by new players, and so new room will be created")]
+        public byte maxPlayersPerRoom;
+
+        public InputField Field_RoomName;
+        public Slider Slider_UserNumber;
+
+        #endregion
+        
         #region Private Serializable Fields
 
 
@@ -25,9 +36,6 @@ namespace Networking
         private VrSettings scriptVrSettings;
         private bool isCreatingRoom = false;
         private bool isJoiningRoom = false;
-
-        [Tooltip("The maximum number of players per room. When a room is full, it can't be joined by new players, and so new room will be created")]
-        public byte maxPlayersPerRoom = 4;
 
         #endregion
         
@@ -60,15 +68,6 @@ namespace Networking
             
         }
 
-
-        /// <summary>
-        /// MonoBehaviour method called on GameObject by Unity during initialization phase.
-        /// </summary>
-        private void Start()
-        {
-        }
-
-
         #endregion
 
 
@@ -77,6 +76,23 @@ namespace Networking
         
         public void CreateNewRoom()
         {
+            //init max player per room
+            switch (Slider_UserNumber.value)
+            {
+                case 1:
+                    maxPlayersPerRoom = 5;
+                    break;
+                case 2:
+                    maxPlayersPerRoom = 10;
+                    break;
+                case 3:
+                    maxPlayersPerRoom = 15;
+                    break;
+                default:
+                    maxPlayersPerRoom = 5;
+                    break;
+            }
+            
             // keep track of the will to join a room, because when we come back from the game we will get a callback that we are connected, so we need to know what to do then
             isConnecting = true;
             
@@ -88,7 +104,6 @@ namespace Networking
             if (PhotonNetwork.NickName == "")
             {
                 PhotonNetwork.NickName = playerName();
-                Debug.Log("Identifiant temporaire de l'utilisateur : " + PhotonNetwork.NickName);
             }
             
             // we check if we are connected or not, we join if we are , else we initiate the connection to the server.
@@ -147,12 +162,25 @@ namespace Networking
         
         private string playerName()
         {
-            return "Player#" + Random.Range(1, 9999);
+            return UnityEngine.PlayerPrefs.GetString("userName");
         }
 
         private string RoomName()
         {
-            return "Salon#" + Random.Range(1, 9999);
+            string roomName;
+            
+            //init room name
+            if (Field_RoomName.text != "")
+            {
+                roomName = Field_RoomName.text;
+            }
+            else
+            {
+                roomName = "Salon#" + Random.Range(1, 9999);
+            }
+            
+            //return Field_RoomName.text;
+            return roomName;
         }
         
         #region MonoBehaviourPunCallbacks Callbacks

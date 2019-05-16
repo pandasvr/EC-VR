@@ -44,9 +44,11 @@ class PdoUnity
  */
 	public function signin($userName)
 	{
-		$req="SELECT * FROM users where userName = '".$userName."'";
-		$resultat=PdoUnity::$myPdo->query($req)->fetch();
-		return $resultat;
+		$resultat=PdoUnity::$myPdo->prepare("SELECT users.idUser, users.userName, users.cryptPassword, users.userEmail, users.userLevel, userlevel.labelUserLevel FROM users, userlevel where users.userLevel=userlevel.idUserLevel and users.userName = :userName");
+		$resultat->bindParam(':userName', $userName);
+		$resultat->execute();
+		$return = $resultat->fetch();
+		return $return;
 	}
 
 /**
