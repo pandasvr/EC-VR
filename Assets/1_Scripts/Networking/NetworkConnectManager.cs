@@ -114,6 +114,7 @@ namespace Networking
                 isCreatingRoom = false;
                 PhotonNetwork.CreateRoom(roomName, new RoomOptions { MaxPlayers = maxPlayersPerRoom });
                 Debug.Log("Création du salon : " + roomName);
+                Debug.Log("Max players : " + maxPlayersPerRoom);
             }
             else
             {
