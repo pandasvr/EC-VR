@@ -5485,7 +5485,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 70.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &722228644
@@ -6188,7 +6188,18 @@ MonoBehaviour:
       Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   OnGripPressed:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1376168265}
+        m_MethodName: PresentatationSwipeRight
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: VRTK.UnityEventHelper.VRTK_ControllerEvents_UnityEvents+ControllerInteractionEvent,
       Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   OnGripReleased:
@@ -8177,7 +8188,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ba893874d94733a40b0cbf0a95cb44c8, type: 2}
+  - {fileID: 2100000, guid: 0cfd0bc274c2379448ed1bdfc2bcf260, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -11661,6 +11672,8 @@ MonoBehaviour:
     type: 3}
   screenTurnedOnTexture: {fileID: 2800000, guid: c01158bf6494c584f96330fafb658271,
     type: 3}
+  ScreenShader: {fileID: 4800000, guid: 8a38f01cb18ffbf4097c4758e2164517, type: 3}
+  presentationSlides: []
 --- !u!1 &1416602150
 GameObject:
   m_ObjectHideFlags: 0
