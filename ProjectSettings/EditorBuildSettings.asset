@@ -21,7 +21,7 @@ EditorBuildSettings:
     path: Assets/0_Scenes/MainMenu.unity
     guid: 1adc00cea1c95c0498b21f56543f3105
   - enabled: 1
-    path: Assets/0_Scenes/Salon 2.unity
+    path: Assets/0_Scenes/Salon.unity
     guid: 16cdb7e8bf68d33479b7701ebe4250a4
   - enabled: 0
     path: Assets/Photon/PhotonVoice/Demos/DemoVoicePun/DemoVoicePun-Scene.unity

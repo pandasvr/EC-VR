@@ -6,6 +6,8 @@ using UnityEngine.Video;
 
 public class MediaShare2 : MonoBehaviour
 {
+    public GameObject projectionScreen;
+    
     public GameObject VideoProjecteur;
     public Image ImageProjecteur;
     public GameObject RadialMenuProjecteur;
@@ -13,14 +15,20 @@ public class MediaShare2 : MonoBehaviour
     private VideoPlayer Video;
     private bool videoIsOn;
     
-    private bool imageIsOn;
+    private bool imageIsOn = false;
     private Sprite image;
     private int pageNumber;
-    
+
+    private void Start()
+    {
+        Video = projectionScreen.gameObject.GetComponent<VideoPlayer>();  //on récupère le videoplayer qu'on voudra allumer où éteindre à partir d'une UI
+    }
+
     public void VideoButton() //cette fonction permet que l'appui sur le bouton "vidéo" lance la vidéo enregistrée dans l'objet videoplayer
     {
         videoIsOn = !videoIsOn; //lorsque le bouton est cliqué, le bouléen "on met la vidéo comme média" change de valeur
         VideoProjecteur.SetActive(videoIsOn); //si la vidéo est mise comme média, on active son support
+        ImageProjecteur.gameObject.SetActive(imageIsOn);
         if (videoIsOn)
         {
             Video.Play(); //si la vidéo est mise comme média, on active son support, on la met en play
@@ -39,19 +47,16 @@ public class MediaShare2 : MonoBehaviour
         }
     }
 
-    public void updatePresentation()
-    {
-        var path = "MediaShare/Presentation" + pageNumber;
-        ImageProjecteur.sprite = Resources.Load <Sprite> (path);
-    }
     
     public void PresentatationSwipeRight()
     {
         if (pageNumber != 7)
         {
             pageNumber++;
-            updatePresentation(); 
+            var path = "MediaShare/Presentation" + pageNumber;
+            ImageProjecteur.sprite = Resources.Load <Sprite> (path);
         }
+        
     } 
     
     public void PresentatationSwipeLeft()
@@ -59,7 +64,8 @@ public class MediaShare2 : MonoBehaviour
         if (pageNumber != 0)
         {
             pageNumber--;
-            updatePresentation();
+            var path = "MediaShare/Presentation" + pageNumber;
+            ImageProjecteur.sprite = Resources.Load <Sprite> (path);
         }
     }
 }
