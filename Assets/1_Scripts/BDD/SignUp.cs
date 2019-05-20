@@ -8,9 +8,6 @@ using UnityEngine.UI;
 
 public class SignUp : MonoBehaviour
 {
-    //Adresse IP du serveur
-    public string adresseIP;
-    
     //champs reliés à l'UI de l'application
     public InputField fieldName;
     public InputField fieldPassword;
@@ -54,8 +51,8 @@ public class SignUp : MonoBehaviour
     IEnumerator ServerSend()
     {
         //Création des url d'envoie au seveur
-        string urlConditionUniqueUserName = "http://" + adresseIP + "/edsa-ecvr/conditionUniqueUserName.php";
-        string urlSignup = "http://" + adresseIP + "/edsa-ecvr/signup.php";
+        string urlConditionUniqueUserName = Adressing.GetSignUpUrl_ConditionUniqueUserName();
+        string urlSignup = Adressing.GetSignUpUrl();
         
         //Récupération des valeurs du formulaire
         userName = fieldName.text;

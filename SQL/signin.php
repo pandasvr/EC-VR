@@ -4,7 +4,7 @@ $pdo = PdoUnity::getPdoUnity();
 
 $name = $_REQUEST['name'];                              
 
-$resultat = $pdo->signin($name);
+$resultat = $pdo->SignIn($name);
 
 echo json_encode($resultat);
 ?>
