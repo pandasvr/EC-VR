@@ -6,11 +6,13 @@ using UnityEngine.XR;
 
 namespace Networking
 {
+        
     public class GameManager : MonoBehaviourPunCallbacks
     {
-
         [Tooltip("The prefab to use for representing the player")]
         public GameObject playerPrefab;
+        
+        public GameObject[] spawnPoints;
 
         private void Start()
         {
@@ -22,7 +24,8 @@ namespace Networking
             {
                 Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManager.GetActiveScene().name);
                 // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
-                PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(-1f,0f,-2f), Quaternion.identity, 0);
+                
+                PhotonNetwork.Instantiate(this.playerPrefab.name, spawnPoints[Random.Range(0, spawnPoints.Length-1)].transform.position, Quaternion.identity, 0);
             }
 
         }

@@ -147,7 +147,8 @@ namespace Networking
         
         private string playerName()
         {
-            return "Player#" + Random.Range(1, 9999);
+            //return "Player#" + Random.Range(1, 9999);
+            return UnityEngine.PlayerPrefs.GetString("userName");
         }
 
         private string RoomName()
