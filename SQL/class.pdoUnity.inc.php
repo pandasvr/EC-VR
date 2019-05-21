@@ -44,7 +44,7 @@ class PdoUnity
  */
 	public function signin($userName)
 	{
-		$req="SELECT * FROM users where userName = '".$userName."'";
+		$req="SELECT * FROM user where userName = '".$userName."'";
 		$resultat=PdoUnity::$myPdo->query($req)->fetch();
 		return $resultat;
 	}
@@ -54,7 +54,7 @@ class PdoUnity
  */
 	public function signup($userName, $cryptPassword, $userEmail, $userLevel)
 	{
-		$resultat=PdoUnity::$myPdo->prepare("INSERT INTO users(userName, cryptPassword, userEmail, userLevel) VALUES (:userName, :cryptPassword, :userEmail, :userLevel)");
+		$resultat=PdoUnity::$myPdo->prepare("INSERT INTO user(userName, cryptPassword, userEmail, userLevel) VALUES (:userName, :cryptPassword, :userEmail, :userLevel)");
 		$resultat->bindParam(':userName', $userName);
 		$resultat->bindParam(':cryptPassword', $cryptPassword);
 		$resultat->bindParam(':userEmail', $userEmail);
@@ -68,7 +68,7 @@ class PdoUnity
  */
 	public function requestUsername($userName)
 	{
-		$req="SELECT * FROM users where userName = '".$userName."'";
+		$req="SELECT * FROM user where userName = '".$userName."'";
 		$resultat=PdoUnity::$myPdo->query($req)->fetch();
 		return $resultat;
 	}
