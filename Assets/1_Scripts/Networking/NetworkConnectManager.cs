@@ -199,7 +199,7 @@ namespace Networking
                 Debug.Log("Chargement de la scene 'Salon 1' ");
                 // #Critical
                 // Load the Room Level.
-                PhotonNetwork.LoadLevel("Salon 2");
+                PhotonNetwork.LoadLevel("Salon");
             }
         }
     }

@@ -7,12 +7,12 @@ using Photon.Pun;
 
 public class MediaShare : MonoBehaviour
 {
-    public GameObject projectionScreen;
-    
     public GameObject VideoProjecteur;
     public Image ImageProjecteur;
     public GameObject RadialMenuProjecteur;
     public GameObject RadialMenu;
+
+    public PhotonView photonView;
     
     private VideoPlayer Video;
     private bool videoIsOn;
@@ -23,7 +23,7 @@ public class MediaShare : MonoBehaviour
 
     private void Start()
     {
-        Video = projectionScreen.gameObject.GetComponent<VideoPlayer>();  //on récupère le videoplayer qu'on voudra allumer où éteindre à partir d'une UI
+        //Video = projectionScreen.gameObject.GetComponent<VideoPlayer>();  //on récupère le videoplayer qu'on voudra allumer où éteindre à partir d'une UI
     }
 
     public void VideoButton() //cette fonction permet que l'appui sur le bouton "vidéo" lance la vidéo enregistrée dans l'objet videoplayer
@@ -52,25 +52,45 @@ public class MediaShare : MonoBehaviour
         }
     }
 
-    
-    public void PresentatationSwipeRight()
+    public void SynchronisationSwipe(string swipe)
+    {
+        if (swipe == "right")
+        {
+            Debug.Log(swipe + " swipe send for all player.");
+            photonView.RPC("SwipeRight", RpcTarget.All);
+        }
+        else if (swipe == "left")
+        {
+            Debug.Log(swipe + " swipe send for all player.");
+            photonView.RPC("SwipeLeft", RpcTarget.All);
+        }
+        
+    }
+
+    [PunRPC]
+    private void SwipeRight(PhotonMessageInfo info)
     {
         if (pageNumber != 7)
         {
             pageNumber++;
             var path = "MediaShare/Presentation" + pageNumber;
             ImageProjecteur.sprite = Resources.Load <Sprite> (path);
+            
+            Debug.Log(string.Format("Info: {0} {1} {2}", info.Sender, info.photonView, info.timestamp));
         }
         
     } 
     
-    public void PresentatationSwipeLeft()
+    [PunRPC]
+    private void SwipeLeft(PhotonMessageInfo info)
     {
         if (pageNumber != 0)
         {
             pageNumber--;
             var path = "MediaShare/Presentation" + pageNumber;
             ImageProjecteur.sprite = Resources.Load <Sprite> (path);
+            
+            Debug.Log(string.Format("Info: {0} {1} {2}", info.Sender, info.photonView, info.timestamp));
         }
     }
 }
