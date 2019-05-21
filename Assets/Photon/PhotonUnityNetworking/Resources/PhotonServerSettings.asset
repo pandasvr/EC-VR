@@ -31,7 +31,9 @@ MonoBehaviour:
   RpcList:
   - DestroySpaceship
   - Fire
+  - PlayVideo
   - RespawnSpaceship
+  - StartPowerPoint
   - SwipeLeft
   - SwipeRight
   DisableAutoOpenWizard: 1

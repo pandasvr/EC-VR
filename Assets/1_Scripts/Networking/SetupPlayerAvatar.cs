@@ -11,6 +11,9 @@ namespace Networking {
         [Tooltip("The avatar's right hand to sync with the right controller. If empty, a child named 'Right Hand' will be used.")]
         public GameObject RightHand;
 
+        public GameObject RightHandModel;
+        public GameObject LeftHandModel;
+
         public GameObject label;
         
         private void InitPlayerName() {
@@ -57,6 +60,10 @@ namespace Networking {
             //RightHand = RightHand != null ? RightHand : NetUtils.Find(gameObject, "Right Hand");
             SetUpControllerHandLink(LeftHand, VRTK_DeviceFinder.Devices.LeftController);
             SetUpControllerHandLink(RightHand, VRTK_DeviceFinder.Devices.RightController);
+            
+            //On désactive le visuel des mains si la prefab appartient au joueur
+            LeftHandModel.SetActive(false);
+            RightHandModel.SetActive(false);
         }
 
         private static void SetUpControllerHandLink(GameObject avatarComponent, VRTK_DeviceFinder.Devices device) {

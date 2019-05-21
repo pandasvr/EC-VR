@@ -7,10 +7,10 @@ using Photon.Pun;
 
 public class MediaShare : MonoBehaviour
 {
-    public GameObject VideoProjecteur;
-    public Image ImageProjecteur;
-    public GameObject RadialMenuProjecteur;
-    public GameObject RadialMenu;
+    public GameObject videoProjecteur;
+    public Image imageProjecteur;
+    public GameObject radialMenuProjecteur;
+    public GameObject radialMenu;
 
     public PhotonView photonView;
     
@@ -23,33 +23,54 @@ public class MediaShare : MonoBehaviour
 
     private void Start()
     {
-        //Video = projectionScreen.gameObject.GetComponent<VideoPlayer>();  //on récupère le videoplayer qu'on voudra allumer où éteindre à partir d'une UI
+        Video = videoProjecteur.gameObject.GetComponent<VideoPlayer>();  //on récupère le videoplayer qu'on voudra allumer où éteindre à partir d'une UI
     }
 
-    public void VideoButton() //cette fonction permet que l'appui sur le bouton "vidéo" lance la vidéo enregistrée dans l'objet videoplayer
+
+
+    public void SynchronisationVideo()
+    {
+        Debug.Log( " Video played send for all player.");
+        photonView.RPC("PlayVideo", RpcTarget.All);
+    }
+    
+    
+    [PunRPC]
+    private void PlayVideo(PhotonMessageInfo info) //cette fonction permet que l'appui sur le bouton "vidéo" lance la vidéo enregistrée dans l'objet videoplayer
     {
         videoIsOn = !videoIsOn; //lorsque le bouton est cliqué, le bouléen "on met la vidéo comme média" change de valeur
-        VideoProjecteur.SetActive(videoIsOn); //si la vidéo est mise comme média, on active son support
-        RadialMenu.SetActive(!videoIsOn);
-        ImageProjecteur.gameObject.SetActive(false);
+        videoProjecteur.SetActive(videoIsOn); //si la vidéo est mise comme média, on active son support
+        radialMenu.SetActive(!videoIsOn);
+        imageProjecteur.gameObject.SetActive(false);
         if (videoIsOn)
         {
             Video.Play(); //si la vidéo est mise comme média, on active son support, on la met en play
         }
+        Debug.Log(string.Format("Info: {0} {1} {2}", info.Sender, info.photonView, info.timestamp));
     }
     
-    public void ImageButton()
+    
+    
+    public void SynchronisationPowerpoint()
+    {
+        Debug.Log( " Powerpoint started send for all player.");
+        photonView.RPC("StartPowerPoint", RpcTarget.All);
+    }
+    
+    [PunRPC]
+    private void StartPowerPoint(PhotonMessageInfo info)
     {
         imageIsOn = !imageIsOn;
-        VideoProjecteur.SetActive(false);
-        ImageProjecteur.gameObject.SetActive(imageIsOn);
-        RadialMenuProjecteur.SetActive(imageIsOn);
-        RadialMenu.SetActive(!imageIsOn);
+        videoProjecteur.SetActive(false);
+        imageProjecteur.gameObject.SetActive(imageIsOn);
+        radialMenuProjecteur.SetActive(imageIsOn);
+        radialMenu.SetActive(!imageIsOn);
         if (imageIsOn)
         {
-            ImageProjecteur.sprite = Resources.Load <Sprite> ("MediaShare/Presentation0");
+            imageProjecteur.sprite = Resources.Load <Sprite> ("MediaShare/Presentation0");
             pageNumber = 0;
         }
+        Debug.Log(string.Format("Info: {0} {1} {2}", info.Sender, info.photonView, info.timestamp));
     }
 
     public void SynchronisationSwipe(string swipe)
@@ -74,7 +95,7 @@ public class MediaShare : MonoBehaviour
         {
             pageNumber++;
             var path = "MediaShare/Presentation" + pageNumber;
-            ImageProjecteur.sprite = Resources.Load <Sprite> (path);
+            imageProjecteur.sprite = Resources.Load <Sprite> (path);
             
             Debug.Log(string.Format("Info: {0} {1} {2}", info.Sender, info.photonView, info.timestamp));
         }
@@ -88,7 +109,7 @@ public class MediaShare : MonoBehaviour
         {
             pageNumber--;
             var path = "MediaShare/Presentation" + pageNumber;
-            ImageProjecteur.sprite = Resources.Load <Sprite> (path);
+            imageProjecteur.sprite = Resources.Load <Sprite> (path);
             
             Debug.Log(string.Format("Info: {0} {1} {2}", info.Sender, info.photonView, info.timestamp));
         }

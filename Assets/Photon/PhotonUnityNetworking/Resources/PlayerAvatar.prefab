@@ -151,7 +151,7 @@ GameObject:
   - component: {fileID: 135836708066244542}
   - component: {fileID: 23052689219880584}
   m_Layer: 0
-  m_Name: model
+  m_Name: RightModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -242,7 +242,7 @@ GameObject:
   - component: {fileID: 135621874978593510}
   - component: {fileID: 23341183443138114}
   m_Layer: 0
-  m_Name: model
+  m_Name: LeftModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -787,6 +787,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LeftHand: {fileID: 1647167761276460}
   RightHand: {fileID: 1311027533318458}
+  RightHandModel: {fileID: 1207133069724046}
+  LeftHandModel: {fileID: 1266566000291760}
   label: {fileID: 1571070037516242}
 --- !u!114 &8819710247351578170
 MonoBehaviour:
