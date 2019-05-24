@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
@@ -20,16 +21,15 @@ public class MediaShare : MonoBehaviour
     private bool imageIsOn;
     private Sprite image;
     private int pageNumber;
+    private int pageNumberMax;
 
     private void Start()
     {
         imageIsOn = false;
         //on récupère le videoplayer qu'on voudra allumer où éteindre à partir d'une UI
         video = videoProjecteur.gameObject.GetComponent<VideoPlayer>();
-        
+        pageNumberMax = Directory.GetFiles("Resources/MediaShare", "*.meta", SearchOption.TopDirectoryOnly).Length - 1;
     }
-
-
 
     public void SynchronisationVideo()
     {
@@ -75,8 +75,8 @@ public class MediaShare : MonoBehaviour
         radialMenu.SetActive(!imageIsOn);
         if (imageIsOn)
         {
-            imageProjecteur.sprite = Resources.Load <Sprite> ("MediaShare/Presentation0");
-            pageNumber = 0;
+            imageProjecteur.sprite = Resources.Load <Sprite> ("MediaShare/Presentation1");
+            pageNumber = 1;
         }
         Debug.Log(string.Format("Info: {0} {1} {2}", info.Sender, info.photonView, info.timestamp));
     }
@@ -98,7 +98,7 @@ public class MediaShare : MonoBehaviour
     [PunRPC]
     private void SwipeRight(PhotonMessageInfo info)
     {
-        if (pageNumber != 7)
+        if (pageNumber != pageNumberMax)
         {
             pageNumber++;
             var path = "MediaShare/Presentation" + pageNumber;
@@ -111,7 +111,7 @@ public class MediaShare : MonoBehaviour
     [PunRPC]
     private void SwipeLeft(PhotonMessageInfo info)
     {
-        if (pageNumber != 0)
+        if (pageNumber != 1)
         {
             pageNumber--;
             var path = "MediaShare/Presentation" + pageNumber;
