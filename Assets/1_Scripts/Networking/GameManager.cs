@@ -11,7 +11,6 @@ namespace Networking
     {
         [Tooltip("The prefab to use for representing the player")]
         public GameObject playerPrefab;
-        
         public GameObject[] spawnPoints;
 
         private void Start()

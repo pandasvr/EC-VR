@@ -14,16 +14,19 @@ public class MediaShare : MonoBehaviour
 
     public PhotonView photonView;
     
-    private VideoPlayer Video;
+    private VideoPlayer video;
     private bool videoIsOn;
     
-    private bool imageIsOn = false;
+    private bool imageIsOn;
     private Sprite image;
     private int pageNumber;
 
     private void Start()
     {
-        Video = videoProjecteur.gameObject.GetComponent<VideoPlayer>();  //on récupère le videoplayer qu'on voudra allumer où éteindre à partir d'une UI
+        imageIsOn = false;
+        //on récupère le videoplayer qu'on voudra allumer où éteindre à partir d'une UI
+        video = videoProjecteur.gameObject.GetComponent<VideoPlayer>();
+        
     }
 
 
@@ -36,15 +39,20 @@ public class MediaShare : MonoBehaviour
     
     
     [PunRPC]
-    private void PlayVideo(PhotonMessageInfo info) //cette fonction permet que l'appui sur le bouton "vidéo" lance la vidéo enregistrée dans l'objet videoplayer
+    //cette fonction permet que l'appui sur le bouton "vidéo" lance la vidéo enregistrée dans l'objet videoplayer
+    private void PlayVideo(PhotonMessageInfo info) 
     {
-        videoIsOn = !videoIsOn; //lorsque le bouton est cliqué, le bouléen "on met la vidéo comme média" change de valeur
-        videoProjecteur.SetActive(videoIsOn); //si la vidéo est mise comme média, on active son support
+        //lorsque le bouton est cliqué, le bouléen "on met la vidéo comme média" change de valeur
+        //si la vidéo est mise comme média, on active son support
+        //si la vidéo est mise comme média, on la met en play
+        
+        videoIsOn = !videoIsOn; 
+        videoProjecteur.SetActive(videoIsOn); 
         radialMenu.SetActive(!videoIsOn);
         imageProjecteur.gameObject.SetActive(false);
         if (videoIsOn)
         {
-            Video.Play(); //si la vidéo est mise comme média, on active son support, on la met en play
+            video.Play(); 
         }
         Debug.Log(string.Format("Info: {0} {1} {2}", info.Sender, info.photonView, info.timestamp));
     }
@@ -85,7 +93,6 @@ public class MediaShare : MonoBehaviour
             Debug.Log(swipe + " swipe send for all player.");
             photonView.RPC("SwipeLeft", RpcTarget.All);
         }
-        
     }
 
     [PunRPC]
@@ -99,7 +106,6 @@ public class MediaShare : MonoBehaviour
             
             Debug.Log(string.Format("Info: {0} {1} {2}", info.Sender, info.photonView, info.timestamp));
         }
-        
     } 
     
     [PunRPC]
