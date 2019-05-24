@@ -5,14 +5,15 @@ namespace Networking {
     using UnityEngine;
     using VRTK;
 
-    public class SetupPlayerAvatar : MonoBehaviourPunCallbacks {
+    public class SetupPlayerAvatar : MonoBehaviourPunCallbacks 
+    {
         [Tooltip("The avatar's left hand to sync with the left controller. If empty, a child named 'Left Hand' will be used.")]
-        public GameObject LeftHand;
+        public GameObject leftHand;
         [Tooltip("The avatar's right hand to sync with the right controller. If empty, a child named 'Right Hand' will be used.")]
-        public GameObject RightHand;
+        public GameObject rightHand;
 
-        public GameObject RightHandModel;
-        public GameObject LeftHandModel;
+        public GameObject rightHandModel;
+        public GameObject leftHandModel;
 
         public GameObject label;
         
@@ -26,10 +27,13 @@ namespace Networking {
                     
                     // Set player's name on the top Label
                     TMPro.TextMeshPro text = label.GetComponent<TMPro.TextMeshPro>();
-                    if (text != null) {
+                    if (text != null) 
+                    {
                         text.text = name;
                     }
-                } else {
+                } 
+                else 
+                {
                     // We deactivate the label because we don't show a label on our own local avatar
                     label.SetActive(false);
                 }
@@ -58,12 +62,12 @@ namespace Networking {
             // Add PhotonViewLink objects to the VR controller objects and link them to the avatar's hands
             //LeftHand = LeftHand != null ? LeftHand : NetUtils.Find(gameObject, "Left Hand");
             //RightHand = RightHand != null ? RightHand : NetUtils.Find(gameObject, "Right Hand");
-            SetUpControllerHandLink(LeftHand, VRTK_DeviceFinder.Devices.LeftController);
-            SetUpControllerHandLink(RightHand, VRTK_DeviceFinder.Devices.RightController);
+            SetUpControllerHandLink(leftHand, VRTK_DeviceFinder.Devices.LeftController);
+            SetUpControllerHandLink(rightHand, VRTK_DeviceFinder.Devices.RightController);
             
             //On désactive le visuel des mains si la prefab appartient au joueur
-            LeftHandModel.SetActive(false);
-            RightHandModel.SetActive(false);
+            leftHandModel.SetActive(false);
+            rightHandModel.SetActive(false);
         }
 
         private static void SetUpControllerHandLink(GameObject avatarComponent, VRTK_DeviceFinder.Devices device) {

@@ -9,7 +9,9 @@ public class Billboard : MonoBehaviour {
             Vector3 forward;
             if (LookAway) {
                 forward = transform.position - Camera.main.transform.position;
-            } else {
+            } 
+            else 
+            {
                 forward = Camera.main.transform.position - transform.position;
             }
             transform.rotation = Quaternion.LookRotation(forward);
