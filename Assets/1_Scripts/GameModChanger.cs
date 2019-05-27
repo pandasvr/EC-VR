@@ -30,9 +30,9 @@ public class GameModChanger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("space"))
+        if ( Input.GetKeyDown("space"))
         {
-            if (isVRActive)
+            if (isVRActive) 
             {
                 Debug.Log("Desactivation mode VR");
                 VRTK_SDKManager.SetActive(false);

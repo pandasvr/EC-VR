@@ -94,7 +94,7 @@ public class SignIn : MonoBehaviour
                 else
                 {
                     Debug.Log("wrong username or password");
-                    InfoText.text = "wrong username or password";
+                    InfoText.text = "Nom d'utilisateur ou mot de passe incorrect";
                     InfoText.color = Color.red;
                     InfoText.enabled = true;
                     InfoText.gameObject.SetActive(true);
@@ -103,7 +103,7 @@ public class SignIn : MonoBehaviour
             else
             {
                 Debug.Log("wrong username or password");
-                InfoText.text = "wrong username or password";
+                InfoText.text = "Nom d'utilisateur ou mot de passe incorrect";
                 InfoText.color = Color.red;
                 InfoText.enabled = true;
                 InfoText.gameObject.SetActive(true);
