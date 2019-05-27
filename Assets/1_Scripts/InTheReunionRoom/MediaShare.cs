@@ -27,7 +27,8 @@ public class MediaShare : MonoBehaviour
         imageIsOn = false;
         //on récupère le videoplayer qu'on voudra allumer où éteindre à partir d'une UI
         video = videoProjecteur.gameObject.GetComponent<VideoPlayer>();
-        pageNumberMax = Directory.GetFiles("Assets/Resources/MediaShare", "*.meta", SearchOption.TopDirectoryOnly).Length;
+        //pageNumberMax = Directory.GetFiles("Assets/Resources/MediaShare", "*.jpg", SearchOption.TopDirectoryOnly).Length;
+        pageNumberMax = 4;
     }
 
     public void SynchronisationVideo()
