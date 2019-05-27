@@ -7,9 +7,6 @@ using UnityEngine.UI;
 
 public class SignIn : MonoBehaviour
 {
-    //Adresse IP du serveur
-    public string adresseIP;
-    
     //champs noms et password récupérés depuis l'UI d'unity
     public InputField fieldName;
     public InputField fieldPassword;
@@ -33,7 +30,7 @@ public class SignIn : MonoBehaviour
     IEnumerator ServerSend()
     {
         //Création url envoie serveur
-        string urlSignin = "http://" + adresseIP + "/edsa-ecvr/signin.php";
+        string urlSignin = Adressing.GetSignInUrl();
         
         //Récupération des valeurs du formulaire
         userPassword = Hashing.HashPassword(fieldPassword.text); //on hache directement le mot de passe récupéré
@@ -71,9 +68,11 @@ public class SignIn : MonoBehaviour
                 Debug.Log("Response user email :" + r_userEmail);
                 var r_userLevel = JObject.Parse(responseJson)["userLevel"].ToString();
                 Debug.Log("Response user level :" + r_userLevel);
+                var r_labelUserLevel = JObject.Parse(responseJson)["labelUserLevel"].ToString();
+                Debug.Log("Response label user level :" + r_userLevel);
                 
                 //création des playerPref servant de variables globales
-                PlayerPrefs.SaveUser(r_userName, r_userEmail, r_userLevel);
+                PlayerPrefs.SaveUser(r_userName, r_userEmail, r_userLevel, r_labelUserLevel);
                 
                 decryptedPassword = Crypting.Decrypt(r_userPassword);
                 Debug.Log("Response Text decrypt :" + decryptedPassword);

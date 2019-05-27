@@ -42,17 +42,19 @@ class PdoUnity
 /**
  * Fonction qui vérifie le userName et le password pour la connexion au site
  */
-	public function signin($userName)
+	public function SignIn($userName)
 	{
-		$req="SELECT * FROM user where userName = '".$userName."'";
-		$resultat=PdoUnity::$myPdo->query($req)->fetch();
-		return $resultat;
+		$resultat=PdoUnity::$myPdo->prepare("SELECT user.idUser, user.userName, user.cryptPassword, user.userEmail, user.userLevel, userlevel.labelUserLevel FROM user, userlevel where user.userLevel=userlevel.idUserLevel and user.userName = :userName");
+		$resultat->bindParam(':userName', $userName);
+		$resultat->execute();
+		$return = $resultat->fetch();
+		return $return;
 	}
 
 /**
- * Fonction qui vérifie le userName et le password pour la connexion au site
+ * Fonction qui enregistre l'utilisateur
  */
-	public function signup($userName, $cryptPassword, $userEmail, $userLevel)
+	public function SignUp($userName, $cryptPassword, $userEmail, $userLevel)
 	{
 		$resultat=PdoUnity::$myPdo->prepare("INSERT INTO user(userName, cryptPassword, userEmail, userLevel) VALUES (:userName, :cryptPassword, :userEmail, :userLevel)");
 		$resultat->bindParam(':userName', $userName);
@@ -66,10 +68,27 @@ class PdoUnity
 /**
  * Fonction qui vérifie que le userName n'existe pas déjà
  */
-	public function requestUsername($userName)
+	public function RequestUsername($userName)
 	{
 		$req="SELECT * FROM user where userName = '".$userName."'";
 		$resultat=PdoUnity::$myPdo->query($req)->fetch();
+		return $resultat;
+	}
+
+/**
+ * Fonction qui enregistre une room
+ */
+	public function CreateRoom($roomName, $userNumber, $whiteboard, $postIt, $mediaProjection, $chatNonVr, $environnement_id)
+	{
+		$resultat=PdoUnity::$myPdo->prepare("INSERT INTO room(roomName, maxPlayerRoom, whiteboard, postIt, mediaProjection, chatNonVr, environnement_id) VALUES (:roomName, :maxPlayerRoom, :whiteboard, :postIt, :mediaProjection, :chatNonVr, :environnement_id)");
+		$resultat->bindParam(':roomName', $roomName);
+		$resultat->bindParam(':maxPlayerRoom', $userNumber);
+		$resultat->bindParam(':whiteboard', $whiteboard);
+		$resultat->bindParam(':postIt', $postIt);
+		$resultat->bindParam(':mediaProjection', $mediaProjection);
+		$resultat->bindParam(':chatNonVr', $chatNonVr);
+		$resultat->bindParam(':environnement_id', $environnement_id);
+		$resultat->execute();
 		return $resultat;
 	}
 

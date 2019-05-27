@@ -5,20 +5,33 @@ using UnityEngine.UI;
 
 public class PlayerPrefs : MonoBehaviour
 {
-    public InputField Field_UserName;
-    public InputField Field_UserEmail;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        Field_UserName.text = UnityEngine.PlayerPrefs.GetString("userName");
-        Field_UserEmail.text = UnityEngine.PlayerPrefs.GetString("userEmail");
-    }
-
-    public static void SaveUser(string userName, string userEmail, string userLevel)
+    public static void SaveUser(string userName, string userEmail, string userLevel, string labelUserLevel)
     {
         UnityEngine.PlayerPrefs.SetString("userName", userName);
         UnityEngine.PlayerPrefs.SetString("userEmail", userEmail);
         UnityEngine.PlayerPrefs.SetString("userLevel", userLevel);
+        UnityEngine.PlayerPrefs.SetString("labelUserLevel", labelUserLevel);
+    }
+
+    public void Disconnect()
+    {
+        UnityEngine.PlayerPrefs.DeleteAll();
+        Debug.Log("User disconnected");
+    }
+
+    public static bool CheckUserConnected()
+    {
+        bool rt;
+        
+        if (UnityEngine.PlayerPrefs.HasKey("userName"))
+        {
+            rt = true;
+        }
+        else
+        {
+            rt = false;
+        }
+
+        return rt;
     }
 }

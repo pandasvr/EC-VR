@@ -4,7 +4,7 @@ $pdo = PdoUnity::getPdoUnity();
 
 $name = $_REQUEST['userName'];                              
 
-$resultat = $pdo->requestUsername($name);
+$resultat = $pdo->RequestUsername($name);
 
 
 if (isset($resultat['userName']))
