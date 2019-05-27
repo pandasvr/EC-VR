@@ -71,11 +71,8 @@ namespace Networking
                 return;
             }
             PhotonNetwork.NickName = value;
-
-
             UnityEngine.PlayerPrefs.SetString(playerNamePrefKey,value);
         }
-
 
         #endregion
     }

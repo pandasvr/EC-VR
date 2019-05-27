@@ -6,5 +6,7 @@ $name = $_REQUEST['name'];
 
 $resultat = $pdo->signin($name);
 
-echo json_encode($resultat);
+if($resultat != false){
+	echo json_encode($resultat);
+}
 ?>

@@ -147,7 +147,8 @@ namespace Networking
         
         private string playerName()
         {
-            return "Player#" + Random.Range(1, 9999);
+            //return "Player#" + Random.Range(1, 9999);
+            return UnityEngine.PlayerPrefs.GetString("userName");
         }
 
         private string RoomName()
@@ -199,7 +200,7 @@ namespace Networking
                 Debug.Log("Chargement de la scene 'Salon 1' ");
                 // #Critical
                 // Load the Room Level.
-                PhotonNetwork.LoadLevel("Salon 2");
+                PhotonNetwork.LoadLevel("Salon");
             }
         }
     }
