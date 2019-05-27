@@ -11,7 +11,6 @@ public class MediaShare : MonoBehaviour
     public GameObject videoProjecteur;
     public Image imageProjecteur;
     public GameObject radialMenuProjecteur;
-    public GameObject radialMenu;
 
     public PhotonView photonView;
     
@@ -28,7 +27,7 @@ public class MediaShare : MonoBehaviour
         imageIsOn = false;
         //on récupère le videoplayer qu'on voudra allumer où éteindre à partir d'une UI
         video = videoProjecteur.gameObject.GetComponent<VideoPlayer>();
-        pageNumberMax = Directory.GetFiles("Resources/MediaShare", "*.meta", SearchOption.TopDirectoryOnly).Length - 1;
+        pageNumberMax = Directory.GetFiles("Assets/Resources/MediaShare", "*.meta", SearchOption.TopDirectoryOnly).Length;
     }
 
     public void SynchronisationVideo()
@@ -48,7 +47,6 @@ public class MediaShare : MonoBehaviour
         
         videoIsOn = !videoIsOn; 
         videoProjecteur.SetActive(videoIsOn); 
-        radialMenu.SetActive(!videoIsOn);
         imageProjecteur.gameObject.SetActive(false);
         if (videoIsOn)
         {
@@ -72,7 +70,7 @@ public class MediaShare : MonoBehaviour
         videoProjecteur.SetActive(false);
         imageProjecteur.gameObject.SetActive(imageIsOn);
         radialMenuProjecteur.SetActive(imageIsOn);
-        radialMenu.SetActive(!imageIsOn);
+
         if (imageIsOn)
         {
             imageProjecteur.sprite = Resources.Load <Sprite> ("MediaShare/Presentation1");
