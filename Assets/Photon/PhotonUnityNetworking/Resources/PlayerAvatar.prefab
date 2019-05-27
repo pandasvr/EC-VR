@@ -785,10 +785,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 980ed99a27f2cc446ae568fd1fc191f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LeftHand: {fileID: 1647167761276460}
-  RightHand: {fileID: 1311027533318458}
-  RightHandModel: {fileID: 1207133069724046}
-  LeftHandModel: {fileID: 1266566000291760}
+  leftHand: {fileID: 1647167761276460}
+  rightHand: {fileID: 1311027533318458}
+  rightHandModel: {fileID: 1207133069724046}
+  leftHandModel: {fileID: 1266566000291760}
   label: {fileID: 1571070037516242}
 --- !u!114 &8819710247351578170
 MonoBehaviour:
@@ -802,10 +802,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8243603c0d46d6be20855111d48395, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AvatarHead: {fileID: 1316983645817718}
-  LeftHand: {fileID: 1647167761276460}
-  RightHand: {fileID: 1311027533318458}
-  AvatarTop: {fileID: 1488535125224394}
+  avatarHead: {fileID: 1316983645817718}
+  leftHand: {fileID: 1647167761276460}
+  rightHand: {fileID: 1311027533318458}
+  avatarTop: {fileID: 1488535125224394}
 --- !u!114 &1334504564164772027
 MonoBehaviour:
   m_ObjectHideFlags: 0

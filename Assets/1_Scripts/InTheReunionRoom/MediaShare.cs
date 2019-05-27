@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
@@ -10,23 +11,25 @@ public class MediaShare : MonoBehaviour
     public GameObject videoProjecteur;
     public Image imageProjecteur;
     public GameObject radialMenuProjecteur;
-    public GameObject radialMenu;
 
     public PhotonView photonView;
     
-    private VideoPlayer Video;
+    private VideoPlayer video;
     private bool videoIsOn;
     
-    private bool imageIsOn = false;
+    private bool imageIsOn;
     private Sprite image;
     private int pageNumber;
+    private int pageNumberMax;
 
     private void Start()
     {
-        Video = videoProjecteur.gameObject.GetComponent<VideoPlayer>();  //on récupère le videoplayer qu'on voudra allumer où éteindre à partir d'une UI
+        imageIsOn = false;
+        //on récupère le videoplayer qu'on voudra allumer où éteindre à partir d'une UI
+        video = videoProjecteur.gameObject.GetComponent<VideoPlayer>();
+        //pageNumberMax = Directory.GetFiles("Assets/Resources/MediaShare", "*.jpg", SearchOption.TopDirectoryOnly).Length;
+        pageNumberMax = 4;
     }
-
-
 
     public void SynchronisationVideo()
     {
@@ -36,15 +39,19 @@ public class MediaShare : MonoBehaviour
     
     
     [PunRPC]
-    private void PlayVideo(PhotonMessageInfo info) //cette fonction permet que l'appui sur le bouton "vidéo" lance la vidéo enregistrée dans l'objet videoplayer
+    //cette fonction permet que l'appui sur le bouton "vidéo" lance la vidéo enregistrée dans l'objet videoplayer
+    private void PlayVideo(PhotonMessageInfo info) 
     {
-        videoIsOn = !videoIsOn; //lorsque le bouton est cliqué, le bouléen "on met la vidéo comme média" change de valeur
-        videoProjecteur.SetActive(videoIsOn); //si la vidéo est mise comme média, on active son support
-        radialMenu.SetActive(!videoIsOn);
+        //lorsque le bouton est cliqué, le bouléen "on met la vidéo comme média" change de valeur
+        //si la vidéo est mise comme média, on active son support
+        //si la vidéo est mise comme média, on la met en play
+        
+        videoIsOn = !videoIsOn; 
+        videoProjecteur.SetActive(videoIsOn); 
         imageProjecteur.gameObject.SetActive(false);
         if (videoIsOn)
         {
-            Video.Play(); //si la vidéo est mise comme média, on active son support, on la met en play
+            video.Play(); 
         }
         Debug.Log(string.Format("Info: {0} {1} {2}", info.Sender, info.photonView, info.timestamp));
     }
@@ -64,11 +71,11 @@ public class MediaShare : MonoBehaviour
         videoProjecteur.SetActive(false);
         imageProjecteur.gameObject.SetActive(imageIsOn);
         radialMenuProjecteur.SetActive(imageIsOn);
-        radialMenu.SetActive(!imageIsOn);
+
         if (imageIsOn)
         {
-            imageProjecteur.sprite = Resources.Load <Sprite> ("MediaShare/Presentation0");
-            pageNumber = 0;
+            imageProjecteur.sprite = Resources.Load <Sprite> ("MediaShare/Presentation1");
+            pageNumber = 1;
         }
         Debug.Log(string.Format("Info: {0} {1} {2}", info.Sender, info.photonView, info.timestamp));
     }
@@ -85,13 +92,12 @@ public class MediaShare : MonoBehaviour
             Debug.Log(swipe + " swipe send for all player.");
             photonView.RPC("SwipeLeft", RpcTarget.All);
         }
-        
     }
 
     [PunRPC]
     private void SwipeRight(PhotonMessageInfo info)
     {
-        if (pageNumber != 7)
+        if (pageNumber != pageNumberMax)
         {
             pageNumber++;
             var path = "MediaShare/Presentation" + pageNumber;
@@ -99,13 +105,12 @@ public class MediaShare : MonoBehaviour
             
             Debug.Log(string.Format("Info: {0} {1} {2}", info.Sender, info.photonView, info.timestamp));
         }
-        
     } 
     
     [PunRPC]
     private void SwipeLeft(PhotonMessageInfo info)
     {
-        if (pageNumber != 0)
+        if (pageNumber != 1)
         {
             pageNumber--;
             var path = "MediaShare/Presentation" + pageNumber;

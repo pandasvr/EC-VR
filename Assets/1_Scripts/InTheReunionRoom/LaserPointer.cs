@@ -54,7 +54,7 @@ public class LaserPointer :  MonoBehaviourPunCallbacks, IPunObservable
                 laserRenderer.enabled = isLaserOn;
             }
         
-            if(laserRenderer.enabled)
+            if (laserRenderer.enabled)
             {
                 laser.transform.position   = hand.transform.position;
                 laser.transform.rotation   = hand.transform.rotation;

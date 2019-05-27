@@ -4,7 +4,7 @@ using UnityEngine;
 
    public class PlayerMenuSettings: MonoBehaviour
    {
-       public GameObject[] playerMenuPanels;
+        public GameObject[] playerMenuPanels;
         public GameObject playerMenuCanvas;
         protected bool isMenuOn;
 
@@ -34,7 +34,6 @@ using UnityEngine;
                 playerMenuPanels[0].SetActive(true); 
                 Debug.Log("Activation du player Menu");
             }
-        
             
             playerMenuCanvas.SetActive(isMenuOn);
         }
