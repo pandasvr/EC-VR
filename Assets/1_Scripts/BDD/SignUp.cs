@@ -16,10 +16,10 @@ public class SignUp : MonoBehaviour
     public InputField fieldLastName;
     public Dropdown fieldUserLevel;
     
-    public GameObject InscriptionPanel;
-    public GameObject LoginPanel;
+    public GameObject PanelCreateUser;
+    public GameObject PanelAdministration;
     
-    public Text InfoTextInscription;
+    public Text TextCanvasInfo;
 
     //champs pour récupérer les informations entrées dans l'UI 
     private string userName;
@@ -134,26 +134,22 @@ public class SignUp : MonoBehaviour
                     if (responseText)
                     {
                         Debug.Log("Inscription réussie");
-                        InfoTextInscription.text = "Inscription réussie !";
-                        InfoTextInscription.color = Color.green;
-                        InfoTextInscription.gameObject.SetActive(true);
+                        TextCanvasInfo.text = "Inscription réussie !";
+                        PanelCreateUser.SetActive(false);
+                        PanelAdministration.SetActive(true);
                     }
                     else
                     {
                         Debug.Log("Inscriptions échouée");
-                        InfoTextInscription.text = "Une erreur est survenue";
-                        InfoTextInscription.color = Color.red;
-                        InfoTextInscription.gameObject.SetActive(true);
+                        TextCanvasInfo.text = "Une erreur est survenue !";
                     }
                 }
             }
             //si le username est déjà pris:
             else
             {
-                InfoTextInscription.text = "Ce nom d'utilisateur est déjà pris";
-                InfoTextInscription.color = Color.red;
-                InfoTextInscription.enabled = true;
-                InfoTextInscription.gameObject.SetActive(true);
+                Debug.Log("Ce nom d'utilisateur est déjà pris");
+                TextCanvasInfo.text = "Ce nom d'utilisateur est déjà pris";
             }
         }
         
@@ -161,18 +157,16 @@ public class SignUp : MonoBehaviour
         else
         {
             Debug.Log("champs non valides");
-            InfoTextInscription.text = "champs non valides";
-            InfoTextInscription.color = Color.red;
-            InfoTextInscription.enabled = true;
-            InfoTextInscription.gameObject.SetActive(true);
+            TextCanvasInfo.text = "Champs non valides";
         }
     }
     
     public void ViderFormulaire()
     {
-        InfoTextInscription.gameObject.SetActive(false);
         fieldName.text = "";
         fieldPassword.text = "";
         fieldEmail.text = "";
+        fieldFirstName.text = "";
+        fieldLastName.text = "";
     }
 }

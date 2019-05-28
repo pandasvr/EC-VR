@@ -9,7 +9,7 @@ public class PlayerPrefs : MonoBehaviour
     {
     }
 
-    public static void SaveUser(string userName, string userEmail, string userLevel, string userFirstName, string userLastName)
+    public static void SaveUser(string userName, string userEmail, string userLevel, string labelUserLevel, string userFirstName, string userLastName)
     {
         UnityEngine.PlayerPrefs.SetString("userName", userName);
         UnityEngine.PlayerPrefs.SetString("userEmail", userEmail);

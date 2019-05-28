@@ -44,7 +44,7 @@ class PdoUnity
  */
 	public function SignIn($userName)
 	{
-		$resultat=PdoUnity::$myPdo->prepare("SELECT user.idUser, user.userName, user.cryptPassword, user.userEmail, user.userLevel, userlevel.labelUserLevel FROM user, userlevel where user.userLevel=userlevel.idUserLevel and user.userName = :userName");
+		$resultat=PdoUnity::$myPdo->prepare("SELECT user.idUser, user.userName, user.cryptPassword, user.userEmail, user.userLevel, userlevel.labelUserLevel, user.userFirstName, user.userLastName FROM user, userlevel where user.userLevel=userlevel.idUserLevel and user.userName = :userName");
 		$resultat->bindParam(':userName', $userName);
 		$resultat->execute();
 		$return = $resultat->fetch();

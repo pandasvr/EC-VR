@@ -78,8 +78,7 @@ public class SignIn : MonoBehaviour
                 Debug.Log("Response r_userLastName :" + r_userLastName);
                 
                 //création des playerPref servant de variables globales
-                PlayerPrefs.SaveUser(r_userName, r_userEmail, r_userLevel, r_userFirstName, r_userLastName);
-                PlayerPrefs.SaveUser(r_userName, r_userEmail, r_userLevel, r_labelUserLevel);
+                PlayerPrefs.SaveUser(r_userName, r_userEmail, r_userLevel,  r_labelUserLevel, r_userFirstName, r_userLastName);
                 
                 decryptedPassword = Crypting.Decrypt(r_userPassword);
                 Debug.Log("Response Text decrypt :" + decryptedPassword);
