@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 class PdoUnity
 {   		
       	private static $server='mysql:host=192.168.0.106';
@@ -96,7 +96,7 @@ class PdoUnity
 
 	public function GetAllUsers()
 	{
-		$resultat=PdoUnity::$myPdo->prepare("SELECT idUser, userName FROM user ");
+		$resultat=PdoUnity::$myPdo->prepare("SELECT idUser, userFirstName, userLastName FROM user ");
 		$resultat->execute();
 		$return = $resultat->fetchAll();
 		return $return;
