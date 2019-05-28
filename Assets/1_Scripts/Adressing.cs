@@ -24,9 +24,15 @@ public class Adressing : MonoBehaviour
         return url;
     }
     
-    public static string getCreateRoomUrl()
+    public static string GetCreateRoomUrl()
     {
         string url = "http://" + ipAddress + "/edsa-ecvr/createRoom.php";
+        return url;
+    }
+    
+    public static string GetAllUsersUrl()
+    {
+        string url = "http://" + ipAddress + "/edsa-ecvr/getAllUsers.php";
         return url;
     }
 }

@@ -94,5 +94,13 @@ class PdoUnity
 		return $resultat;
 	}
 
+	public function GetAllUsers()
+	{
+		$resultat=PdoUnity::$myPdo->prepare("SELECT idUser, userName FROM user ");
+		$resultat->execute();
+		$return = $resultat->fetchAll();
+		return $return;
+	}
+
 }
 ?>
