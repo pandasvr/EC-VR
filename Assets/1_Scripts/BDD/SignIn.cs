@@ -18,6 +18,8 @@ public class SignIn : MonoBehaviour
     private bool isValidPassword;
     private String userPassword;
     private String userName;
+    private string userFirstname;
+    private String userLastName;
     private String decryptedPassword;
 
     //Création d'une coroutine pour la connexion d'un utilisateur
@@ -70,8 +72,13 @@ public class SignIn : MonoBehaviour
                 Debug.Log("Response user level :" + r_userLevel);
                 var r_labelUserLevel = JObject.Parse(responseJson)["labelUserLevel"].ToString();
                 Debug.Log("Response label user level :" + r_userLevel);
+                var r_userFirstName = JObject.Parse(responseJson)["userFirstName"].ToString();
+                Debug.Log("Response r_userFirstName :" + r_userFirstName);
+                var r_userLastName = JObject.Parse(responseJson)["userLastName"].ToString();
+                Debug.Log("Response r_userLastName :" + r_userLastName);
                 
                 //création des playerPref servant de variables globales
+                PlayerPrefs.SaveUser(r_userName, r_userEmail, r_userLevel, r_userFirstName, r_userLastName);
                 PlayerPrefs.SaveUser(r_userName, r_userEmail, r_userLevel, r_labelUserLevel);
                 
                 decryptedPassword = Crypting.Decrypt(r_userPassword);

@@ -5,9 +5,11 @@ $pdo = PdoUnity::getPdoUnity();
 $userName = $_REQUEST['userName'];
 $cryptPassword = $_REQUEST['cryptPassword'];
 $userEmail = $_REQUEST['userEmail'];
+$userFirstName = $_REQUEST['userFirstName'];
+$userLastName = $_REQUEST['userLastName'];
 $userLevel = $_REQUEST['userLevel'];
 
-$resultat = $pdo->SignUp($userName, $cryptPassword, $userEmail, $userLevel);
+$resultat = $pdo->signup($userName, $cryptPassword, $userEmail, $userLevel, $userFirstName, $userLastName);
 
 echo $resultat;
 ?>

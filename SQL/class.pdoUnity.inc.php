@@ -54,13 +54,15 @@ class PdoUnity
 /**
  * Fonction qui enregistre l'utilisateur
  */
-	public function SignUp($userName, $cryptPassword, $userEmail, $userLevel)
+	public function signup($userName, $cryptPassword, $userEmail, $userLevel, $userFirstName, $userLastName)
 	{
-		$resultat=PdoUnity::$myPdo->prepare("INSERT INTO user(userName, cryptPassword, userEmail, userLevel) VALUES (:userName, :cryptPassword, :userEmail, :userLevel)");
+		$resultat=PdoUnity::$myPdo->prepare("INSERT INTO user(userName, cryptPassword, userEmail, userLevel, userFirstName, userLastName) VALUES (:userName, :cryptPassword, :userEmail, :userLevel, :userFirstName, :userLastName)");
 		$resultat->bindParam(':userName', $userName);
 		$resultat->bindParam(':cryptPassword', $cryptPassword);
 		$resultat->bindParam(':userEmail', $userEmail);
 		$resultat->bindParam(':userLevel', $userLevel);
+		$resultat->bindParam(':userFirstName', $userFirstName);
+		$resultat->bindParam(':userLastName', $userLastName);
 		$resultat->execute();
 		return $resultat;
 	}

@@ -164,7 +164,9 @@ namespace Networking
         private string playerName()
         {
             //return "Player#" + Random.Range(1, 9999);
-            return UnityEngine.PlayerPrefs.GetString("userName");
+            //return UnityEngine.PlayerPrefs.GetString("userName");
+            return UnityEngine.PlayerPrefs.GetString("userFirstName") + " " +
+                   UnityEngine.PlayerPrefs.GetString("userLastName");
         }
 
         private string RoomName()
