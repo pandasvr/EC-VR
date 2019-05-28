@@ -43,7 +43,7 @@ public class CreateRoom : MonoBehaviour
 
     IEnumerator SaveRoom()
     {
-        string urlCreateRoom = Adressing.getCreateRoomUrl();
+        string urlCreateRoom = Adressing.GetCreateRoomUrl();
         
         //Récupération des valeurs du formulaire
         if (Field_RoomName.text != "")

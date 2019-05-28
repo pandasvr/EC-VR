@@ -44,7 +44,7 @@ class PdoUnity
  */
 	public function SignIn($userName)
 	{
-		$resultat=PdoUnity::$myPdo->prepare("SELECT user.idUser, user.userName, user.cryptPassword, user.userEmail, user.userLevel, userlevel.labelUserLevel FROM user, userlevel where user.userLevel=userlevel.idUserLevel and user.userName = :userName");
+		$resultat=PdoUnity::$myPdo->prepare("SELECT user.idUser, user.userName, user.cryptPassword, user.userEmail, user.userLevel, userlevel.labelUserLevel, user.userFirstName, user.userLastName FROM user, userlevel where user.userLevel=userlevel.idUserLevel and user.userName = :userName");
 		$resultat->bindParam(':userName', $userName);
 		$resultat->execute();
 		$return = $resultat->fetch();
@@ -54,13 +54,15 @@ class PdoUnity
 /**
  * Fonction qui enregistre l'utilisateur
  */
-	public function SignUp($userName, $cryptPassword, $userEmail, $userLevel)
+	public function signup($userName, $cryptPassword, $userEmail, $userLevel, $userFirstName, $userLastName)
 	{
-		$resultat=PdoUnity::$myPdo->prepare("INSERT INTO user(userName, cryptPassword, userEmail, userLevel) VALUES (:userName, :cryptPassword, :userEmail, :userLevel)");
+		$resultat=PdoUnity::$myPdo->prepare("INSERT INTO user(userName, cryptPassword, userEmail, userLevel, userFirstName, userLastName) VALUES (:userName, :cryptPassword, :userEmail, :userLevel, :userFirstName, :userLastName)");
 		$resultat->bindParam(':userName', $userName);
 		$resultat->bindParam(':cryptPassword', $cryptPassword);
 		$resultat->bindParam(':userEmail', $userEmail);
 		$resultat->bindParam(':userLevel', $userLevel);
+		$resultat->bindParam(':userFirstName', $userFirstName);
+		$resultat->bindParam(':userLastName', $userLastName);
 		$resultat->execute();
 		return $resultat;
 	}
@@ -90,6 +92,14 @@ class PdoUnity
 		$resultat->bindParam(':environnement_id', $environnement_id);
 		$resultat->execute();
 		return $resultat;
+	}
+
+	public function GetAllUsers()
+	{
+		$resultat=PdoUnity::$myPdo->prepare("SELECT idUser, userName FROM user ");
+		$resultat->execute();
+		$return = $resultat->fetchAll();
+		return $return;
 	}
 
 }

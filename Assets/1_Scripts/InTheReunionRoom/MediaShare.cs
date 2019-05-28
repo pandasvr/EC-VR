@@ -53,6 +53,14 @@ public class MediaShare : MonoBehaviour
         {
             video.Play(); 
         }
+
+        videoProjecteur.SetActive(videoIsOn); //si la vidéo est mise comme média, on active son support
+        //radialMenu.SetActive(!videoIsOn);
+
+        if (videoIsOn)
+        {
+            video.Play(); //si la vidéo est mise comme média, on active son support, on la met en play
+        }
         Debug.Log(string.Format("Info: {0} {1} {2}", info.Sender, info.photonView, info.timestamp));
     }
     

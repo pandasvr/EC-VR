@@ -7,10 +7,16 @@ public class PlayerPrefs : MonoBehaviour
 {
     public static void SaveUser(string userName, string userEmail, string userLevel, string labelUserLevel)
     {
+    }
+
+    public static void SaveUser(string userName, string userEmail, string userLevel, string labelUserLevel, string userFirstName, string userLastName)
+    {
         UnityEngine.PlayerPrefs.SetString("userName", userName);
         UnityEngine.PlayerPrefs.SetString("userEmail", userEmail);
         UnityEngine.PlayerPrefs.SetString("userLevel", userLevel);
         UnityEngine.PlayerPrefs.SetString("labelUserLevel", labelUserLevel);
+        UnityEngine.PlayerPrefs.SetString("userFirstName", userFirstName);
+        UnityEngine.PlayerPrefs.SetString("userLastName", userLastName);
     }
 
     public void Disconnect()
