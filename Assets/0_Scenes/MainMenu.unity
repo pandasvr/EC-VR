@@ -5265,6 +5265,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e22438a7749dc749b853f4792048997, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &111025981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77421,8 +77423,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 80313739}
   m_HandleRect: {fileID: 80313738}
   m_Direction: 2
-  m_Value: 0.99999964
-  m_Size: 0.6818182
+  m_Value: 0.9999993
+  m_Size: 0.6818181
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -81651,7 +81653,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1855255511}
+      - m_Target: {fileID: 1645967778}
         m_MethodName: SetActive
         m_Mode: 6
         m_Arguments:
