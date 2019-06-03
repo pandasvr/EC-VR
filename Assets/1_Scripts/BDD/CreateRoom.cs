@@ -22,6 +22,8 @@ public class CreateRoom : MonoBehaviour
     public Toggle Toggle_ChatNonVr;
     public Dropdown Dropdown_Environnement;
 
+    public AddUserRoom AddUserRoomScript;
+    
     #endregion
     
     #region Private Fields
@@ -33,12 +35,28 @@ public class CreateRoom : MonoBehaviour
     string mediaProjection;
     string chatNonVr;
     int environnement_id;
+    List<int> listinvites;
+    private int createdRoomId;
+    
+    private WWWForm form;
+    private UnityWebRequest www;
 
     #endregion
 
     public void Call_SaveRoom()
     {
-        StartCoroutine(SaveRoom());
+        listinvites = AddUserRoomScript.GetListInvites();
+        if (listinvites.Count == 0 )
+        {
+            Debug.Log("Erreur, pas d'utilisateurs invités");
+            Text_Info.text = "Erreur, vous n'avez pas invité d'utilisateurs";
+            Panel_Main.SetActive(true);
+            Panel_CreateRoom.SetActive(false);
+        }
+        else
+        {
+            StartCoroutine(SaveRoom());
+        }
     }
 
     IEnumerator SaveRoom()
@@ -77,7 +95,7 @@ public class CreateRoom : MonoBehaviour
         environnement_id = Dropdown_Environnement.value + 1;
         
         //Create form values for send
-        WWWForm form = new WWWForm();
+        form = new WWWForm();
         form.AddField("roomName", roomName);
         form.AddField("userNumber", userNumber);
         form.AddField("whiteboard", whiteboard);
@@ -95,7 +113,7 @@ public class CreateRoom : MonoBehaviour
         Debug.Log("environnement_id :" + environnement_id);
 
         //Envoie des données au serveur
-        UnityWebRequest www = UnityWebRequest.Post(urlCreateRoom, form);
+        www = UnityWebRequest.Post(urlCreateRoom, form);
 
         //Récupération du retour serveur
         www.downloadHandler = new DownloadHandlerBuffer();
@@ -109,7 +127,8 @@ public class CreateRoom : MonoBehaviour
         else
         {
             Debug.Log("Post request complete!" + " Response Code: " + www.responseCode);
-            bool responseText = BitConverter.ToBoolean(www.downloadHandler.data, 0);
+            
+            /*bool responseText = BitConverter.ToBoolean(www.downloadHandler.data, 0);
             Debug.Log("Response Text:" + responseText);
 
             if (responseText)
@@ -124,6 +143,94 @@ public class CreateRoom : MonoBehaviour
                 Debug.Log("création échouée");
                 Text_Info.text = "Création du salon échouée";
             }
+            */
+            
+            var responseText = www.downloadHandler.text;
+            Debug.Log("Response text last Id : " + responseText);
+            createdRoomId = int.Parse(responseText);
+            
+            StartCoroutine(SaveInvites());
         }
+    }
+
+    IEnumerator SaveInvites()
+    {
+        string urlCreateInvite = Adressing.GetCreateInviteUrl();
+        
+        //Creation du formulaire d'invitation à la room pour le User Createur
+        //Create form values for send
+        form = new WWWForm();
+
+        int idCreator = int.Parse(UnityEngine.PlayerPrefs.GetString("userId"));
+        
+        form.AddField("idUser", idCreator);
+        form.AddField("idRoom", createdRoomId);
+        form.AddField("isCreator",1);
+            
+        //Envoie des données au serveur
+        www = UnityWebRequest.Post(urlCreateInvite, form);
+
+        //Récupération du retour serveur
+        www.downloadHandler = new DownloadHandlerBuffer();
+        yield return www.SendWebRequest();
+
+        //Vérification du retour
+        if (www.isNetworkError || www.isHttpError)
+        {
+            Debug.Log(www.error);
+        }
+        else
+        {
+            Debug.Log("Post request complete!" + " Response Code: " + www.responseCode);
+            bool textResponse = BitConverter.ToBoolean(www.downloadHandler.data, 0);
+            if (textResponse)
+            {
+                Debug.Log("invitation user n°" + idCreator + " à la room n°"+ createdRoomId + " réussie");
+            }
+            else
+            {
+                Debug.Log("invitation user n°" + idCreator + " à la room n°"+ createdRoomId + " échouée");
+            }
+        }
+        
+        foreach (int userId in listinvites)
+        {
+            //Create form values for send
+            form = new WWWForm();
+            form.AddField("idUser", userId);
+            form.AddField("idRoom", createdRoomId);
+            form.AddField("isCreator",0);
+            
+            //Envoie des données au serveur
+            www = UnityWebRequest.Post(urlCreateInvite, form);
+
+            //Récupération du retour serveur
+            www.downloadHandler = new DownloadHandlerBuffer();
+            yield return www.SendWebRequest();
+
+            //Vérification du retour
+            if (www.isNetworkError || www.isHttpError)
+            {
+                Debug.Log(www.error);
+            }
+            else
+            {
+                Debug.Log("Post request complete!" + " Response Code: " + www.responseCode);
+                bool textResponse = BitConverter.ToBoolean(www.downloadHandler.data, 0);
+                if (textResponse)
+                {
+                    Debug.Log("invitation user n°" + userId + " à la room n°"+ createdRoomId + " réussie");
+                }
+                else
+                {
+                    Debug.Log("invitation user n°" + userId + " à la room n°"+ createdRoomId + " échouée");
+                }
+            }
+        }
+        
+        Debug.Log("création réussie");
+        Text_Info.text = "Création du salon réussie";
+        Panel_Main.SetActive(true);
+        Panel_CreateRoom.SetActive(false);
     }
 }

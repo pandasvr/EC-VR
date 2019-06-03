@@ -42,4 +42,10 @@ public class Adressing : MonoBehaviour
         string url = "http://" + ipAddressStatic + "/edsa-ecvr/getAllUsers.php";
         return url;
     }
+
+    public static string GetCreateInviteUrl()
+    {
+        string url = "http://" + ipAddressStatic + "/edsa-ecvr/createInvite.php";
+        return url;
+    }
 }

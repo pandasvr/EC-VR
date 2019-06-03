@@ -5,12 +5,13 @@ using UnityEngine.UI;
 
 public class PlayerPrefs : MonoBehaviour
 {
-    public static void SaveUser(string userName, string userEmail, string userLevel, string labelUserLevel)
+    public static void SaveUser(string userId, string userName, string userEmail, string userLevel, string labelUserLevel)
     {
     }
 
-    public static void SaveUser(string userName, string userEmail, string userLevel, string labelUserLevel, string userFirstName, string userLastName)
+    public static void SaveUser(string userId, string userName, string userEmail, string userLevel, string labelUserLevel, string userFirstName, string userLastName)
     {
+        UnityEngine.PlayerPrefs.SetString("userId", userId);
         UnityEngine.PlayerPrefs.SetString("userName", userName);
         UnityEngine.PlayerPrefs.SetString("userEmail", userEmail);
         UnityEngine.PlayerPrefs.SetString("userLevel", userLevel);
