@@ -8,7 +8,7 @@ $whiteboard = $_REQUEST['whiteboard'];
 $postIt = $_REQUEST['postIt'];
 $mediaProjection = $_REQUEST['mediaProjection'];
 $chatNonVr = $_REQUEST['chatNonVr'];
-$environnement_id = $_REQUEST['environnement_id'];;
+$environnement_id = $_REQUEST['environnement_id'];
 
 
 $resultat = $pdo->CreateRoom($roomName, $userNumber, $whiteboard, $postIt, $mediaProjection, $chatNonVr, $environnement_id);

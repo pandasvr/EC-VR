@@ -54,9 +54,10 @@ class PdoUnity
 /**
  * Fonction qui enregistre l'utilisateur
  */
-	public function signup($userName, $cryptPassword, $userEmail, $userLevel, $userFirstName, $userLastName)
+	public function signup($userId, $userName, $cryptPassword, $userEmail, $userLevel, $userFirstName, $userLastName)
 	{
-		$resultat=PdoUnity::$myPdo->prepare("INSERT INTO user(userName, cryptPassword, userEmail, userLevel, userFirstName, userLastName) VALUES (:userName, :cryptPassword, :userEmail, :userLevel, :userFirstName, :userLastName)");
+		$resultat=PdoUnity::$myPdo->prepare("INSERT INTO user(idUser, userName, cryptPassword, userEmail, userLevel, userFirstName, userLastName) VALUES (:userId, :userName, :cryptPassword, :userEmail, :userLevel, :userFirstName, :userLastName)");
+		$resultat->bindParam(':idUser', $userId);
 		$resultat->bindParam(':userName', $userName);
 		$resultat->bindParam(':cryptPassword', $cryptPassword);
 		$resultat->bindParam(':userEmail', $userEmail);
@@ -91,9 +92,27 @@ class PdoUnity
 		$resultat->bindParam(':chatNonVr', $chatNonVr);
 		$resultat->bindParam(':environnement_id', $environnement_id);
 		$resultat->execute();
+		$lastId = PdoUnity::$myPdo->lastInsertId();
+		return $lastId;
+	}
+
+/**
+ * Fonction qui enregiste une invitation
+ */
+	public function CreateInvite($idUser, $idRoom, $isCreator)
+	{
+		$resultat=PdoUnity::$myPdo->prepare("INSERT INTO link_user_room(idUser, idRoom, isCreator) VALUES
+			(:idUser, :idRoom, :isCreator)");
+		$resultat->bindParam(':idUser', $idUser);
+		$resultat->bindParam(':idRoom', $idRoom);
+		$resultat->bindParam(':isCreator', $isCreator);
+		$resultat->execute();
 		return $resultat;
 	}
 
+/**
+ * Fonction qui récupère la liste des users
+ */
 	public function GetAllUsers()
 	{
 		$resultat=PdoUnity::$myPdo->prepare("SELECT idUser, userFirstName, userLastName FROM user ");

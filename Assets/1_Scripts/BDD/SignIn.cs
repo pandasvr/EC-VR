@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using Newtonsoft.Json.Linq;
+using Photon.Pun.Demo.Cockpit;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
@@ -62,6 +63,8 @@ public class SignIn : MonoBehaviour
             if (!string.IsNullOrEmpty(responseJson))
             {
                 //Récupération des item JSON reçu depuis le serveur
+                var r_userId = JObject.Parse(responseJson)["idUser"].ToString();
+                Debug.Log("Response UserIdField: " + r_userId);
                 var r_userName = JObject.Parse(responseJson)["userName"].ToString();
                 Debug.Log("Response username :" + r_userName);
                 var r_userPassword = JObject.Parse(responseJson)["cryptPassword"].ToString();
@@ -78,7 +81,7 @@ public class SignIn : MonoBehaviour
                 Debug.Log("Response r_userLastName :" + r_userLastName);
                 
                 //création des playerPref servant de variables globales
-                PlayerPrefs.SaveUser(r_userName, r_userEmail, r_userLevel,  r_labelUserLevel, r_userFirstName, r_userLastName);
+                PlayerPrefs.SaveUser(r_userId, r_userName, r_userEmail, r_userLevel,  r_labelUserLevel, r_userFirstName, r_userLastName);
                 
                 decryptedPassword = Crypting.Decrypt(r_userPassword);
                 Debug.Log("Response Text decrypt :" + decryptedPassword);
