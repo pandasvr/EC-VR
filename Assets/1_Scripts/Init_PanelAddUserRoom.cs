@@ -9,7 +9,7 @@ public class Init_PanelAddUserRoom : MonoBehaviour
     public GameObject ListObject_User;
 
     // Update is called once per frame
-    void Update()
+    public void GetAllUsersBis()
     {
         StartCoroutine(GetAllUsers());
     }
@@ -39,11 +39,14 @@ public class Init_PanelAddUserRoom : MonoBehaviour
 
             if (!string.IsNullOrEmpty(responseJson))
             {
-                //Récupération des item JSON reçu depuis le serveur
-                var r_idUser = JObject.Parse(responseJson)["idUser"].ToString();
-                Debug.Log("Response idUser :" + r_idUser);
-                var r_userName = JObject.Parse(responseJson)["userName"].ToString();
-                Debug.Log("Response userName :" + r_userName);
+                for (int i = 0; i < JArray.Parse(responseJson).Count; i++)
+                {
+                    var r_item = JArray.Parse(responseJson)[i].ToString();
+                    var r_idUser = JObject.Parse(r_item)["idUser"].ToString();
+                    var r_userFirstName = JObject.Parse(r_item)["userFirstName"].ToString();
+                    var r_userLastName = JObject.Parse(r_item)["userLastName"].ToString();
+                    Debug.Log("Response for UserId n°" + r_idUser + " : " + r_userFirstName + " " + r_userLastName);
+                }
 
             }
             else

@@ -1,7 +1,7 @@
 ﻿<?php
 class PdoUnity
 {   		
-      	private static $server='mysql:host=192.168.0.106';
+      	private static $server='mysql:host=192.168.0.101';
       	private static $bdd='dbname=ecvr_db';
       	private static $user='ecvr_db';
       	private static $pw='!CapgeminiPandas4';
