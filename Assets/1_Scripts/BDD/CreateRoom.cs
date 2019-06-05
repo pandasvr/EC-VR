@@ -50,8 +50,6 @@ public class CreateRoom : MonoBehaviour
         {
             Debug.Log("Erreur, pas d'utilisateurs invités");
             Text_Info.text = "Erreur, vous n'avez pas invité d'utilisateurs";
-            Panel_Main.SetActive(true);
-            Panel_CreateRoom.SetActive(false);
         }
         else
         {
