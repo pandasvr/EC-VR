@@ -145,9 +145,10 @@ public class CreateRoom : MonoBehaviour
             }
             */
             
-            var responseText = www.downloadHandler.text;
-            Debug.Log("Response text last Id : " + responseText);
-            createdRoomId = int.Parse(responseText);
+            var responseData = int.Parse(System.Text.Encoding.UTF8.GetString(www.downloadHandler.data, 3, www.downloadHandler.data.Length-3)) ;
+            Debug.Log("Response text last Id : " + responseData);
+
+            createdRoomId = responseData;
             
             StartCoroutine(SaveInvites());
         }

@@ -1,5 +1,5 @@
 <?php
-require_once("class.pdoUnity.inc.php");
+require_once('class.pdoUnity.inc.php');
 $pdo = PdoUnity::getPdoUnity();
 
 $userId = $_REQUEST['userId'];

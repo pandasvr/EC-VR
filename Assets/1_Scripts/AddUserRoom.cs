@@ -46,7 +46,7 @@ public class AddUserRoom : MonoBehaviour
         }
         else {
             Debug.Log("Post request complete!" + " Response Code: " + www.responseCode);
-            var responseJson = www.downloadHandler.text;
+            var responseJson = System.Text.Encoding.UTF8.GetString(www.downloadHandler.data, 3, www.downloadHandler.data.Length-3);
             Debug.Log("Json response :" + responseJson);
 
             if (!string.IsNullOrEmpty(responseJson))

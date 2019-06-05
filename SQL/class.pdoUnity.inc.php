@@ -47,17 +47,17 @@ class PdoUnity
 		$resultat=PdoUnity::$myPdo->prepare("SELECT user.idUser, user.userName, user.cryptPassword, user.userEmail, user.userLevel, userlevel.labelUserLevel, user.userFirstName, user.userLastName FROM user, userlevel where user.userLevel=userlevel.idUserLevel and user.userName = :userName");
 		$resultat->bindParam(':userName', $userName);
 		$resultat->execute();
-		$return = $resultat->fetch();
+		$return = $resultat->fetch(PDO::FETCH_ASSOC);
 		return $return;
 	}
 
 /**
  * Fonction qui enregistre l'utilisateur
  */
-	public function signup($userId, $userName, $cryptPassword, $userEmail, $userLevel, $userFirstName, $userLastName)
+	public function signup($idUser, $userName, $cryptPassword, $userEmail, $userLevel, $userFirstName, $userLastName)
 	{
-		$resultat=PdoUnity::$myPdo->prepare("INSERT INTO user(idUser, userName, cryptPassword, userEmail, userLevel, userFirstName, userLastName) VALUES (:userId, :userName, :cryptPassword, :userEmail, :userLevel, :userFirstName, :userLastName)");
-		$resultat->bindParam(':idUser', $userId);
+		$resultat=PdoUnity::$myPdo->prepare("INSERT INTO user(idUser, userName, cryptPassword, userEmail, userLevel, userFirstName, userLastName) VALUES (:idUser, :userName, :cryptPassword, :userEmail, :userLevel, :userFirstName, :userLastName)");
+		$resultat->bindParam(':idUser', $idUser);
 		$resultat->bindParam(':userName', $userName);
 		$resultat->bindParam(':cryptPassword', $cryptPassword);
 		$resultat->bindParam(':userEmail', $userEmail);
@@ -115,7 +115,7 @@ class PdoUnity
  */
 	public function GetAllUsers()
 	{
-		$resultat=PdoUnity::$myPdo->prepare("SELECT idUser, userFirstName, userLastName FROM user ");
+		$resultat=PdoUnity::$myPdo->prepare("SELECT idUser, userFirstName, userLastName FROM user");
 		$resultat->execute();
 		$return = $resultat->fetchAll();
 		return $return;
