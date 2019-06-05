@@ -81,7 +81,7 @@ public class SignUp : MonoBehaviour
             wwwUserName.downloadHandler = new DownloadHandlerBuffer();
             yield return wwwUserName.SendWebRequest();
             
-            string reponseUserName = wwwUserName.downloadHandler.text;
+            string reponseUserName = System.Text.Encoding.UTF8.GetString(wwwUserName.downloadHandler.data, 3, wwwUserName.downloadHandler.data.Length-3);
             
             Debug.Log("reponse username :" + reponseUserName);
             
