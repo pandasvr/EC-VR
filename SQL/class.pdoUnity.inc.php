@@ -81,9 +81,9 @@ class PdoUnity
 /**
  * Fonction qui enregistre une room
  */
-	public function CreateRoom($roomName, $userNumber, $whiteboard, $postIt, $mediaProjection, $chatNonVr, $environnement_id)
+	public function CreateRoom($roomName, $userNumber, $whiteboard, $postIt, $mediaProjection, $chatNonVr, $environnement_id, $userCreator_id)
 	{
-		$resultat=PdoUnity::$myPdo->prepare("INSERT INTO room(roomName, maxPlayerRoom, whiteboard, postIt, mediaProjection, chatNonVr, environnement_id) VALUES (:roomName, :maxPlayerRoom, :whiteboard, :postIt, :mediaProjection, :chatNonVr, :environnement_id)");
+		$resultat=PdoUnity::$myPdo->prepare("INSERT INTO room(roomName, maxPlayerRoom, whiteboard, postIt, mediaProjection, chatNonVr, environnement_id, userCreator_id) VALUES (:roomName, :maxPlayerRoom, :whiteboard, :postIt, :mediaProjection, :chatNonVr, :environnement_id, :userCreator_id)");
 		$resultat->bindParam(':roomName', $roomName);
 		$resultat->bindParam(':maxPlayerRoom', $userNumber);
 		$resultat->bindParam(':whiteboard', $whiteboard);
@@ -91,6 +91,7 @@ class PdoUnity
 		$resultat->bindParam(':mediaProjection', $mediaProjection);
 		$resultat->bindParam(':chatNonVr', $chatNonVr);
 		$resultat->bindParam(':environnement_id', $environnement_id);
+		$resultat->bindParam(':userCreator_id', $userCreator_id);
 		$resultat->execute();
 		$lastId = PdoUnity::$myPdo->lastInsertId();
 		return $lastId;
@@ -121,5 +122,28 @@ class PdoUnity
 		return $return;
 	}
 
+/**
+ * Fonction qui récupère la liste des rooms d'un user
+ */
+	public function GetAllRoomOfUser($idUser)
+	{
+		$resultat=PdoUnity::$myPdo->prepare("SELECT * FROM link_user_room WHERE idUser = :idUser");
+        $resultat->bindParam(':idUser', $idUser);
+		$resultat->execute();
+		$return = $resultat->fetchAll();
+		return $return;
+	}
+
+/**
+ * Fonction qui récupère un salon
+ */
+    public function GetRoom($idRoom)
+    {
+        $resultat=PdoUnity::$myPdo->prepare("SELECT room.idRoom, room.roomName, room.maxPlayerRoom, room.whiteboard, room.postIt, room.mediaProjection, room.chatNonVr, room.environnement_id, user.userName AS userCreatorName FROM room, user WHERE idRoom = :idRoom AND user.idUser = room.userCreator_id");
+        $resultat->bindParam(':idRoom', $idRoom);
+        $resultat->execute();
+        $return = $resultat->fetchAll();
+        return $return;
+    }
 }
 ?>

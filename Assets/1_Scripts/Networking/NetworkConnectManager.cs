@@ -12,11 +12,6 @@ namespace Networking
     {
         #region Public Fields
 
-        [Tooltip("The maximum number of players per room. When a room is full, it can't be joined by new players, and so new room will be created")]
-        public byte maxPlayersPerRoom;
-
-        public InputField Field_RoomName;
-        public Slider Slider_UserNumber;
 
         #endregion
         
@@ -34,8 +29,10 @@ namespace Networking
         private const string GameVersion = "0.1";
         
         private VrSettings scriptVrSettings;
-        private bool isCreatingRoom = false;
+        private static bool isCreatingRoom = false;
         private bool isJoiningRoom = false;
+        private static string roomName;
+        private static string maxPlayer;
 
         #endregion
         
@@ -44,7 +41,7 @@ namespace Networking
         /// we need to keep track of this to properly adjust the behavior when we receive call back by Photon.
         /// Typically this is used for the OnConnectedToMaster() callback.
         /// </summary>
-        bool isConnecting;
+        static bool isConnecting;
 
 
         #region MonoBehaviour CallBacks
@@ -73,25 +70,25 @@ namespace Networking
 
         #region Public Methods
 
-        
-        public void CreateNewRoom()
+        public static void OnClickButtonJoin(string currentRoomName, string currentMaxPlayer)
         {
-            //init max player per room
-            switch (Slider_UserNumber.value)
+            maxPlayer = currentMaxPlayer;
+            roomName = currentRoomName;
+            
+            if (!PhotonNetwork.IsConnected)
             {
-                case 1:
-                    maxPlayersPerRoom = 5;
-                    break;
-                case 2:
-                    maxPlayersPerRoom = 10;
-                    break;
-                case 3:
-                    maxPlayersPerRoom = 15;
-                    break;
-                default:
-                    maxPlayersPerRoom = 5;
-                    break;
+                // #Critical, we must first and foremost connect to Photon Online Server.
+                Debug.Log("#Critical, we must first and foremost connect to Photon Online Server.");
+                PhotonNetwork.GameVersion = GameVersion;// Setting this updates the AppVersion, which separates your playerbase in matchmaking
+                PhotonNetwork.ConnectUsingSettings();
             }
+        }
+        
+        public static void CreateNewRoom(string currentRoomName, string currentMaxPlayer)
+        {
+            
+            maxPlayer = currentMaxPlayer;
+            roomName = currentRoomName;
             
             // keep track of the will to join a room, because when we come back from the game we will get a callback that we are connected, so we need to know what to do then
             isConnecting = true;
@@ -110,11 +107,10 @@ namespace Networking
             if (PhotonNetwork.IsConnected)
             {
                 //Création d'un nouveau salon
-                var roomName = RoomName();
                 isCreatingRoom = false;
-                PhotonNetwork.CreateRoom(roomName, new RoomOptions { MaxPlayers = maxPlayersPerRoom });
+                PhotonNetwork.CreateRoom(roomName, new RoomOptions { MaxPlayers = Byte.Parse(maxPlayer) });
                 Debug.Log("Création du salon : " + roomName);
-                Debug.Log("Max players : " + maxPlayersPerRoom);
+                Debug.Log("Max players : " + maxPlayer);
             }
             else
             {
@@ -148,7 +144,7 @@ namespace Networking
             {
                 //Rejoin un salon aléatoire disponible
                 isJoiningRoom = false;
-                PhotonNetwork.JoinRandomRoom();
+                PhotonNetwork.JoinRoom(roomName);
             }
             else
             {
@@ -161,7 +157,7 @@ namespace Networking
         
         #endregion
         
-        private string playerName()
+        private static string playerName()
         {
             return UnityEngine.PlayerPrefs.GetString("userFirstName") + " " +
                    UnityEngine.PlayerPrefs.GetString("userLastName");
@@ -169,19 +165,6 @@ namespace Networking
 
         private string RoomName()
         {
-            string roomName;
-            
-            //init room name
-            if (Field_RoomName.text != "")
-            {
-                roomName = Field_RoomName.text;
-            }
-            else
-            {
-                roomName = "Salon#" + Random.Range(1, 9999);
-            }
-            
-            //return Field_RoomName.text;
             return roomName;
         }
         
@@ -203,7 +186,7 @@ namespace Networking
                 else if (isCreatingRoom == true)
                 {
                     //Retour à la phase de création de salon
-                    CreateNewRoom();
+                    CreateNewRoom(roomName, maxPlayer);
                 }
             }   
         }

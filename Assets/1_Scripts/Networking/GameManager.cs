@@ -27,6 +27,8 @@ namespace Networking
                 PhotonNetwork.Instantiate(this.playerPrefab.name, spawnPoints[Random.Range(0, spawnPoints.Length-1)].transform.position, Quaternion.identity, 0);
             }
 
+            Debug.Log("Room Name : " + PhotonNetwork.CurrentRoom.Name);
+            Debug.Log("Max Player : " + PhotonNetwork.CurrentRoom.MaxPlayers);
         }
 
         #region Photon Callbacks
