@@ -12,21 +12,35 @@ public class RadialMenuSettings : MonoBehaviour
 
     public GameObject contextualMenu;
     public GameObject exitMenu;
+    public GameObject playersListMenu;
     public GameObject radialMenuPanel;
+
     
-    public VRTK_Pointer handPointer;
+    public GameObject handPointer;
 
     [Header("Pen Controller Model")] 
     public GameObject penModel;
 
     private bool isPenModelActive;
+    private bool isPlayersListActive;
+
+    private VRTK_Pointer pointerScript;
+    private VRTK_UIPointer uiPointerScript;
+    private VRTK_StraightPointerRenderer straightPointerScript;
 
     private VRTK_RadialMenuController radialMenuScript;
 
     public void Start()
     {
+        //récupération des différents components dans le radialMenu et le controller hand
         radialMenuScript = this.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.GetComponent<VRTK_RadialMenuController>();
+        pointerScript = handPointer.GetComponent<VRTK_Pointer>();
+        uiPointerScript = handPointer.GetComponent<VRTK_UIPointer>();
+        straightPointerScript = handPointer.GetComponent<VRTK_StraightPointerRenderer>();
+
+        //initialisation des Bool
         isPenModelActive = false;
+        isPlayersListActive = false;
     }
 
     //Change la couleur de l'icone en Hover Enter
@@ -59,7 +73,13 @@ public class RadialMenuSettings : MonoBehaviour
     //Activation du menu contextuel
     public void OpenContextualMenu()
     {
-        handPointer.enabled = true;
+        //on ferme le MenuPlayerList si il est activé
+        if (isPlayersListActive)
+        {
+            ChangePlayersListMenuState();
+        }
+        
+        ChangeUiPointerState(true);
         radialMenuScript.enabled = false;
 
         radialMenuPanel.GetComponent<Animator>().SetInteger("isDisable", 1);
@@ -69,7 +89,7 @@ public class RadialMenuSettings : MonoBehaviour
     //Desactivation du menu contextuel
     public void CloseContextualMenu()
     {
-        handPointer.enabled = false;
+        ChangeUiPointerState(false);
         radialMenuScript.enabled = true;
         
         contextualMenu.GetComponent<Animator>().SetInteger("isEnable", 0);
@@ -80,7 +100,13 @@ public class RadialMenuSettings : MonoBehaviour
     //Activation du menu exit
     public void OpenExitMenu()
     {
-        handPointer.enabled = true;
+        //on ferme le MenuPlayerList si il est activé
+        if (isPlayersListActive)
+        {
+            ChangePlayersListMenuState();
+        }
+        
+        ChangeUiPointerState(true);
         radialMenuScript.enabled = false;
 
         radialMenuPanel.GetComponent<Animator>().SetInteger("isDisable", 1);
@@ -90,7 +116,7 @@ public class RadialMenuSettings : MonoBehaviour
     //Desactivation du menu exit
     public void CloseExitMenu()
     {
-        handPointer.enabled = false;
+        ChangeUiPointerState(false);
         radialMenuScript.enabled = true;
 
         exitMenu.GetComponent<Animator>().SetInteger("isEnable", 0);
@@ -103,9 +129,40 @@ public class RadialMenuSettings : MonoBehaviour
     {
         isPenModelActive = !isPenModelActive;
         
+        ChangeUiPointerState(isPenModelActive);
+        
         GameObject controller = GameObject.FindWithTag("controllerLeft");
         controller.transform.Find("Model").gameObject.SetActive(!isPenModelActive);
         controller.transform.Find("pencil").gameObject.SetActive(isPenModelActive);
 
     }
+    
+    public void ChangePlayersListMenuState()
+    {
+        isPlayersListActive = !isPlayersListActive;
+        int isActive;
+        if (isPlayersListActive)
+        {
+            isActive = 1;
+        }
+        else
+        {
+            isActive = 0;
+        }
+        
+        ChangeUiPointerState(isPlayersListActive);
+        playersListMenu.GetComponent<Animator>().SetInteger("isEnable",isActive);
+        
+
+    }
+
+    //Change le type de pointer entre le bezier (pour la téléportation) et le straight (pointer UI)
+    // 0 = Bezier || 1 = straight
+    private void ChangeUiPointerState(bool isActive)
+    {
+        pointerScript.enabled = isActive;
+        straightPointerScript.enabled = isActive;
+        uiPointerScript.enabled = isActive;
+    }
+    
 }
