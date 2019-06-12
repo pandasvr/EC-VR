@@ -7,6 +7,7 @@ TagManager:
   - VRTKManager
   - IncludeTeleport
   - LabelToggleUser
+  - controllerLeft
   layers:
   - Default
   - TransparentFX
