@@ -16,16 +16,13 @@ namespace Networking
     {
         [Tooltip("The prefab to use for representing the player")]
         public GameObject playerPrefab;
-
-        
         public GameObject[] spawnPoints;
         public GameObject personalMenuCanvas;
+        public float timer;
         
         protected Vector3 previousPosition;
         protected Vector3 newPosition;
-        protected float timer;
         protected Vector3 playerFirstPos;
-        protected GameObject userPrefabInstantiation;
         
         private Transform headsetTransform;
 
@@ -44,20 +41,10 @@ namespace Networking
                 PhotonNetwork.Instantiate(this.playerPrefab.name, playerFirstPos, Quaternion.identity, 0);
             }
 
-            //on initialise des données traitées dans l'update()
+            //on initialise des données qui seront traitées dans l'update()
             previousPosition = playerFirstPos;
             newPosition = new Vector3(0,0,0);
             timer = 0.0f;
-
-            /*GameObject[] userGameObjects = GameObject.FindGameObjectsWithTag("Avatar");
-            foreach (GameObject userGameObject in userGameObjects)
-            {
-                if (PhotonView.Get(userGameObject).IsMine)
-                {
-                    userPrefabInstantiation = userGameObject;
-                    break;
-                }
-            }*/
         }
         
         
@@ -111,20 +98,25 @@ namespace Networking
         #endregion
         
         
-        //fonction qui définit s'il y a un mouvement entre deux positions
+        //fonction qui définit s'il y a un l'utilisateur se déplace à partir de ses positions
         protected bool userMoves(Vector3 previousPosition, Vector3 newposition)
         {
-            return (Vector3.Magnitude(previousPosition - newposition) <= 0.01f);
+            return (!(Vector3.Magnitude(previousPosition - newposition) <= 0.0003f));
         }
         
         //Fonction qui change la valeur du statut de l'utilisateur, selon depuis combien de temps il n'a pas bougé (passage de connecté à absent)
         //où selon s'il est dans un menu
         protected void updateStatus(float timer, Vector3 previousPosition, Vector3 newPosition, out float updatedTimer)
         {
-            //le string auquel nous allons attribuer unee valeur selon certaines conditions
-            string status = "connecté";
+            //le string sur lequel on va calculer le statut
             //on attribue la valeur en sortie du timer au cas où elle ne serait pas changée
+            //Si l'utilisateur bouge, il est soit connecté soit dans un menu
+            //Sinon, s'il ne bouge pas pendant plus de 120s, il est considéré absent
+            //On attribue finalementà la playerpref userStatus sa nouvelle valeur
+
+            string status = "connecté";
             updatedTimer = timer;
+            
             
             if (userMoves(previousPosition, newPosition))
             {
@@ -138,14 +130,11 @@ namespace Networking
                     status = "connecté";
                 }
             }
-            
-            //Tout d'abord, la condition pour savoir si l'utilisateur est absent
-            //condition sur un timer
-            if (timer == 2)
+            if (timer >= 120.0f)
             {
                 status = "absent";
             }
-            Debug.Log(status);
+            
             UnityEngine.PlayerPrefs.SetString("userStatus", status);
         }
         
@@ -155,7 +144,8 @@ namespace Networking
         {
             //dans l'update, on va évaluer le statut de l'utilisateur, 
             //pour celà, on va réévaluer l'ancienne position previousPosition et la nouvelle newPosition
-            //On pourra ensuite les traiter à l'aide de la fonction updateStatus, qui nous permettra de savoir avoec le timer si l'utilisateur est absent, connecté, où dans le menu
+            //On pourra ensuite les traiter à l'aide de la fonction updateStatus, qui nous permettra de
+            //savoir avoec le timer si l'utilisateur est absent, connecté, où dans le menu
             
             previousPosition = newPosition; 
             if (headsetTransform != null)
@@ -179,12 +169,7 @@ namespace Networking
             //Avec les lignes suivantes, on fait évoluer le timer qui compte la durée de non-mouvement de l'utilisateur, et on fait évoluer le statut
             timer += Time.deltaTime;
             updateStatus(timer, previousPosition, newPosition, out timer);
-            
-            Debug.Log(UnityEngine.PlayerPrefs.GetString("userStatus"));
-            
         }
     }
-    
-    
-    
+ 
 }
