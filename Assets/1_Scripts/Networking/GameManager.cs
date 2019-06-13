@@ -43,8 +43,8 @@ namespace Networking
 
             //on initialise des données qui seront traitées dans l'update()
             previousPosition = playerFirstPos;
-            newPosition = new Vector3(0,0,0);
             timer = 0.0f;
+            newPosition = new Vector3(0,0,0);
         }
         
         

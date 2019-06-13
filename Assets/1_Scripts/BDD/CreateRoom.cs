@@ -37,6 +37,7 @@ public class CreateRoom : MonoBehaviour
     int environnement_id;
     List<int> listinvites;
     private int createdRoomId;
+    private int userCreator_id;
     
     private WWWForm form;
     private UnityWebRequest www;
@@ -91,6 +92,7 @@ public class CreateRoom : MonoBehaviour
         mediaProjection = Toggle_MediaProjection.isOn.ToString();
         chatNonVr = Toggle_ChatNonVr.isOn.ToString();
         environnement_id = Dropdown_Environnement.value + 1;
+        userCreator_id = int.Parse(UnityEngine.PlayerPrefs.GetString("userId"));
         
         //Create form values for send
         form = new WWWForm();
@@ -101,6 +103,7 @@ public class CreateRoom : MonoBehaviour
         form.AddField("mediaProjection", mediaProjection);
         form.AddField("chatNonVr", chatNonVr);
         form.AddField("environnement_id", environnement_id);
+        form.AddField("userCreator_id", userCreator_id);
 
         Debug.Log("roomName :" + roomName);
         Debug.Log("userNumber :" + userNumber);
@@ -109,6 +112,7 @@ public class CreateRoom : MonoBehaviour
         Debug.Log("mediaProjection :" + mediaProjection);
         Debug.Log("chatNonVr :" + chatNonVr);
         Debug.Log("environnement_id :" + environnement_id);
+        Debug.Log("userCreator_Id :" + userCreator_id);
 
         //Envoie des données au serveur
         www = UnityWebRequest.Post(urlCreateRoom, form);
