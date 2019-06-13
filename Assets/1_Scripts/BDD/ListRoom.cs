@@ -16,6 +16,8 @@ public class ListRoom : MonoBehaviour
 {
     public GameObject scrollviewContent;
     public GameObject itemListRoom;
+
+
     private bool isCreatingRoom = false;
     private bool isJoiningRoom = false;
     private bool isConnecting;
@@ -30,36 +32,41 @@ public class ListRoom : MonoBehaviour
         }
         StartCoroutine(ServerSend());
     }
-    
-    
-    
+
+
+
     IEnumerator ServerSend()
     {
+        List<Room> listRoom = new List<Room>();
+        
         //Création url envoie serveur
         string urlListRoom_GetAllRoomsOfUser = Adressing.GetListRoomUrl_GetAllRoomsOfUser();
-        
+
         //Récupération des infos user
         var idUser = UnityEngine.PlayerPrefs.GetString("userId");
 
         //Création du formulaire de donnée
         WWWForm formRoomOfUser = new WWWForm();
         formRoomOfUser.AddField("idUser", idUser);
-        
+
         //Envoie des données au serveur
         UnityWebRequest wwwRoomOfUser = UnityWebRequest.Post(urlListRoom_GetAllRoomsOfUser, formRoomOfUser);
-        
+
         //Récupération du retour serveur
         wwwRoomOfUser.downloadHandler = new DownloadHandlerBuffer();
         yield return wwwRoomOfUser.SendWebRequest();
- 
-        
+
+
         //Vérification du retour
-        if(wwwRoomOfUser.isNetworkError || wwwRoomOfUser.isHttpError) {
+        if (wwwRoomOfUser.isNetworkError || wwwRoomOfUser.isHttpError)
+        {
             Debug.Log(wwwRoomOfUser.error);
         }
-        else {
+        else
+        {
             Debug.Log("Post request complete!" + " Response Code: " + wwwRoomOfUser.responseCode);
-            var responseJsonGetRoomOfUser = System.Text.Encoding.UTF8.GetString(wwwRoomOfUser.downloadHandler.data, 3, wwwRoomOfUser.downloadHandler.data.Length-3);
+            var responseJsonGetRoomOfUser = System.Text.Encoding.UTF8.GetString(wwwRoomOfUser.downloadHandler.data, 3,
+                wwwRoomOfUser.downloadHandler.data.Length - 3);
             Debug.Log("Json response :" + responseJsonGetRoomOfUser);
 
             if (responseJsonGetRoomOfUser != "")
@@ -71,65 +78,97 @@ public class ListRoom : MonoBehaviour
 
                 foreach (var roomOfUser in listRoomOfUser)
                 {
-                    Debug.Log("idUser : " +roomOfUser.idUser + " idRoom : " + roomOfUser.idRoom + " isCreator : " + roomOfUser.isCreator);
-                    
+                    Debug.Log("idUser : " + roomOfUser.idUser + " idRoom : " + roomOfUser.idRoom + " isCreator : " +
+                              roomOfUser.isCreator);
+
                     //Création url envoie serveur
                     string urlListRoom_GetRoom = Adressing.GetListRoomUrl_GetRoom();
 
                     //Création du formulaire de donnée
                     WWWForm formGetRoom = new WWWForm();
                     formGetRoom.AddField("idRoom", roomOfUser.idRoom);
-        
+
                     //Envoie des données au serveur
                     UnityWebRequest wwwGetRoom = UnityWebRequest.Post(urlListRoom_GetRoom, formGetRoom);
-        
+
                     //Récupération du retour serveur
                     wwwGetRoom.downloadHandler = new DownloadHandlerBuffer();
                     yield return wwwGetRoom.SendWebRequest();
-                    
+
                     //Vérification du retour
-                    if(wwwGetRoom.isNetworkError || wwwGetRoom.isHttpError) {
+                    if (wwwGetRoom.isNetworkError || wwwGetRoom.isHttpError)
+                    {
                         Debug.Log(wwwGetRoom.error);
                     }
                     else
                     {
                         Debug.Log("Post request complete!" + " Response Code: " + wwwGetRoom.responseCode);
-                        var responseJsonGetRoom = System.Text.Encoding.UTF8.GetString(wwwGetRoom.downloadHandler.data, 3,
+                        var responseJsonGetRoom = System.Text.Encoding.UTF8.GetString(wwwGetRoom.downloadHandler.data,
+                            3,
                             wwwGetRoom.downloadHandler.data.Length - 3);
                         Debug.Log("Json response :" + responseJsonGetRoom);
 
                         if (responseJsonGetRoom != "")
                         {
-                            var listRoom = JsonConvert.DeserializeObject<IEnumerable<Room>>(responseJsonGetRoom);
+                            var tempListRoom = JsonConvert.DeserializeObject<IEnumerable<Room>>(responseJsonGetRoom);
+                            
 
-                            foreach (var room in listRoom)
+                            foreach (var room in tempListRoom)
                             {
-                                posY -= 80;
-                                currentItem = Instantiate(itemListRoom,scrollviewContent.transform);
-                                currentItem.GetComponent<RectTransform>().anchoredPosition = new Vector2(-40,posY);
-                                GameObject currentTextNameRoom = currentItem.transform.Find("Title_RoomName/Label").gameObject;
-                                GameObject currentTextCreatorName = currentItem.transform.Find("Title_CreatorName/Label").gameObject;
-                                GameObject currentTextNbConnected = currentItem.transform.Find("Title_NbConnected/Label").gameObject;
-                                GameObject currentButtonJoinRoom =
-                                    currentItem.transform.Find("Button_joinRoom").gameObject;
-                                currentButtonJoinRoom.gameObject.GetComponent<Button>().onClick.AddListener(delegate()
-                                {
-                                    NetworkConnectManager.CreateNewRoom(room.roomName,room.maxPlayerRoom);});
-                                currentTextNameRoom.GetComponent<Text>().text = room.roomName;
-                                currentTextCreatorName.GetComponent<Text>().text = room.userCreatorName;
-                                Debug.Log("idRoom : " +room.idRoom + " nameRoom : " + room.roomName);
+                                listRoom.Add(room);
                             }
+                            
+                            
 
                         }
                     }
                 }
+
+                for (int i = 0; i < listRoom.Count; i++)
+                {
+                    if (listRoom[i].userCreatorName == UnityEngine.PlayerPrefs.GetString("userName"))
+                    {
+                        listRoom.Insert(0,listRoom[i]);
+                        listRoom.RemoveAt(i+1);
+                    }
+                }
+
+                Debug.Log(listRoom);
+                foreach (var room in listRoom)
+                {
+                    posY -= 80;
+                    currentItem = Instantiate(itemListRoom, scrollviewContent.transform);
+                    currentItem.GetComponent<RectTransform>().anchoredPosition = new Vector2(-40, posY);
+                    GameObject currentTextNameRoom =
+                        currentItem.transform.Find("Title_RoomName/Label").gameObject;
+                    GameObject currentTextCreatorName =
+                        currentItem.transform.Find("Title_CreatorName/Label").gameObject;
+                    GameObject currentButtonJoinRoom =
+                        currentItem.transform.Find("Button_joinRoom").gameObject;
+                    currentButtonJoinRoom.gameObject.GetComponent<Button>().onClick.AddListener(delegate()
+                    {
+                        NetworkConnectManager.CreateNewRoom(room.roomName, room.maxPlayerRoom);
+                    });
+                    currentTextNameRoom.GetComponent<Text>().text = room.roomName;
+                    currentTextCreatorName.GetComponent<Text>().text = room.userCreatorName;
+                    Debug.Log("idRoom : " + room.idRoom + " nameRoom : " + room.roomName);
+                                
+                    if (room.userCreatorName == UnityEngine.PlayerPrefs.GetString("userName"))
+                    {
+                        GameObject currentButtonModify =
+                            currentItem.transform.Find("Button_modify").gameObject;
+                        currentButtonModify.SetActive(true);
+                    }
+                }
+                
             }
             else
             {
-               
+
             }
 
         }
+
     }
 
 
