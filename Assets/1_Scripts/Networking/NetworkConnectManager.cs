@@ -106,6 +106,14 @@ namespace Networking
                 PhotonNetwork.NickName = playerName();
             }
             
+            //creation des options, du playerTTL pour gérer le isInactive, et le MaxPlayers
+            RoomOptions options = new RoomOptions();
+            //TODO
+            options.PlayerTtl = 3000; // 0.003 sec
+            options.EmptyRoomTtl = 3000;
+            options.MaxPlayers = maxPlayersPerRoom;
+            
+            
             // we check if we are connected or not, we join if we are , else we initiate the connection to the server.
             if (PhotonNetwork.IsConnected)
             {
