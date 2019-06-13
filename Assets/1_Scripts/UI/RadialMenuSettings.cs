@@ -16,6 +16,7 @@ public class RadialMenuSettings : MonoBehaviour
     public GameObject exitMenu;
     public GameObject playersListMenu;
     public GameObject radialMenuPanel;
+    public GameObject radialMenuMediaShare;
 
     
     public GameObject handPointer;
@@ -166,5 +167,5 @@ public class RadialMenuSettings : MonoBehaviour
         straightPointerScript.enabled = isActive;
         uiPointerScript.enabled = isActive;
     }
-    
+
 }
