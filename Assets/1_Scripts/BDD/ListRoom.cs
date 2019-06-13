@@ -69,6 +69,7 @@ public class ListRoom : MonoBehaviour
                 wwwRoomOfUser.downloadHandler.data.Length - 3);
             Debug.Log("Json response :" + responseJsonGetRoomOfUser);
 
+            //Vérification de la réponse json 
             if (responseJsonGetRoomOfUser != "")
             {
 
@@ -76,11 +77,10 @@ public class ListRoom : MonoBehaviour
                 float posY = 0;
                 GameObject currentItem;
 
+                //boucle sur la liste de toutes les salles d'un utilisateur
                 foreach (var roomOfUser in listRoomOfUser)
                 {
-                    Debug.Log("idUser : " + roomOfUser.idUser + " idRoom : " + roomOfUser.idRoom + " isCreator : " +
-                              roomOfUser.isCreator);
-
+                    
                     //Création url envoie serveur
                     string urlListRoom_GetRoom = Adressing.GetListRoomUrl_GetRoom();
 
@@ -112,18 +112,16 @@ public class ListRoom : MonoBehaviour
                         {
                             var tempListRoom = JsonConvert.DeserializeObject<IEnumerable<Room>>(responseJsonGetRoom);
                             
-
+                            //boucle pour créer la liste des infos de chaque salle
                             foreach (var room in tempListRoom)
                             {
                                 listRoom.Add(room);
                             }
-                            
-                            
-
                         }
                     }
                 }
 
+                //tri des salles (admin en premier)
                 for (int i = 0; i < listRoom.Count; i++)
                 {
                     if (listRoom[i].userCreatorName == UnityEngine.PlayerPrefs.GetString("userName"))
@@ -133,26 +131,36 @@ public class ListRoom : MonoBehaviour
                     }
                 }
 
-                Debug.Log(listRoom);
+                //affichage des donnés dans l'UI
                 foreach (var room in listRoom)
                 {
                     posY -= 80;
+                    
+                    //instanciation du prefab
                     currentItem = Instantiate(itemListRoom, scrollviewContent.transform);
+                    
+                    //placement du prefab
                     currentItem.GetComponent<RectTransform>().anchoredPosition = new Vector2(-40, posY);
+                    
+                    //récupération des game objects du prefab
                     GameObject currentTextNameRoom =
                         currentItem.transform.Find("Title_RoomName/Label").gameObject;
                     GameObject currentTextCreatorName =
                         currentItem.transform.Find("Title_CreatorName/Label").gameObject;
                     GameObject currentButtonJoinRoom =
                         currentItem.transform.Find("Button_joinRoom").gameObject;
+                    
+                    //bouton rejoindre une salle
                     currentButtonJoinRoom.gameObject.GetComponent<Button>().onClick.AddListener(delegate()
                     {
                         NetworkConnectManager.CreateNewRoom(room.roomName, room.maxPlayerRoom);
                     });
+                    
+                    //valorisation des textes des game objects du prefab
                     currentTextNameRoom.GetComponent<Text>().text = room.roomName;
                     currentTextCreatorName.GetComponent<Text>().text = room.userCreatorName;
-                    Debug.Log("idRoom : " + room.idRoom + " nameRoom : " + room.roomName);
-                                
+
+                    //activation du bouton modifier si on est le créateur de la salle
                     if (room.userCreatorName == UnityEngine.PlayerPrefs.GetString("userName"))
                     {
                         GameObject currentButtonModify =
@@ -160,15 +168,8 @@ public class ListRoom : MonoBehaviour
                         currentButtonModify.SetActive(true);
                     }
                 }
-                
             }
-            else
-            {
-
-            }
-
         }
-
     }
 
 
