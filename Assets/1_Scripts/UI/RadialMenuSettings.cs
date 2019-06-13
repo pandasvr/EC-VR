@@ -7,9 +7,11 @@ using VRTK;
 
 public class RadialMenuSettings : MonoBehaviour
 {
+    [Header("Couleur des Icones")]
     public Color hoverEnterIconColor;
     public Color hoverExitIconColor;
 
+    [Header("Les Menus")]
     public GameObject contextualMenu;
     public GameObject exitMenu;
     public GameObject playersListMenu;
@@ -124,14 +126,14 @@ public class RadialMenuSettings : MonoBehaviour
 
     }
 
-    //permet de changer le model du controller Left
-    public void ChangeLeftControllerModel()
+    //permet de changer le model du controller Right
+    public void ChangeRightControllerModel()
     {
         isPenModelActive = !isPenModelActive;
         
         ChangeUiPointerState(isPenModelActive);
         
-        GameObject controller = GameObject.FindWithTag("controllerLeft");
+        GameObject controller = GameObject.FindWithTag("controllerRight");
         controller.transform.Find("Model").gameObject.SetActive(!isPenModelActive);
         controller.transform.Find("pencil").gameObject.SetActive(isPenModelActive);
 
