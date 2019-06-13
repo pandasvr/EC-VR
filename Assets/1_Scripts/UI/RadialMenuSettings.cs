@@ -131,9 +131,7 @@ public class RadialMenuSettings : MonoBehaviour
     public void ChangeRightControllerModel()
     {
         isPenModelActive = !isPenModelActive;
-        
-        ChangeUiPointerState(isPenModelActive);
-        
+
         GameObject controller = GameObject.FindWithTag("controllerRight");
         controller.transform.Find("Model").gameObject.SetActive(!isPenModelActive);
         controller.transform.Find("pencil").gameObject.SetActive(isPenModelActive);
