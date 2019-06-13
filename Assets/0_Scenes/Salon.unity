@@ -5590,6 +5590,7 @@ MonoBehaviour:
   - {fileID: 236676240}
   - {fileID: 1264882597}
   - {fileID: 676123333}
+  personalMenuCanvas: {fileID: 1872423207}
 --- !u!1 &879189446
 GameObject:
   m_ObjectHideFlags: 0

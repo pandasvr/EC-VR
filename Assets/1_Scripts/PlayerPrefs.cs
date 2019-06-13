@@ -1,7 +1,13 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Timers;
+using Photon.Pun;
+using Valve.VR.InteractionSystem;
+using Vector3 = UnityEngine.Vector3;
 
 public class PlayerPrefs : MonoBehaviour
 {
@@ -18,6 +24,8 @@ public class PlayerPrefs : MonoBehaviour
         UnityEngine.PlayerPrefs.SetString("labelUserLevel", labelUserLevel);
         UnityEngine.PlayerPrefs.SetString("userFirstName", userFirstName);
         UnityEngine.PlayerPrefs.SetString("userLastName", userLastName);
+        
+        UnityEngine.PlayerPrefs.SetString("userStatus", "connecté");
     }
 
     public void Disconnect()
@@ -41,4 +49,5 @@ public class PlayerPrefs : MonoBehaviour
 
         return rt;
     }
+
 }
