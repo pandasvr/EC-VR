@@ -97,6 +97,22 @@ class PdoUnity
 		return $lastId;
 	}
 
+
+    /**
+     * Fonction qui modifie une room
+     */
+    public function ModifyRoom($idRoom ,$whiteboard, $postIt, $mediaProjection, $chatNonVr, $environnement_id)
+    {
+        $resultat=PdoUnity::$myPdo->prepare("UPDATE room SET (whiteboard = :whiteboard, postIt = :postIt, mediaProjection = :mediaProjection, chatNonVr = :chatNonVr, environnement_id = :environnement_id) WHERE idRoom = :idRoom");
+        $resultat->bindParam(':whiteboard', $whiteboard);
+        $resultat->bindParam(':postIt', $postIt);
+        $resultat->bindParam(':mediaProjection', $mediaProjection);
+        $resultat->bindParam(':chatNonVr', $chatNonVr);
+        $resultat->bindParam(':environnement_id', $environnement_id);
+        $resultat->bindParam(':idRoom', $idRoom);
+        $resultat->execute();
+        return $resultat;
+    }
 /**
  * Fonction qui enregiste une invitation
  */

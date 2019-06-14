@@ -60,4 +60,10 @@ public class Adressing : MonoBehaviour
         string url = "http://" + ipAddressStatic + "/edsa-ecvr/getRoom.php";
         return url;
     }
+
+    public static string GetModifyRoomUrl()
+    {
+        string url = "http://" + ipAddressStatic + "/edsa-ecvr/modifyRoom.php";
+        return url;
+    }
 }
