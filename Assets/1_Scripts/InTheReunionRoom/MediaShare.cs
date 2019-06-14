@@ -10,7 +10,6 @@ public class MediaShare : MonoBehaviour
 {
     public GameObject videoProjecteur;
     public Image imageProjecteur;
-    public GameObject radialMenuProjecteur;
 
     public PhotonView photonView;
     
@@ -55,7 +54,7 @@ public class MediaShare : MonoBehaviour
         }
 
         videoProjecteur.SetActive(videoIsOn); //si la vidéo est mise comme média, on active son support
-        //radialMenu.SetActive(!videoIsOn);
+
 
         if (videoIsOn)
         {
@@ -78,7 +77,6 @@ public class MediaShare : MonoBehaviour
         imageIsOn = !imageIsOn;
         videoProjecteur.SetActive(false);
         imageProjecteur.gameObject.SetActive(imageIsOn);
-        radialMenuProjecteur.SetActive(imageIsOn);
 
         if (imageIsOn)
         {

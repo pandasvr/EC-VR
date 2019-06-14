@@ -8,6 +8,8 @@ TagManager:
   - IncludeTeleport
   - LabelToggleUser
   - PersonnalMenu
+  - controllerLeft
+  - controllerRight
   layers:
   - Default
   - TransparentFX

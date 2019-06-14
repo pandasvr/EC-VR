@@ -48,4 +48,16 @@ public class Adressing : MonoBehaviour
         string url = "http://" + ipAddressStatic + "/edsa-ecvr/createInvite.php";
         return url;
     }
+    
+    public static string GetListRoomUrl_GetAllRoomsOfUser()
+    {
+        string url = "http://" + ipAddressStatic + "/edsa-ecvr/getAllRoomsOfUser.php";
+        return url;
+    }
+    
+    public static string GetListRoomUrl_GetRoom()
+    {
+        string url = "http://" + ipAddressStatic + "/edsa-ecvr/getRoom.php";
+        return url;
+    }
 }
