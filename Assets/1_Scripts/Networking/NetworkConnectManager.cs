@@ -144,7 +144,7 @@ namespace Networking
             isJoiningRoom = true;
             
             //TODO : Récupérer le vrai Identifiant de l'utilisateur
-            //On donne un identifiant Random à l'utilisateur qui se connecte
+            //On donne un identifiant à l'utilisateur qui se connecte
             if (PhotonNetwork.NickName == "")
             {
                 PhotonNetwork.NickName = playerName();

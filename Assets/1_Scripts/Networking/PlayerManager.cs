@@ -10,10 +10,7 @@ public class PlayerManager : MonoBehaviour
     /*public static GameObject LocalPlayerInstance;
     private void Awake()
     {
-        if (PhotonView.IsMine)
-        {
-            PlayerManager.LocalPlayerInstance = this.gameObject;
-        }
+        
     }
     
        

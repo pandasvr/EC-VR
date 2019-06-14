@@ -135,6 +135,7 @@ namespace Networking
                 status = "absent";
             }
             
+            
             UnityEngine.PlayerPrefs.SetString("userStatus", status);
         }
         

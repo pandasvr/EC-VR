@@ -16,6 +16,7 @@ namespace Networking {
         public GameObject leftHandModel;
 
         public GameObject label;
+        public GameObject statusLabel;
         
         private void InitPlayerName() {
             
@@ -39,6 +40,8 @@ namespace Networking {
                 }
             }
         }
+        
+       
 
         void Awake() {
             VRTK_SDKManager.instance.AddBehaviourToToggleOnLoadedSetupChange(this);
