@@ -121,14 +121,11 @@ namespace Networking
             if (userMoves(previousPosition, newPosition))
             {
                 updatedTimer = 0;
-                if (personalMenuCanvas.activeInHierarchy)
-                {
-                    status = "dans le menu";
-                }
-                else
-                {
-                    status = "connecté";
-                }
+                status = "connecté";
+            }
+            if (personalMenuCanvas.activeInHierarchy)
+            {
+                status = "dans le menu";
             }
             if (timer >= 120.0f)
             {

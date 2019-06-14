@@ -19,11 +19,11 @@ public class userStatus : MonoBehaviour
     
     public void synchronisationUserStatus()
     {
-        photonView.RPC("updateUserStatus", RpcTarget.All);
+        photonView.RPC("updateStatusSphereMaterial", RpcTarget.All);
     }
     
     [PunRPC]
-    private void updateUserStatus()
+    private void updateStatusSphereMaterial()
     {
         
         switch (status)
@@ -39,11 +39,8 @@ public class userStatus : MonoBehaviour
                 break;
         }
 
+        statusSphereRenderer.material = currentMaterial;
         Debug.Log(currentMaterial);
-        if (previousStatus != status)
-        {
-            statusSphereRenderer.material = currentMaterial;
-        }
     }
     
     
@@ -58,7 +55,13 @@ public class userStatus : MonoBehaviour
     {
         previousStatus = status;
         status = UnityEngine.PlayerPrefs.GetString("userStatus");
+        Debug.Log(previousStatus != status);
+        Debug.Log(previousStatus);
         Debug.Log(status);
+        /*if (previousStatus != status)
+        {
+            synchronisationUserStatus();
+        }*/
 
         synchronisationUserStatus();
     }
