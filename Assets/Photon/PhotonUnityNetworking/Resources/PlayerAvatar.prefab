@@ -1544,6 +1544,8 @@ MonoBehaviour:
     type: 2}
   InTheMenuStatutMaterial: {fileID: 2100000, guid: 243f14a9b5fa1bf4eb755eaa8a1fd049,
     type: 2}
+  personalMenuCanvas: {fileID: 0}
+  timer: 0
 --- !u!114 &2950049674300331282
 MonoBehaviour:
   m_ObjectHideFlags: 0
