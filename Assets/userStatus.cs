@@ -146,9 +146,6 @@ public class userStatus : MonoBehaviour
         }
         previousStatus = status;
         status = UnityEngine.PlayerPrefs.GetString("userStatus");
-        Debug.Log(previousStatus != status);
-        Debug.Log(previousStatus);
-        Debug.Log(status);
         synchronisationUserStatus();
     }
 }

@@ -13,7 +13,7 @@ public class AddUserRoom : MonoBehaviour
     public GameObject scrollviewContent;
 
     private Dictionary<int, GameObject> togglesList;
-    private float init_posY = -80;
+    public float init_posY;
 
     // Update is called once per frame
     public void GetAllUsers()
