@@ -5,7 +5,7 @@ using Photon.Pun;
 using UnityEngine;
 using VRTK;
 
-public class userStatus : MonoBehaviour
+public class userStatusUpdate : MonoBehaviour
 {
     public GameObject statusSphere;
     public PhotonView photonView;
