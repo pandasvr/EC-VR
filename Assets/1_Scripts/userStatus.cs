@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
@@ -12,7 +12,6 @@ public class userStatus : MonoBehaviour
     public Material ConnectedStatutMaterial;
     public Material AbsentStatutMaterial;
     public Material InTheMenuStatutMaterial;
-    public GameObject personalMenuCanvas;
     public float timer;
         
     protected Vector3 previousPosition;
@@ -32,8 +31,8 @@ public class userStatus : MonoBehaviour
         previousPosition = playerFirstPos;
         newPosition = new Vector3(0,0,0);
         timer = 0.0f;
-        
-        Debug.Log("personalMenuCanvas", personalMenuCanvas);
+        status = "status";
+       
         statusSphereRenderer = statusSphere.gameObject.GetComponent<Renderer>();
     }
     
@@ -72,7 +71,7 @@ public class userStatus : MonoBehaviour
     protected bool userMoves(Vector3 previousPosition, Vector3 newposition)
     {
        //on renvoie que userMoves vaut true si le déplacement est plus grand qu'une certaine valeur
-        return (!(Vector3.Magnitude(previousPosition - newposition) <= 0.0002f));
+        return (!(Vector3.Magnitude(previousPosition - newposition) <= 0.0005f));
     }
         
     
@@ -93,10 +92,6 @@ public class userStatus : MonoBehaviour
         {
             updatedTimer = 0;
             status = "connecté";
-        }
-        if (personalMenuCanvas.activeInHierarchy)
-        {
-            status = "dans le menu";
         }
         if (timer >= 120.0f)
         {
@@ -136,19 +131,10 @@ public class userStatus : MonoBehaviour
         //Avec les lignes suivantes, on fait évoluer le timer qui compte la durée de non-mouvement de l'utilisateur, et on fait évoluer le statut
         timer += Time.deltaTime;
         
-        if (personalMenuCanvas != null)
-        {
-            updateStatus(timer, previousPosition, newPosition, out timer); 
-        }
-        else
-        {
-            personalMenuCanvas = GameObject.FindGameObjectWithTag("PersonnalMenu");
-        }
+        updateStatus(timer, previousPosition, newPosition, out timer); 
+        
         previousStatus = status;
         status = UnityEngine.PlayerPrefs.GetString("userStatus");
-        Debug.Log(previousStatus != status);
-        Debug.Log(previousStatus);
-        Debug.Log(status);
         synchronisationUserStatus();
     }
 }
