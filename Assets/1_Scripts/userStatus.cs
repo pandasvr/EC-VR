@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
@@ -92,7 +92,7 @@ public class userStatus : MonoBehaviour
             updatedTimer = 0;
             status = "connecté";
         }
-        if (timer >= 120.0f)
+        if (timer >= 20.0f)
         {
             status = "absent";
         }  

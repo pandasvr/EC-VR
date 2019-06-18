@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -19,6 +20,7 @@ public class RoomSettings : MonoBehaviour
 
     public void RoomDisconnect()
     {
+        PhotonNetwork.LeaveRoom();
         SceneManager.LoadScene("MainMenu");
     }
 }
