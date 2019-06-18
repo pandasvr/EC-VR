@@ -165,12 +165,12 @@ class PdoUnity
  /**
  * Fonction qui récupère un salon par son nom
  */
-    public function GetRoom($roomName)
+    public function GetRoomByName($roomName)
     {
         $resultat=PdoUnity::$myPdo->prepare("SELECT room.idRoom, room.roomName, room.maxPlayerRoom, room.whiteboard, room.postIt, room.mediaProjection, room.chatNonVr, room.environnement_id, user.userName AS userCreatorName FROM room, user WHERE roomName = :roomName AND user.idUser = room.userCreator_id");
         $resultat->bindParam(':roomName', $roomName);
         $resultat->execute();
-        $return = $resultat->fetchAll();
+        $return = $resultat->fetch();
         return $return;
     }
 }
