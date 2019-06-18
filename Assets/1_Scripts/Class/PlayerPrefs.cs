@@ -11,10 +11,6 @@ using Vector3 = UnityEngine.Vector3;
 
 public class PlayerPrefs : MonoBehaviour
 {
-    public static void SaveUser(string userId, string userName, string userEmail, string userLevel, string labelUserLevel)
-    {
-    }
-
     public static void SaveUser(string userId, string userName, string userEmail, string userLevel, string labelUserLevel, string userFirstName, string userLastName)
     {
         UnityEngine.PlayerPrefs.SetString("userId", userId);

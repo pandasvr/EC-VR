@@ -80,7 +80,6 @@ public class userStatus : MonoBehaviour
     protected void updateStatus(float timer, Vector3 previousPosition, Vector3 newPosition, out float updatedTimer)
     {
         //le string sur lequel on va calculer le statut
-        //on attribue la valeur en sortie du timer au cas où elle ne serait pas changée
         //Si l'utilisateur bouge, il est soit connecté soit dans un menu
         //Sinon, s'il ne bouge pas pendant plus de 120s, il est considéré absent
         //On attribue finalementà la playerpref userStatus sa nouvelle valeur
@@ -138,3 +137,5 @@ public class userStatus : MonoBehaviour
         synchronisationUserStatus();
     }
 }
+
+        //on attribue la valeur en sortie du timer au cas où elle ne serait pas changée
