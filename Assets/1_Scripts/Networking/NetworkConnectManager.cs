@@ -2,6 +2,7 @@
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.XR;
 using Random = UnityEngine.Random;
 
@@ -9,6 +10,11 @@ namespace Networking
 {
     public class NetworkConnectManager :  MonoBehaviourPunCallbacks
     {
+        #region Public Fields
+
+
+        #endregion
+        
         #region Private Serializable Fields
 
 
@@ -23,11 +29,10 @@ namespace Networking
         private const string GameVersion = "0.1";
         
         private VrSettings scriptVrSettings;
-        private bool isCreatingRoom = false;
+        private static bool isCreatingRoom = false;
         private bool isJoiningRoom = false;
-
-        [Tooltip("The maximum number of players per room. When a room is full, it can't be joined by new players, and so new room will be created")]
-        public byte maxPlayersPerRoom = 4;
+        private static string roomName;
+        private static string maxPlayer;
 
         #endregion
         
@@ -36,7 +41,7 @@ namespace Networking
         /// we need to keep track of this to properly adjust the behavior when we receive call back by Photon.
         /// Typically this is used for the OnConnectedToMaster() callback.
         /// </summary>
-        bool isConnecting;
+        static bool isConnecting;
 
 
         #region MonoBehaviour CallBacks
@@ -60,23 +65,31 @@ namespace Networking
             
         }
 
-
-        /// <summary>
-        /// MonoBehaviour method called on GameObject by Unity during initialization phase.
-        /// </summary>
-        private void Start()
-        {
-        }
-
-
         #endregion
 
 
         #region Public Methods
 
-        
-        public void CreateNewRoom()
+        public static void OnClickButtonJoin(string currentRoomName, string currentMaxPlayer)
         {
+            maxPlayer = currentMaxPlayer;
+            roomName = currentRoomName;
+            
+            if (!PhotonNetwork.IsConnected)
+            {
+                // #Critical, we must first and foremost connect to Photon Online Server.
+                Debug.Log("#Critical, we must first and foremost connect to Photon Online Server.");
+                PhotonNetwork.GameVersion = GameVersion;// Setting this updates the AppVersion, which separates your playerbase in matchmaking
+                PhotonNetwork.ConnectUsingSettings();
+            }
+        }
+        
+        public static void CreateNewRoom(string currentRoomName, string currentMaxPlayer)
+        {
+            
+            maxPlayer = currentMaxPlayer;
+            roomName = currentRoomName;
+            
             // keep track of the will to join a room, because when we come back from the game we will get a callback that we are connected, so we need to know what to do then
             isConnecting = true;
             
@@ -88,17 +101,16 @@ namespace Networking
             if (PhotonNetwork.NickName == "")
             {
                 PhotonNetwork.NickName = playerName();
-                Debug.Log("Identifiant temporaire de l'utilisateur : " + PhotonNetwork.NickName);
             }
             
             // we check if we are connected or not, we join if we are , else we initiate the connection to the server.
             if (PhotonNetwork.IsConnected)
             {
                 //Création d'un nouveau salon
-                var roomName = RoomName();
                 isCreatingRoom = false;
-                PhotonNetwork.CreateRoom(roomName, new RoomOptions { MaxPlayers = maxPlayersPerRoom });
+                PhotonNetwork.CreateRoom(roomName, new RoomOptions { MaxPlayers = Byte.Parse(maxPlayer) });
                 Debug.Log("Création du salon : " + roomName);
+                Debug.Log("Max players : " + maxPlayer);
             }
             else
             {
@@ -120,7 +132,7 @@ namespace Networking
             isJoiningRoom = true;
             
             //TODO : Récupérer le vrai Identifiant de l'utilisateur
-            //On donne un identifiant Random à l'utilisateur qui se connecte
+            //On donne un identifiant à l'utilisateur qui se connecte
             if (PhotonNetwork.NickName == "")
             {
                 PhotonNetwork.NickName = playerName();
@@ -132,7 +144,7 @@ namespace Networking
             {
                 //Rejoin un salon aléatoire disponible
                 isJoiningRoom = false;
-                PhotonNetwork.JoinRandomRoom();
+                PhotonNetwork.JoinRoom(roomName);
             }
             else
             {
@@ -145,15 +157,15 @@ namespace Networking
         
         #endregion
         
-        private string playerName()
+        private static string playerName()
         {
-            //return "Player#" + Random.Range(1, 9999);
-            return UnityEngine.PlayerPrefs.GetString("userName");
+            return UnityEngine.PlayerPrefs.GetString("userFirstName") + " " +
+                   UnityEngine.PlayerPrefs.GetString("userLastName");
         }
 
         private string RoomName()
         {
-            return "Salon#" + Random.Range(1, 9999);
+            return roomName;
         }
         
         #region MonoBehaviourPunCallbacks Callbacks
@@ -174,7 +186,7 @@ namespace Networking
                 else if (isCreatingRoom == true)
                 {
                     //Retour à la phase de création de salon
-                    CreateNewRoom();
+                    CreateNewRoom(roomName, maxPlayer);
                 }
             }   
         }

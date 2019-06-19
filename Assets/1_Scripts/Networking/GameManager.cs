@@ -1,8 +1,13 @@
-﻿using Photon.Pun;
+﻿using System;
+using Photon.Pun;
+using Photon.Pun.Demo.PunBasics;
 using Photon.Realtime;
 using UnityEngine;
+using UnityEngine.iOS;
 using UnityEngine.SceneManagement;
 using UnityEngine.XR;
+using VRTK;
+using Random = UnityEngine.Random;
 
 namespace Networking
 {
@@ -12,7 +17,9 @@ namespace Networking
         [Tooltip("The prefab to use for representing the player")]
         public GameObject playerPrefab;
         public GameObject[] spawnPoints;
+        
 
+        
         private void Start()
         {
             if (playerPrefab == null)
@@ -23,12 +30,11 @@ namespace Networking
             {
                 Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManager.GetActiveScene().name);
                 // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
-                
-                PhotonNetwork.Instantiate(this.playerPrefab.name, spawnPoints[Random.Range(0, spawnPoints.Length-1)].transform.position, Quaternion.identity, 0);
+                PhotonNetwork.Instantiate(this.playerPrefab.name, spawnPoints[Random.Range(0, spawnPoints.Length - 1)].transform.position, Quaternion.identity, 0);
             }
-
         }
-
+        
+        
         #region Photon Callbacks
 
 
@@ -77,8 +83,7 @@ namespace Networking
 
 
         #endregion
+        
     }
-    
-    
-    
+ 
 }

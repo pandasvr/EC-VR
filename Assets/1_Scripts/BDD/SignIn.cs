@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Photon.Pun.Demo.Cockpit;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+using WebSocketSharp;
 
 public class SignIn : MonoBehaviour
 {
-    //Adresse IP du serveur
-    public string adresseIP;
-    
     //champs noms et password récupérés depuis l'UI d'unity
     public InputField fieldName;
     public InputField fieldPassword;
@@ -21,6 +24,8 @@ public class SignIn : MonoBehaviour
     private bool isValidPassword;
     private String userPassword;
     private String userName;
+    private string userFirstname;
+    private String userLastName;
     private String decryptedPassword;
 
     //Création d'une coroutine pour la connexion d'un utilisateur
@@ -33,7 +38,7 @@ public class SignIn : MonoBehaviour
     IEnumerator ServerSend()
     {
         //Création url envoie serveur
-        string urlSignin = "http://" + adresseIP + "/edsa-ecvr/signin.php";
+        string urlSignin = Adressing.GetSignInUrl();
         
         //Récupération des valeurs du formulaire
         userPassword = Hashing.HashPassword(fieldPassword.text); //on hache directement le mot de passe récupéré
@@ -57,25 +62,19 @@ public class SignIn : MonoBehaviour
         }
         else {
             Debug.Log("Post request complete!" + " Response Code: " + www.responseCode);
-            var responseJson = www.downloadHandler.text;
+            var responseJson = System.Text.Encoding.UTF8.GetString(www.downloadHandler.data, 3, www.downloadHandler.data.Length-3);
+
             Debug.Log("Json response :" + responseJson);
 
-            if (!string.IsNullOrEmpty(responseJson))
+            if (!responseJson.IsNullOrEmpty())
             {
-                //Récupération des item JSON reçu depuis le serveur
-                var r_userName = JObject.Parse(responseJson)["userName"].ToString();
-                Debug.Log("Response username :" + r_userName);
-                var r_userPassword = JObject.Parse(responseJson)["cryptPassword"].ToString();
-                Debug.Log("Response password :" + r_userPassword);
-                var r_userEmail = JObject.Parse(responseJson)["userEmail"].ToString();
-                Debug.Log("Response user email :" + r_userEmail);
-                var r_userLevel = JObject.Parse(responseJson)["userLevel"].ToString();
-                Debug.Log("Response user level :" + r_userLevel);
-                
+              var user = JsonConvert.DeserializeObject<User>(responseJson);
+
                 //création des playerPref servant de variables globales
-                PlayerPrefs.SaveUser(r_userName, r_userEmail, r_userLevel);
+                PlayerPrefs.SaveUser(user.idUser, user.userName, user.userEmail, user.userLevel,  user.labelUserLevel, user.userFirstName, user.userLastName);
+
                 
-                decryptedPassword = Crypting.Decrypt(r_userPassword);
+                decryptedPassword = Crypting.Decrypt(user.cryptPassword);
                 Debug.Log("Response Text decrypt :" + decryptedPassword);
                 isValidPassword = Hashing.ValidatePassword(fieldPassword.text, decryptedPassword);
 

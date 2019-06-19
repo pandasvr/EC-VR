@@ -1,7 +1,7 @@
-<?php
+﻿<?php
 class PdoUnity
 {   		
-      	private static $server='mysql:host=192.168.0.106';
+      	private static $server='mysql:host=192.168.0.101';
       	private static $bdd='dbname=ecvr_db';
       	private static $user='ecvr_db';
       	private static $pw='!CapgeminiPandas4';
@@ -42,23 +42,28 @@ class PdoUnity
 /**
  * Fonction qui vérifie le userName et le password pour la connexion au site
  */
-	public function signin($userName)
+	public function SignIn($userName)
 	{
-		$req="SELECT * FROM user where userName = '".$userName."'";
-		$resultat=PdoUnity::$myPdo->query($req)->fetch();
-		return $resultat;
+		$resultat=PdoUnity::$myPdo->prepare("SELECT user.idUser, user.userName, user.cryptPassword, user.userEmail, user.userLevel, userlevel.labelUserLevel, user.userFirstName, user.userLastName FROM user, userlevel where user.userLevel=userlevel.idUserLevel and user.userName = :userName");
+		$resultat->bindParam(':userName', $userName);
+		$resultat->execute();
+		$return = $resultat->fetch(PDO::FETCH_ASSOC);
+		return $return;
 	}
 
 /**
- * Fonction qui vérifie le userName et le password pour la connexion au site
+ * Fonction qui enregistre l'utilisateur
  */
-	public function signup($userName, $cryptPassword, $userEmail, $userLevel)
+	public function signup($idUser, $userName, $cryptPassword, $userEmail, $userLevel, $userFirstName, $userLastName)
 	{
-		$resultat=PdoUnity::$myPdo->prepare("INSERT INTO user(userName, cryptPassword, userEmail, userLevel) VALUES (:userName, :cryptPassword, :userEmail, :userLevel)");
+		$resultat=PdoUnity::$myPdo->prepare("INSERT INTO user(idUser, userName, cryptPassword, userEmail, userLevel, userFirstName, userLastName) VALUES (:idUser, :userName, :cryptPassword, :userEmail, :userLevel, :userFirstName, :userLastName)");
+		$resultat->bindParam(':idUser', $idUser);
 		$resultat->bindParam(':userName', $userName);
 		$resultat->bindParam(':cryptPassword', $cryptPassword);
 		$resultat->bindParam(':userEmail', $userEmail);
 		$resultat->bindParam(':userLevel', $userLevel);
+		$resultat->bindParam(':userFirstName', $userFirstName);
+		$resultat->bindParam(':userLastName', $userLastName);
 		$resultat->execute();
 		return $resultat;
 	}
@@ -66,12 +71,107 @@ class PdoUnity
 /**
  * Fonction qui vérifie que le userName n'existe pas déjà
  */
-	public function requestUsername($userName)
+	public function RequestUsername($userName)
 	{
 		$req="SELECT * FROM user where userName = '".$userName."'";
 		$resultat=PdoUnity::$myPdo->query($req)->fetch();
 		return $resultat;
 	}
 
+/**
+ * Fonction qui enregistre une room
+ */
+	public function CreateRoom($roomName, $userNumber, $whiteboard, $postIt, $mediaProjection, $chatNonVr, $environnement_id, $userCreator_id)
+	{
+		$resultat=PdoUnity::$myPdo->prepare("INSERT INTO room(roomName, maxPlayerRoom, whiteboard, postIt, mediaProjection, chatNonVr, environnement_id, userCreator_id) VALUES (:roomName, :maxPlayerRoom, :whiteboard, :postIt, :mediaProjection, :chatNonVr, :environnement_id, :userCreator_id)");
+		$resultat->bindParam(':roomName', $roomName);
+		$resultat->bindParam(':maxPlayerRoom', $userNumber);
+		$resultat->bindParam(':whiteboard', $whiteboard);
+		$resultat->bindParam(':postIt', $postIt);
+		$resultat->bindParam(':mediaProjection', $mediaProjection);
+		$resultat->bindParam(':chatNonVr', $chatNonVr);
+		$resultat->bindParam(':environnement_id', $environnement_id);
+		$resultat->bindParam(':userCreator_id', $userCreator_id);
+		$resultat->execute();
+		$lastId = PdoUnity::$myPdo->lastInsertId();
+		return $lastId;
+	}
+
+
+    /**
+     * Fonction qui modifie une room
+     */
+    public function ModifyRoom($idRoom ,$whiteboard, $postIt, $mediaProjection, $chatNonVr, $environnement_id)
+    {
+        $resultat=PdoUnity::$myPdo->prepare("UPDATE room SET (whiteboard = :whiteboard, postIt = :postIt, mediaProjection = :mediaProjection, chatNonVr = :chatNonVr, environnement_id = :environnement_id) WHERE idRoom = :idRoom");
+        $resultat->bindParam(':whiteboard', $whiteboard);
+        $resultat->bindParam(':postIt', $postIt);
+        $resultat->bindParam(':mediaProjection', $mediaProjection);
+        $resultat->bindParam(':chatNonVr', $chatNonVr);
+        $resultat->bindParam(':environnement_id', $environnement_id);
+        $resultat->bindParam(':idRoom', $idRoom);
+        $resultat->execute();
+        return $resultat;
+    }
+/**
+ * Fonction qui enregiste une invitation
+ */
+	public function CreateInvite($idUser, $idRoom, $isCreator)
+	{
+		$resultat=PdoUnity::$myPdo->prepare("INSERT INTO link_user_room(idUser, idRoom, isCreator) VALUES
+			(:idUser, :idRoom, :isCreator)");
+		$resultat->bindParam(':idUser', $idUser);
+		$resultat->bindParam(':idRoom', $idRoom);
+		$resultat->bindParam(':isCreator', $isCreator);
+		$resultat->execute();
+		return $resultat;
+	}
+
+/**
+ * Fonction qui récupère la liste des users
+ */
+	public function GetAllUsers()
+	{
+		$resultat=PdoUnity::$myPdo->prepare("SELECT idUser, userFirstName, userLastName FROM user");
+		$resultat->execute();
+		$return = $resultat->fetchAll();
+		return $return;
+	}
+
+/**
+ * Fonction qui récupère la liste des rooms d'un user
+ */
+	public function GetAllRoomOfUser($idUser)
+	{
+		$resultat=PdoUnity::$myPdo->prepare("SELECT * FROM link_user_room WHERE idUser = :idUser");
+        $resultat->bindParam(':idUser', $idUser);
+		$resultat->execute();
+		$return = $resultat->fetchAll();
+		return $return;
+	}
+
+/**
+ * Fonction qui récupère un salon
+ */
+    public function GetRoom($idRoom)
+    {
+        $resultat=PdoUnity::$myPdo->prepare("SELECT room.idRoom, room.roomName, room.maxPlayerRoom, room.whiteboard, room.postIt, room.mediaProjection, room.chatNonVr, room.environnement_id, user.userName AS userCreatorName FROM room, user WHERE idRoom = :idRoom AND user.idUser = room.userCreator_id");
+        $resultat->bindParam(':idRoom', $idRoom);
+        $resultat->execute();
+        $return = $resultat->fetchAll();
+        return $return;
+    }
+
+ /**
+ * Fonction qui récupère un salon par son nom
+ */
+    public function GetRoomByName($roomName)
+    {
+        $resultat=PdoUnity::$myPdo->prepare("SELECT room.idRoom, room.roomName, room.maxPlayerRoom, room.whiteboard, room.postIt, room.mediaProjection, room.chatNonVr, room.environnement_id, user.userName AS userCreatorName FROM room, user WHERE roomName = :roomName AND user.idUser = room.userCreator_id");
+        $resultat->bindParam(':roomName', $roomName);
+        $resultat->execute();
+        $return = $resultat->fetch();
+        return $return;
+    }
 }
 ?>

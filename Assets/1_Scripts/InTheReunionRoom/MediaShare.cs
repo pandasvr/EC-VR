@@ -10,7 +10,7 @@ public class MediaShare : MonoBehaviour
 {
     [Header(("Vidéo projecteur"))]
     public GameObject videoProjecteur;
-    public GameObject radialMenuProjecteur;
+    public Image imageProjecteur;
 
     [Header("Fake PowerPoint Slides")] 
     public Texture[] slides;
@@ -65,10 +65,13 @@ public class MediaShare : MonoBehaviour
             video.Play();
             videoProjecteur.GetComponent<Renderer>().material.color = Color.white;
         }
-        else
+
+        videoProjecteur.SetActive(videoIsOn); //si la vidéo est mise comme média, on active son support
+
+
+        if (videoIsOn)
         {
-            video.Stop();
-            videoProjecteur.GetComponent<Renderer>().material.color = offScreenProjecteur;
+            video.Play(); //si la vidéo est mise comme média, on active son support, on la met en play
         }
         Debug.Log(string.Format("Info: {0} {1} {2}", info.Sender, info.photonView, info.timestamp));
     }
@@ -82,10 +85,9 @@ public class MediaShare : MonoBehaviour
     [PunRPC]
     private void StartPowerPoint(PhotonMessageInfo info)
     {
-        powerpointState = !powerpointState;
- 
-        //Activation/Désactivation du Radial menu permettant de changer de Slide
-        radialMenuProjecteur.SetActive(powerpointState);
+        imageIsOn = !imageIsOn;
+        videoProjecteur.SetActive(false);
+        imageProjecteur.gameObject.SetActive(imageIsOn);
 
         if (videoState)
         {

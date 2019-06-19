@@ -6,6 +6,10 @@ TagManager:
   tags:
   - VRTKManager
   - IncludeTeleport
+  - LabelToggleUser
+  - PersonnalMenu
+  - controllerLeft
+  - controllerRight
   layers:
   - Default
   - TransparentFX
