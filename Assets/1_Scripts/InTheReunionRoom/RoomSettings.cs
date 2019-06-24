@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using VRTK;
 
 public class RoomSettings : MonoBehaviour
 {
@@ -20,7 +22,17 @@ public class RoomSettings : MonoBehaviour
 
     public void RoomDisconnect()
     {
+        // plusieurs déconnexions simultanées ?? autre moyen de quitter la salle ??
+        if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
+        {
+            GameObject buttonUpload = transform.Find("Button_Upload").gameObject;
+            buttonUpload.SetActive(true);
+            
+            // onclick button : imageProjecteur.sprite = Resources.Load <Sprite> ("MediaShare/Presentation1");
+        }
+       
         PhotonNetwork.LeaveRoom();
+        
         SceneManager.LoadScene("MainMenu");
     }
 }
