@@ -97,6 +97,18 @@ class PdoUnity
 		return $lastId;
 	}
 
+    /**
+     * Fonction qui enregistre un compte-rendu
+     */
+    public function CreateReport($pathReport, $dateReport)
+    {
+        $resultat=PdoUnity::$myPdo->prepare("INSERT INTO report(pathReport, dateReport) VALUES (:pathReport, :dateReport)");
+        $resultat->bindParam(':pathReport', $pathReport);
+        $resultat->bindParam(':dateReport', $dateReport);
+        $resultat->execute();
+        $lastId = PdoUnity::$myPdo->lastInsertId();
+        return $lastId;
+    }
 
     /**
      * Fonction qui modifie une room
@@ -127,6 +139,19 @@ class PdoUnity
 		return $resultat;
 	}
 
+    /**
+     * Fonction qui enregiste les récepteurs d'un compte-rendu
+     */
+    public function CreateReceiver($idUser, $idReport)
+    {
+        $resultat=PdoUnity::$myPdo->prepare("INSERT INTO reportuser(idUser, idReport) VALUES
+			(:idUser, :idReport)");
+        $resultat->bindParam(':idUser', $idUser);
+        $resultat->bindParam(':idReport', $idReport);
+        $resultat->execute();
+        return $resultat;
+    }
+
 /**
  * Fonction qui récupère la liste des users
  */
@@ -149,6 +174,19 @@ class PdoUnity
 		$return = $resultat->fetchAll();
 		return $return;
 	}
+
+
+    /**
+     * Fonction qui récupère la liste des users d'une room
+     */
+    public function GetAllUsersOfRoom($idRoom)
+    {
+        $resultat=PdoUnity::$myPdo->prepare("SELECT * FROM link_user_room WHERE idRoom = :idRoom");
+        $resultat->bindParam(':idRoom', $idRoom);
+        $resultat->execute();
+        $return = $resultat->fetchAll();
+        return $return;
+    }
 
 /**
  * Fonction qui récupère un salon
