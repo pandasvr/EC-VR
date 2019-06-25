@@ -12,15 +12,6 @@ public class CreateReport : MonoBehaviour
 
     public Text Text_Info;
     public GameObject Panel_Main;
-    public GameObject Panel_CreateRoom;
-    
-    public InputField Field_RoomName;
-    public Slider Slider_UserNumber;
-    public Toggle Toggle_Whiteboard;
-    public Toggle Toggle_PostIt;
-    public Toggle Toggle_MediaProjection;
-    public Toggle Toggle_ChatNonVr;
-    public Dropdown Dropdown_Environnement;
 
     public AddUserRoom AddUserRoomScript;
     
@@ -31,9 +22,9 @@ public class CreateReport : MonoBehaviour
     string pathReport;
     private string dateReport;
 
-    List<int> listinvites;
-    private int createdRoomId;
-    private int userCreator_id;
+    List<int> listreceivers;
+    private int createdReportId;
+    //private int userCreator_id;
     
     private WWWForm form;
     private UnityWebRequest www;
@@ -42,6 +33,7 @@ public class CreateReport : MonoBehaviour
 
     public void Call_SaveReport()
     {
+        listreceivers = AddUserRoomScript.GetListInvites();
         StartCoroutine(SaveReport());
     }
 
@@ -78,7 +70,7 @@ public class CreateReport : MonoBehaviour
             var responseData = int.Parse(System.Text.Encoding.UTF8.GetString(www.downloadHandler.data, 3, www.downloadHandler.data.Length-3)) ;
             Debug.Log("Response text last Id : " + responseData);
 
-            createdRoomId = responseData;
+            createdReportId = responseData;
             
             StartCoroutine(SaveReceivers());
         }
@@ -88,18 +80,18 @@ public class CreateReport : MonoBehaviour
     {
         string urlCreateReceiver = Adressing.GetCreateReceiverUrl();
         
-        //Creation du formulaire d'invitation à la room pour le User Createur
+        /*//Creation du formulaire d'invitation à la room pour le User Createur
         //Create form values for send
         form = new WWWForm();
 
-        int idCreator = int.Parse(UnityEngine.PlayerPrefs.GetString("userId"));
+        int idReport = int.Parse(UnityEngine.PlayerPrefs.GetString("userId"));
         
-        form.AddField("idUser", idCreator);
+        form.AddField("idUser", idReport);
         form.AddField("idRoom", createdRoomId);
         
             
         //Envoie des données au serveur
-        www = UnityWebRequest.Post(urlCreateInvite, form);
+        www = UnityWebRequest.Post(urlCreateReceiver, form);
 
         //Récupération du retour serveur
         www.downloadHandler = new DownloadHandlerBuffer();
@@ -122,18 +114,17 @@ public class CreateReport : MonoBehaviour
             {
                 Debug.Log("invitation user n°" + idCreator + " à la room n°"+ createdRoomId + " échouée");
             }
-        }
+        }*/
         
-        foreach (int userId in listinvites)
+        foreach (int userId in listreceivers)
         {
             //Create form values for send
             form = new WWWForm();
             form.AddField("idUser", userId);
-            form.AddField("idRoom", createdRoomId);
-            form.AddField("isCreator",0);
-            
+            form.AddField("idReport", createdReportId);
+
             //Envoie des données au serveur
-            www = UnityWebRequest.Post(urlCreateInvite, form);
+            www = UnityWebRequest.Post(urlCreateReceiver, form);
 
             //Récupération du retour serveur
             www.downloadHandler = new DownloadHandlerBuffer();
@@ -150,18 +141,17 @@ public class CreateReport : MonoBehaviour
                 bool textResponse = BitConverter.ToBoolean(www.downloadHandler.data, 0);
                 if (textResponse)
                 {
-                    Debug.Log("invitation user n°" + userId + " à la room n°"+ createdRoomId + " réussie");
+                    Debug.Log("invitation user n°" + userId + " au report n°"+ createdReportId + " réussie");
                 }
                 else
                 {
-                    Debug.Log("invitation user n°" + userId + " à la room n°"+ createdRoomId + " échouée");
+                    Debug.Log("invitation user n°" + userId + " au report n°"+ createdReportId + " échouée");
                 }
             }
         }
         
         Debug.Log("création réussie");
-        Text_Info.text = "Création du salon réussie";
-        Panel_Main.SetActive(true);
-        Panel_CreateRoom.SetActive(false);
+        Text_Info.text = "Création du compte rendu réussie";
+        
     }
 }
