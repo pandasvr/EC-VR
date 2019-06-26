@@ -152,6 +152,7 @@ namespace Networking
                 Debug.Log("#Critical, we must first and foremost connect to Photon Online Server.");
                 PhotonNetwork.GameVersion = GameVersion;
                 PhotonNetwork.ConnectUsingSettings();
+                
             }  
         }
         

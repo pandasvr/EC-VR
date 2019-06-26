@@ -4,10 +4,23 @@ $pdo = PdoUnity::getPdoUnity();
 
 $pathReport = $_REQUEST['pathReport'];
 $dateReport = $_REQUEST['dateReport'];
+$idRoom = $_REQUEST['idRoom'];
+
+$idReport = $pdo->CreateReport($pathReport, $dateReport);
 
 
+$listUser = $pdo->GetAllUsersOfRoom($idRoom);
 
-$resultat = $pdo->CreateReport($pathReport, $dateReport);
+/*if($idRoom != null) {
+    foreach ($listUser as $user) {
+        $pdo->CreateReceiver($user['idUser'], $idRoom);
+    }
+    echo true;
+} else{
+   echo false;
+}*/
 
-echo $resultat;
+foreach ($listUser as $user) {
+    $pdo->CreateReceiver($user['idUser'], $idReport);
+}
 ?>

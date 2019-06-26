@@ -4,7 +4,7 @@ $pdo = PdoUnity::getPdoUnity();
 
 $idUser = $_REQUEST['idRoom'];
 
-$resultat = $pdo->GetAllRoomOfUser($idRoom);
+$resultat = $pdo->GetAllUsersOfRoom($idRoom);
 
 echo json_encode($resultat);
 ?>

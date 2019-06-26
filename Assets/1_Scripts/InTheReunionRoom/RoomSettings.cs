@@ -25,12 +25,11 @@ public class RoomSettings : MonoBehaviour
         // plusieurs déconnexions simultanées ?? autre moyen de quitter la salle ??
         if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
         {
-            CreateReport report = GameObject.AddComponent<CreateReport>();
+            StartCoroutine(CreateReport.SaveReport());
             // onclick button : imageProjecteur.sprite = Resources.Load <Sprite> ("MediaShare/Presentation1");
         }
-       
+        UnityEngine.PlayerPrefs.DeleteKey("idRoom");
         PhotonNetwork.LeaveRoom();
-        
         SceneManager.LoadScene("MainMenu");
     }
 }
