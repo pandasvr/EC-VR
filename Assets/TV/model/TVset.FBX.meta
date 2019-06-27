@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 6385f8f25b43f5d4cb273222e7a3c727
+=======
+guid: 7f8a017722393ee41b6fa7c5d5a055c5
+>>>>>>> feature_AjoutDesComposantsDansLeSalonP000853-210
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:

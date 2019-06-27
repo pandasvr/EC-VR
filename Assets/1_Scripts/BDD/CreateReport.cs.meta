@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: beb48eeb99d04e1896e202abe0d0a458
+=======
+guid: 8b0596b628ac6c74d8bd74dcd5faa1ac
+>>>>>>> feature_AjoutDesComposantsDansLeSalonP000853-210
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

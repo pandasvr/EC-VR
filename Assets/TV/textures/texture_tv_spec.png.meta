@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 54859b4ed0405524a8c2849831482327
+=======
+guid: f593778f985dbfe43b6abde8d75172b0
+>>>>>>> feature_AjoutDesComposantsDansLeSalonP000853-210
 TextureImporter:
   fileIDToRecycleName: {}
   externalObjects: {}

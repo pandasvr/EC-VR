@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 5ac525593439c514391592d65017019f
+=======
+guid: f10e6915b13efea4aa20dfac5d34eb3e
+>>>>>>> feature_AjoutDesComposantsDansLeSalonP000853-210
 PrefabImporter:
   externalObjects: {}
   userData: 

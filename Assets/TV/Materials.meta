@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 4df0614a56ace744d97b784613f85ed9
+=======
+guid: 490b7979268acba469181dd1079e433b
+>>>>>>> feature_AjoutDesComposantsDansLeSalonP000853-210
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

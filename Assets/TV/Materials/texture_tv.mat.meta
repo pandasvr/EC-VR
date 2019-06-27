@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: b061f377975aa5345b9627ab346ea1a9
+=======
+guid: 7ea7089098ba014499f2ce03942f089d
+>>>>>>> feature_AjoutDesComposantsDansLeSalonP000853-210
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 0
