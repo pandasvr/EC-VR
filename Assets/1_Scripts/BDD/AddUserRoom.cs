@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using Newtonsoft.Json.Linq;
-using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;

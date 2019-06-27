@@ -1,9 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using BCrypt.Net;
-
-public class Hashing
+﻿public class Hashing
 {
 
     private static string GetRandomSalt()

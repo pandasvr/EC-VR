@@ -2,9 +2,6 @@
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.XR;
-using Random = UnityEngine.Random;
 
 namespace Networking
 {

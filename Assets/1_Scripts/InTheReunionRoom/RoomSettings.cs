@@ -1,10 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Photon.Pun;
+﻿using Photon.Pun;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using VRTK;
 
 public class RoomSettings : MonoBehaviour
 {

@@ -2,7 +2,6 @@
 namespace VRTK.Examples.Utilities
 {
     using UnityEngine;
-    using UnityEditor;
 
     [ExecuteInEditMode]
     public class VRTKExample_FixSetup : MonoBehaviour

@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace Photon.Voice.Unity
+﻿namespace Photon.Voice.Unity
 {
     public class PhotonVoiceCreatedParams
     {

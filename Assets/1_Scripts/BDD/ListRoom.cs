@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using _1_Scripts.Class;
 using Networking;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Photon.Pun;
-using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;

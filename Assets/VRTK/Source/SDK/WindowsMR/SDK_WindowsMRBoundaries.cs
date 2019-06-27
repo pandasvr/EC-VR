@@ -1,11 +1,8 @@
 ﻿// WindowsMR Boundaries|SDK_WindowsMR|005
 namespace VRTK
 {
-    using UnityEngine;
-    using System.Collections.Generic;
 #if UNITY_2017_2_OR_NEWER
-    using UnityEngine.XR;
-    using UnityEngine.Experimental.XR;
+
 #if VRTK_DEFINE_SDK_WINDOWSMR
     using UnityEngine.XR.WSA;
 #endif

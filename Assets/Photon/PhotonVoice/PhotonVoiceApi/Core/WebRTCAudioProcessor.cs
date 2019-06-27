@@ -2,7 +2,6 @@
 #define DLL_IMPORT_INTERNAL
 #endif
 using System;
-using System.Collections.Generic;
 using System.Runtime.InteropServices;
 namespace Photon.Voice
 {
