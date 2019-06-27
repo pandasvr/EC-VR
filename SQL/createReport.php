@@ -11,15 +11,6 @@ $idReport = $pdo->CreateReport($pathReport, $dateReport);
 
 $listUser = $pdo->GetAllUsersOfRoom($idRoom);
 
-/*if($idRoom != null) {
-    foreach ($listUser as $user) {
-        $pdo->CreateReceiver($user['idUser'], $idRoom);
-    }
-    echo true;
-} else{
-   echo false;
-}*/
-
 foreach ($listUser as $user) {
     $pdo->CreateReceiver($user['idUser'], $idReport);
 }

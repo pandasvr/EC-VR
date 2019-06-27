@@ -84,4 +84,10 @@ public class Adressing : MonoBehaviour
         string url = "http://" + ipAddressStatic + "/edsa-ecvr/getRoomByName.php";
         return url;
     }
+    
+    public static string GetReportByUserUrl()
+    {
+        string url = "http://" + ipAddressStatic + "/edsa-ecvr/getReportByUser.php";
+        return url;
+    }
 }

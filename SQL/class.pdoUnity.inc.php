@@ -211,5 +211,17 @@ class PdoUnity
         $return = $resultat->fetch();
         return $return;
     }
+
+    /**
+     * Fonction qui récupère un salon par son nom
+     */
+    public function GetReportByUser($idUser)
+    {
+        $resultat=PdoUnity::$myPdo->prepare("SELECT report.idReport, report.pathReport, report.dateReport FROM report, reportuser WHERE reportuser.idUser = :idUser AND report.idReport = reportuser.idReport");
+        $resultat->bindParam(':idUser', $idUser);
+        $resultat->execute();
+        $return = $resultat->fetchAll();
+        return $return;
+    }
 }
 ?>
