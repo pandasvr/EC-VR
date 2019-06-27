@@ -40,7 +40,7 @@ public class CreateReport : MonoBehaviour
 
         //Create form values for send
         form = new WWWForm();
-        pathReport = "Assets/Resources/Documents/CR/CompteRendu.pdf";
+        pathReport = "Resources/Documents/CR/CompteRendu.pdf";
         dateReport = DateTime.Now.ToString();
         idRoom = UnityEngine.PlayerPrefs.GetString("idRoom");
         

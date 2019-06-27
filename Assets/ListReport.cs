@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using _1_Scripts.Class;
 using Networking;
 using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+using Debug = UnityEngine.Debug;
 
 public class ListReport : MonoBehaviour
 {
@@ -87,7 +90,7 @@ public class ListReport : MonoBehaviour
                     //bouton rejoindre une salle
                     currentButtonDownload.gameObject.GetComponent<Button>().onClick.AddListener(delegate()
                     {
-                        Application.OpenURL(report.pathReport);
+                        Process.Start(Path.Combine(Application.dataPath,report.pathReport));
                     });
                     
                     
