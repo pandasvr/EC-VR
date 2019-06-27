@@ -154,6 +154,7 @@ public class ListRoom : MonoBehaviour
                     currentButtonJoinRoom.gameObject.GetComponent<Button>().onClick.AddListener(delegate()
                     {
                         NetworkConnectManager.CreateNewRoom(room.roomName, room.maxPlayerRoom);
+                        UnityEngine.PlayerPrefs.SetString("idRoom", room.idRoom);
                     });
                     
                     //valorisation des textes des game objects du prefab
