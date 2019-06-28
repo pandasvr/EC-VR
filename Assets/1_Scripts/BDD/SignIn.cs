@@ -1,15 +1,9 @@
 ﻿using System;
 using System.Collections;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Photon.Pun.Demo.Cockpit;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
-using WebSocketSharp;
 
 public class SignIn : MonoBehaviour
 {
@@ -66,7 +60,7 @@ public class SignIn : MonoBehaviour
 
             Debug.Log("Json response :" + responseJson);
 
-            if (!responseJson.IsNullOrEmpty())
+            if (responseJson != "")
             {
               var user = JsonConvert.DeserializeObject<User>(responseJson);
 

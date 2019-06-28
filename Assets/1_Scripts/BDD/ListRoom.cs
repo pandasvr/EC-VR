@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using _1_Scripts.Class;
 using Networking;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Photon.Pun;
-using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
@@ -154,6 +150,7 @@ public class ListRoom : MonoBehaviour
                     currentButtonJoinRoom.gameObject.GetComponent<Button>().onClick.AddListener(delegate()
                     {
                         NetworkConnectManager.CreateNewRoom(room.roomName, room.maxPlayerRoom);
+                        UnityEngine.PlayerPrefs.SetString("idRoom", room.idRoom);
                     });
                     
                     //valorisation des textes des game objects du prefab

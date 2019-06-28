@@ -1,6 +1,5 @@
-using System.Collections;
 using System;
-using System.Collections.Generic;
+
 namespace Photon.Voice
 {
     /// <summary>Audio Source interface.</summary>

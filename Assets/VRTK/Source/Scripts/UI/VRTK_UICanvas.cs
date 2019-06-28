@@ -6,7 +6,6 @@ namespace VRTK
     using UnityEngine.EventSystems;
     using System.Collections;
     using System.Reflection;
-    using System;
 
     /// <summary>
     /// Denotes a Unity World UI Canvas can be interacted with a UIPointer script.

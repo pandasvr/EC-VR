@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class DropdownSubMenu : MonoBehaviour, IPointerClickHandler, IPointerExitHandler

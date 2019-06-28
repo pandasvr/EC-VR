@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using POpusCodec.Enums;
+﻿using POpusCodec.Enums;
 using POpusCodec;
 using System;
-using System.Collections.Generic;
+
 namespace Photon.Voice
 {
     public class OpusCodec

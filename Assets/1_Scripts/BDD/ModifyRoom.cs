@@ -7,8 +7,6 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 using _1_Scripts.Class;
-using Newtonsoft.Json.Linq;
-using Random = UnityEngine.Random;
 
 public class ModifyRoom : MonoBehaviour
 {

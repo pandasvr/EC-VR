@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Threading;
-
 #if NETFX_CORE
 using System.Diagnostics;
 using Windows.Foundation;
@@ -11,8 +8,6 @@ using Windows.Storage.Streams;
 #endif
 
 #if !NO_SOCKET && !NETFX_CORE
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Net.Sockets;
 #endif
 

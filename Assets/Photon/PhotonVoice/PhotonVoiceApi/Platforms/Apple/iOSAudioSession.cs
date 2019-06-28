@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using Voice = Photon.Voice;
-
-namespace Photon.Voice.IOS
+﻿namespace Photon.Voice.IOS
 {
     public enum AudioSessionCategory // values are the same as in AudioIn.mm enums
     {

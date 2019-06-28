@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Adressing : MonoBehaviour
 {
@@ -37,6 +34,12 @@ public class Adressing : MonoBehaviour
         return url;
     }
     
+    public static string GetCreateReportUrl()
+    {
+        string url = "http://" + ipAddressStatic + "/edsa-ecvr/createReport.php";
+        return url;
+    }
+    
     public static string GetAllUsersUrl()
     {
         string url = "http://" + ipAddressStatic + "/edsa-ecvr/getAllUsers.php";
@@ -46,6 +49,12 @@ public class Adressing : MonoBehaviour
     public static string GetCreateInviteUrl()
     {
         string url = "http://" + ipAddressStatic + "/edsa-ecvr/createInvite.php";
+        return url;
+    }
+    
+    public static string GetCreateReceiverUrl()
+    {
+        string url = "http://" + ipAddressStatic + "/edsa-ecvr/createReceiver.php";
         return url;
     }
     
@@ -70,6 +79,12 @@ public class Adressing : MonoBehaviour
     public static string GetModifyRoomUrl_getRoom()
     {
         string url = "http://" + ipAddressStatic + "/edsa-ecvr/getRoomByName.php";
+        return url;
+    }
+    
+    public static string GetReportByUserUrl()
+    {
+        string url = "http://" + ipAddressStatic + "/edsa-ecvr/getReportByUser.php";
         return url;
     }
 }

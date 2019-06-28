@@ -1,12 +1,7 @@
-﻿using System;
-using Photon.Pun;
-using Photon.Pun.Demo.PunBasics;
+﻿using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
-using UnityEngine.iOS;
 using UnityEngine.SceneManagement;
-using UnityEngine.XR;
-using VRTK;
 using Random = UnityEngine.Random;
 
 namespace Networking
@@ -42,8 +37,10 @@ namespace Networking
         /// Called when the local player left the room. We need to load the launcher scene.
         /// </summary>
         public override void OnLeftRoom()
-        {        
+        {    
+            
             SceneManager.LoadScene("MainMenu");
+            
         }
 
         #endregion
@@ -55,6 +52,7 @@ namespace Networking
         public void LeaveRoom()
         {
             PhotonNetwork.LeaveRoom();
+            
         }
 
         #endregion

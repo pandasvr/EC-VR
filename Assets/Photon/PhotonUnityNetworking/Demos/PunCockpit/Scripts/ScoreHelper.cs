@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using Photon.Pun;
 using Photon.Pun.UtilityScripts;
 
