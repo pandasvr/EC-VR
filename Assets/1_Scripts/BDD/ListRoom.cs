@@ -149,7 +149,7 @@ public class ListRoom : MonoBehaviour
                     //bouton rejoindre une salle
                     currentButtonJoinRoom.gameObject.GetComponent<Button>().onClick.AddListener(delegate()
                     {
-                        NetworkConnectManager.CreateNewRoom(room.roomName, room.maxPlayerRoom);
+                        NetworkConnectManager.CreateNewRoom(room.roomName, room.maxPlayerRoom, room.labelEnvironnement);
                         UnityEngine.PlayerPrefs.SetString("idRoom", room.idRoom);
                     });
                     
