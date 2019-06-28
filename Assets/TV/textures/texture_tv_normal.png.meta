@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
 guid: 9ae282053178e014f9378aeac71a886e
-=======
-guid: d298132571c25194c8688e3947a01dbf
->>>>>>> feature_AjoutDesComposantsDansLeSalonP000853-210
 TextureImporter:
   fileIDToRecycleName: {}
   externalObjects: {}
@@ -11,11 +7,7 @@ TextureImporter:
   mipmaps:
     mipMapMode: 0
     enableMipMap: 1
-<<<<<<< HEAD
     sRGBTexture: 0
-=======
-    sRGBTexture: 1
->>>>>>> feature_AjoutDesComposantsDansLeSalonP000853-210
     linearTexture: 0
     fadeOut: 0
     borderMipMap: 0
@@ -59,11 +51,7 @@ TextureImporter:
   alphaUsage: 1
   alphaIsTransparency: 0
   spriteTessellationDetail: -1
-<<<<<<< HEAD
   textureType: 1
-=======
-  textureType: 0
->>>>>>> feature_AjoutDesComposantsDansLeSalonP000853-210
   textureShape: 1
   singleChannelComponent: 0
   maxTextureSizeSet: 0
