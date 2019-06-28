@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1.5
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 18a18be315858d64c9a8ce50ccd52e64, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 378e6f5b30ae67c4da6848fcb2f8b455, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 2003931976}
-  m_IndirectSpecularColor: {r: 0.2592175, g: 0.56321985, b: 0.55733186, a: 1}
+  m_IndirectSpecularColor: {r: 0.480394, g: 0.79245335, b: 0.53589714, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1121,7 +1121,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 103409160}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 293.78098, y: 2.76, z: 173.23201}
+  m_LocalPosition: {x: 293.82, y: 2.27, z: 181.09}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1747377653}
@@ -4876,7 +4876,7 @@ Transform:
   - {fileID: 1982483594}
   - {fileID: 862444880}
   m_Father: {fileID: 1193270502}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &438942594
 MonoBehaviour:
@@ -14477,7 +14477,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1175990586}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 293.77, y: 2.76, z: 182.36}
+  m_LocalPosition: {x: 289.769, y: 2.27, z: 183.35799}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1747377653}
@@ -15274,6 +15274,10 @@ PrefabInstance:
       propertyPath: buttons.Array.data[3].OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: right
       objectReference: {fileID: 0}
+    - target: {fileID: 122840, guid: d5fe2f7f9d3e98a478d151422643620c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 22453742, guid: d5fe2f7f9d3e98a478d151422643620c, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -15284,10 +15288,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22453742, guid: d5fe2f7f9d3e98a478d151422643620c, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 122840, guid: d5fe2f7f9d3e98a478d151422643620c, type: 3}
-      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -15362,8 +15362,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1747613109}
   - {fileID: 438942593}
+  - {fileID: 1747613109}
   m_Father: {fileID: 423674193}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -16944,6 +16944,10 @@ PrefabInstance:
       propertyPath: buttons.Array.data[0].OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 122840, guid: d5fe2f7f9d3e98a478d151422643620c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 22453742, guid: d5fe2f7f9d3e98a478d151422643620c, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -16954,10 +16958,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22453742, guid: d5fe2f7f9d3e98a478d151422643620c, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 122840, guid: d5fe2f7f9d3e98a478d151422643620c, type: 3}
-      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -17130,7 +17130,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1257173052}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 290.47998, y: 2.76, z: 175.29}
+  m_LocalPosition: {x: 280.47, y: 2.27, z: 183.78}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1747377653}
@@ -18152,7 +18152,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1343097543}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 290.47998, y: 2.76, z: 179.24}
+  m_LocalPosition: {x: 286.479, y: 2.27, z: 180.23799}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1747377653}
@@ -23196,7 +23196,7 @@ Transform:
   m_Children:
   - {fileID: 1748917427}
   m_Father: {fileID: 1193270502}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1748917426
 GameObject:
@@ -26180,6 +26180,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1982483593}
   m_PrefabAsset: {fileID: 0}
+--- !u!20 &1982483612 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 2082592, guid: 4d293c8e162f3874b982baadd71153d2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1982483593}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2003931975
 GameObject:
   m_ObjectHideFlags: 0
@@ -28772,13 +28778,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ff5b1f04dece7440b6f0886ee13f147, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Camera: {fileID: 1262971219}
+  Camera: {fileID: 1982483612}
   FollowCamera: 1
   RainSoundLight: {fileID: 8300000, guid: c980eda1ec9b9ff4b930005976b00f41, type: 3}
   RainSoundMedium: {fileID: 8300000, guid: 3359e9d10af08ca46ae396298dbd1ed9, type: 3}
   RainSoundHeavy: {fileID: 8300000, guid: db1471092e49b7445bfbd374a17ea61a, type: 3}
   RainSoundAudioMixer: {fileID: 0}
-  RainIntensity: 0.1
+  RainIntensity: 0
   RainFallParticleSystem: {fileID: 8267897480350532518}
   RainExplosionParticleSystem: {fileID: 8267897480350590840}
   RainMistParticleSystem: {fileID: 8267897480350545524}
@@ -28789,6 +28795,8 @@ MonoBehaviour:
   WindSpeedRange: {x: 50, y: 100, z: 500}
   WindChangeInterval: {x: 5, y: 30}
   EnableWind: 0
+  sunSkybox: {fileID: 2100000, guid: 378e6f5b30ae67c4da6848fcb2f8b455, type: 2}
+  cloudSkybox: {fileID: 2100000, guid: 18a18be315858d64c9a8ce50ccd52e64, type: 2}
   RainHeight: 25
   RainForwardOffset: -7
   RainMistHeight: 3

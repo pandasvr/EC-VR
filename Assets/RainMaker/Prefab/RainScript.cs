@@ -1,8 +1,4 @@
-﻿//
-// Rain Maker (c) 2015 Digital Ruby, LLC
-// http://www.digitalruby.com
-//
-
+﻿
 using UnityEngine;
 using System.Collections;
 
@@ -10,6 +6,11 @@ namespace DigitalRuby.RainMaker
 {
     public class RainScript : BaseRainScript
     {
+        [Tooltip(("Skyboxs"))] 
+        public Material sunSkybox;
+
+        public Material cloudSkybox;
+        
         [Tooltip("The height above the camera that the rain will start falling from")]
         public float RainHeight = 25.0f;
 
@@ -65,6 +66,24 @@ namespace DigitalRuby.RainMaker
         protected override void Update()
         {
             base.Update();
+
+            if (Input.GetKeyDown(KeyCode.Keypad1))
+            {
+                RainIntensity = 0;
+                //RenderSettings.skybox = sunSkybox;
+            }
+            
+            if (Input.GetKeyDown(KeyCode.Keypad2))
+            {
+                //RenderSettings.skybox = cloudSkybox;
+                RainIntensity = 0.1f;
+            }
+            
+            if (Input.GetKeyDown(KeyCode.Keypad3))
+            {
+                //RenderSettings.skybox = cloudSkybox;
+                RainIntensity = 1f;
+            }
 
             UpdateRain();
         }
