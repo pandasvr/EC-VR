@@ -12,6 +12,7 @@ namespace Networking
     {
         #region Public Fields
 
+        public string loadedRoomName = "AmelioratedSalon";
 
         #endregion
         
@@ -212,7 +213,7 @@ namespace Networking
                 Debug.Log("Chargement de la scene 'Salon 1' ");
                 // #Critical
                 // Load the Room Level.
-                PhotonNetwork.LoadLevel("AmelioratedSalon");
+                PhotonNetwork.LoadLevel(loadedRoomName);
             }
         }
     }

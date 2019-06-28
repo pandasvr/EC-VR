@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/0_Scenes/AmelioratedSalon.unity
     guid: a3ec901a692a06841bbe68a9df25ad7c
+  - enabled: 1
+    path: Assets/0_Scenes/Forest.unity
+    guid: bc4d1b9d2fa39db47bff63eee37a511f
   m_configObjects: {}
