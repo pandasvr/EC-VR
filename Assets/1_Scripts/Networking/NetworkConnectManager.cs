@@ -9,8 +9,6 @@ namespace Networking
     {
         #region Public Fields
 
-        public string loadedRoomName = "AmelioratedSalon";
-
         #endregion
         
         #region Private Serializable Fields
@@ -31,6 +29,7 @@ namespace Networking
         private bool isJoiningRoom = false;
         private static string roomName;
         private static string maxPlayer;
+        private static string labelEnvironnement;
 
         #endregion
         
@@ -82,11 +81,12 @@ namespace Networking
             }
         }
         
-        public static void CreateNewRoom(string currentRoomName, string currentMaxPlayer)
+        public static void CreateNewRoom(string currentRoomName, string currentMaxPlayer, string currentLabelEnvironnement)
         {
             
             maxPlayer = currentMaxPlayer;
             roomName = currentRoomName;
+            labelEnvironnement = currentLabelEnvironnement;
             
             // keep track of the will to join a room, because when we come back from the game we will get a callback that we are connected, so we need to know what to do then
             isConnecting = true;
@@ -185,7 +185,7 @@ namespace Networking
                 else if (isCreatingRoom == true)
                 {
                     //Retour à la phase de création de salon
-                    CreateNewRoom(roomName, maxPlayer);
+                    CreateNewRoom(roomName, maxPlayer, labelEnvironnement);
                 }
             }   
         }
@@ -211,7 +211,7 @@ namespace Networking
                 Debug.Log("Chargement de la scene 'Salon 1' ");
                 // #Critical
                 // Load the Room Level.
-                PhotonNetwork.LoadLevel(loadedRoomName);
+                PhotonNetwork.LoadLevel(labelEnvironnement);
             }
         }
     }

@@ -193,7 +193,7 @@ class PdoUnity
  */
     public function GetRoom($idRoom)
     {
-        $resultat=PdoUnity::$myPdo->prepare("SELECT room.idRoom, room.roomName, room.maxPlayerRoom, room.whiteboard, room.postIt, room.mediaProjection, room.chatNonVr, room.environnement_id, user.userName AS userCreatorName FROM room, user WHERE idRoom = :idRoom AND user.idUser = room.userCreator_id");
+        $resultat=PdoUnity::$myPdo->prepare("SELECT room.idRoom, room.roomName, room.maxPlayerRoom, room.whiteboard, room.postIt, room.mediaProjection, room.chatNonVr, room.environnement_id, environnement.labelEnvironnement, user.userName AS userCreatorName FROM room, user, environnement WHERE idRoom = :idRoom AND user.idUser = room.userCreator_id AND room.environnement_id = environnement.idEnvironnement");
         $resultat->bindParam(':idRoom', $idRoom);
         $resultat->execute();
         $return = $resultat->fetchAll();

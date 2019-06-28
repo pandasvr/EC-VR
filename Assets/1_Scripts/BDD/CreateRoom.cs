@@ -130,23 +130,6 @@ public class CreateRoom : MonoBehaviour
         {
             Debug.Log("Post request complete!" + " Response Code: " + www.responseCode);
             
-            /*bool responseText = BitConverter.ToBoolean(www.downloadHandler.data, 0);
-            Debug.Log("Response Text:" + responseText);
-
-            if (responseText)
-            {
-                Debug.Log("création réussie");
-                Text_Info.text = "Création du salon réussie";
-                Panel_Main.SetActive(true);
-                Panel_CreateRoom.SetActive(false);
-            }
-            else
-            {
-                Debug.Log("création échouée");
-                Text_Info.text = "Création du salon échouée";
-            }
-            */
-            
             var responseData = int.Parse(System.Text.Encoding.UTF8.GetString(www.downloadHandler.data, 3, www.downloadHandler.data.Length-3)) ;
             Debug.Log("Response text last Id : " + responseData);
 

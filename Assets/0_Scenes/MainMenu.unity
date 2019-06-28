@@ -23819,7 +23819,9 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: Environnement  1
+    - m_Text: Coworking
+      m_Image: {fileID: 0}
+    - m_Text: "For\xEAt"
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
