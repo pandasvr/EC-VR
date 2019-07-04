@@ -19,32 +19,56 @@ public class Timer : MonoBehaviour
     void Start ()
     {
         isTimerEnd = false;
-        
+    }
+    
+    public void StartTimer()
+    {
         StartCoroutine("UpdateTime");
         Time.timeScale = 1; //Just making sure that the timeScale is right
     }
+
+    public void ResetTimer()
+    {
+        StopCoroutine("UpdateTime");
+        isTimerEnd = false;
+        timerText.text = "00:00";
+        timerText.color = Color.white;
+        if (timerText.enabled == false)
+        {
+            timerText.enabled = true;
+        }
+    }
+    
     void Update ()
     {
+        if (!isTimerEnd)
+        {
+            if (timerMinutes < 10)
+            {
+                currentTimeText = "0" + timerMinutes + ":";
+            }
+            else
+            {
+                currentTimeText = timerMinutes + ":";
+            }
 
-        if (timerMinutes < 10)
-        {
-            currentTimeText = "0" + timerMinutes + ":";
-        }
-        else
-        {
-            currentTimeText = timerMinutes + ":";
-        }
+            if (timerSecondes < 10)
+            {
+                currentTimeText += "0" + timerSecondes;
+            }
+            else
+            {
+                currentTimeText += timerSecondes;
+            }
 
-        if (timerSecondes < 10)
-        {
-            currentTimeText += "0" + timerSecondes;
+            timerText.text = currentTimeText;
+            
+            if(timerMinutes == 0 && timerSecondes == 0)
+            {
+                isTimerEnd = true;
+                timerText.color = Color.red;
+            }
         }
-        else
-        {
-            currentTimeText += timerSecondes;
-        }
-
-        timerText.text = currentTimeText;
     }
     
     IEnumerator UpdateTime()
@@ -62,11 +86,6 @@ public class Timer : MonoBehaviour
                 timerSecondes--;
             }
             
-            if(timerMinutes == 0 && timerSecondes == 0)
-            {
-                isTimerEnd = true;
-                timerText.color = Color.red;
-            }
         }
 
         while (isTimerEnd)
