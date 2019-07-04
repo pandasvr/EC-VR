@@ -25,6 +25,8 @@ public class RoomSettings : MonoBehaviour
             // onclick button : imageProjecteur.sprite = Resources.Load <Sprite> ("MediaShare/Presentation1");
         }
         UnityEngine.PlayerPrefs.DeleteKey("idRoom");
+        UnityEngine.PlayerPrefs.DeleteKey("whiteboard");
+        UnityEngine.PlayerPrefs.DeleteKey("postIt");
         PhotonNetwork.LeaveRoom();
         SceneManager.LoadScene("MainMenu");
     }
