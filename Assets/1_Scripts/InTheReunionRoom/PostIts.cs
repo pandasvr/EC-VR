@@ -55,7 +55,6 @@ public class PostIts : MonoBehaviour
         photonView.RPC("gerneratePostIt", RpcTarget.All);
     }
     
-    
     [PunRPC]
     private void gerneratePostIt()
     {
