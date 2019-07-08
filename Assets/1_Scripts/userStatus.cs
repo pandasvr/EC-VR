@@ -90,7 +90,7 @@ public class userStatus : MonoBehaviour
             updatedTimer = 0;
             status = "connecté";
         }
-        if (timer >= 20.0f)
+        if (timer >= 5.0f)
         {
             status = "absent";
         }  
