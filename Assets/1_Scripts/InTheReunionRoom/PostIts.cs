@@ -16,7 +16,7 @@ public class PostIts : MonoBehaviour
     public GameObject postItVert;
 
     //variables servant à étudier la manette
-    protected Transform rightControllerTransform;
+    protected VRTK_InteractGrab grabbingController;
     protected bool rightControllerExists;
     
     //Booléen servant à ne pas créer plus d'un post-it à la fois
@@ -35,13 +35,12 @@ public class PostIts : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (rightControllerTransform == null) 
+        if (grabbingController == null) 
         {
              try
              {
-                 rightControllerTransform = VRTK_DeviceFinder.DeviceTransform(VRTK_DeviceFinder.Devices.RightController)
-                    .gameObject
-                    .transform;
+                 grabbingController = VRTK_DeviceFinder.DeviceTransform(VRTK_DeviceFinder.Devices.RightController)
+                    .gameObject.GetComponent<VRTK_InteractGrab>();
                  //on indique qu'on a trouvé la manette
                  rightControllerExists = true;
              }
@@ -64,10 +63,13 @@ public class PostIts : MonoBehaviour
             //si on a trouvé la position de la main, alors on créée le post-it rattaché à celle-ci
             if (rightControllerExists) 
             {
-                GameObject postIts = Instantiate(postItJaune);
-                postIts.transform.parent = rightControllerTransform;
-                postIts.transform.position = rightControllerTransform.position+ new Vector3(0,0.08f,0);
-                postIts.transform.rotation = new Quaternion(90.0f,0.0f,0.0f, 90.0f);
+                GameObject postIt = Instantiate(postItJaune);
+                grabbingController.GetComponent<VRTK_InteractTouch>().ForceTouch(postIt);
+                grabbingController.AttemptGrab();
+                
+                //postIts.transform.parent = rightControllerTransform;
+                //postIts.transform.position = rightControllerTransform.position+ new Vector3(0,0.08f,0);
+                //postIts.transform.rotation = new Quaternion(90.0f,0.0f,0.0f, 90.0f);
 
                 //Il y a maintenant un post-it sur la manette, on passe ce bool à true.
                 postItPresentOnController = true;
