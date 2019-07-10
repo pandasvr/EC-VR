@@ -55,14 +55,13 @@ public class PostIts : MonoBehaviour
         }
     }
 
-    //PunRPC
+    /*PunRPC
     public void synchronisationPostIt()
     {
         photonView.RPC("gerneratePostIt", RpcTarget.All);
-    }
+    }*/
     
-    [PunRPC]
-    private void gerneratePostIt()
+    public void gerneratePostIt()
     {
         //condition pour ne pas créer plus d'un post-it à la fois
         if (!isObjectInController)
