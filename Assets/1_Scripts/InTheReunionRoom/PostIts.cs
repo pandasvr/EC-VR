@@ -64,12 +64,14 @@ public class PostIts : MonoBehaviour
             if (rightControllerExists) 
             {
                 GameObject postIt = Instantiate(postItJaune);
+                postIt.transform.position = grabbingController.gameObject.transform.position+ new Vector3(0,0.08f,0);
+                postIt.transform.rotation = new Quaternion(90.0f,0.0f,0.0f, 90.0f);
                 grabbingController.GetComponent<VRTK_InteractTouch>().ForceTouch(postIt);
                 grabbingController.AttemptGrab();
                 
                 //postIts.transform.parent = rightControllerTransform;
-                //postIts.transform.position = rightControllerTransform.position+ new Vector3(0,0.08f,0);
-                //postIts.transform.rotation = new Quaternion(90.0f,0.0f,0.0f, 90.0f);
+                
+                
 
                 //Il y a maintenant un post-it sur la manette, on passe ce bool à true.
                 postItPresentOnController = true;
