@@ -20,7 +20,7 @@ public class PostIts : MonoBehaviour
     protected bool rightControllerExists;
     
     //Booléen servant à ne pas créer plus d'un post-it à la fois
-    protected bool postItPresentOnController;
+    protected bool isObjectInController;
     
     
     // Start is called before the first frame update
@@ -28,7 +28,7 @@ public class PostIts : MonoBehaviour
     {
         //au lancement de l'application, on n'a pas encore trouvé la manette
         rightControllerExists = false;
-        postItPresentOnController = false;
+        isObjectInController = false;
     }
 
     
@@ -46,6 +46,13 @@ public class PostIts : MonoBehaviour
              }
             catch (NullReferenceException){}
         }
+        else
+        {
+            if (grabbingController.GetGrabbedObject() == null)
+            {
+                isObjectInController = false;
+            }
+        }
     }
 
     //PunRPC
@@ -58,7 +65,7 @@ public class PostIts : MonoBehaviour
     private void gerneratePostIt()
     {
         //condition pour ne pas créer plus d'un post-it à la fois
-        if (!postItPresentOnController)
+        if (!isObjectInController)
         {
             //si on a trouvé la position de la main, alors on créée le post-it rattaché à celle-ci
             if (rightControllerExists) 
@@ -74,7 +81,7 @@ public class PostIts : MonoBehaviour
                 
 
                 //Il y a maintenant un post-it sur la manette, on passe ce bool à true.
-                postItPresentOnController = true;
+                isObjectInController = true;
             }
         }
     }
