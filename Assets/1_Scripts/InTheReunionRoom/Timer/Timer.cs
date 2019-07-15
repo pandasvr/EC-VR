@@ -30,35 +30,41 @@ public class Timer : MonoBehaviour
     {
         if (!isTimerRunning)
         {
+            isTimerEnd = false;
             StartCoroutine("UpdateTime");
             Time.timeScale = 1; //Just making sure that the timeScale is right 
         }
     }
 
-    public void SetTime()
+    public void ResetTimer()
     {
         if (isTimerRunning)
         {
-            ResetTimer();
-        }
+            StopCoroutine("UpdateTime");
+            isTimerRunning = false;
+            timerText.color = Color.white; 
+            if (timerText.enabled == false)
+            {
+                timerText.enabled = true;
+            }   
+        }   
         
         int intValue = dropdownTime.value;
         string stringValue = dropdownTime.options[intValue].text;
         timerMinutes = int.Parse(stringValue.Substring(0, 2));
         timerSecondes = 0;
     }
-
-    public void ResetTimer()
+	
+    public void PauseTimer()
     {
-        StopCoroutine("UpdateTime");
-        isTimerEnd = false;
-        timerText.text = "00:00";
-        timerText.color = Color.white;
-        if (timerText.enabled == false)
+        if (isTimerRunning)
         {
-            timerText.enabled = true;
+            StopCoroutine("UpdateTime");
+            isTimerRunning = false;
         }
-    }
+		
+	}
+
     
     void Update ()
     {
