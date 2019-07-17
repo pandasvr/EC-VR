@@ -2,16 +2,12 @@
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.XR;
-using Random = UnityEngine.Random;
 
 namespace Networking
 {
     public class NetworkConnectManager :  MonoBehaviourPunCallbacks
     {
         #region Public Fields
-
 
         #endregion
         
@@ -33,6 +29,7 @@ namespace Networking
         private bool isJoiningRoom = false;
         private static string roomName;
         private static string maxPlayer;
+        private static string labelEnvironnement;
 
         #endregion
         
@@ -84,11 +81,12 @@ namespace Networking
             }
         }
         
-        public static void CreateNewRoom(string currentRoomName, string currentMaxPlayer)
+        public static void CreateNewRoom(string currentRoomName, string currentMaxPlayer, string currentLabelEnvironnement)
         {
             
             maxPlayer = currentMaxPlayer;
             roomName = currentRoomName;
+            labelEnvironnement = currentLabelEnvironnement;
             
             // keep track of the will to join a room, because when we come back from the game we will get a callback that we are connected, so we need to know what to do then
             isConnecting = true;
@@ -152,6 +150,7 @@ namespace Networking
                 Debug.Log("#Critical, we must first and foremost connect to Photon Online Server.");
                 PhotonNetwork.GameVersion = GameVersion;
                 PhotonNetwork.ConnectUsingSettings();
+                
             }  
         }
         
@@ -186,7 +185,7 @@ namespace Networking
                 else if (isCreatingRoom == true)
                 {
                     //Retour à la phase de création de salon
-                    CreateNewRoom(roomName, maxPlayer);
+                    CreateNewRoom(roomName, maxPlayer, labelEnvironnement);
                 }
             }   
         }
@@ -212,7 +211,7 @@ namespace Networking
                 Debug.Log("Chargement de la scene 'Salon 1' ");
                 // #Critical
                 // Load the Room Level.
-                PhotonNetwork.LoadLevel("Salon");
+                PhotonNetwork.LoadLevel(labelEnvironnement);
             }
         }
     }

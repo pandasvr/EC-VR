@@ -5,7 +5,6 @@
 //=============================================================================
 
 using UnityEngine;
-using System.Collections;
 using Valve.VR;
 
 public class SteamVR_Overlay : MonoBehaviour

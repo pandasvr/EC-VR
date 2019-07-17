@@ -1,25 +1,19 @@
 ﻿using System;
 using System.Collections;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Photon.Pun.Demo.Cockpit;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
-using WebSocketSharp;
 
 public class SignIn : MonoBehaviour
 {
     //champs noms et password récupérés depuis l'UI d'unity
     public InputField fieldName;
     public InputField fieldPassword;
+    public Animator Animator_Canva_Main;
     
-    public GameObject LoginPanel;
-    public GameObject MainPanel;
-    public Text InfoText;
+    //public GameObject LoginPanel;
+    //public GameObject MainPanel;
 
     private bool isValidPassword;
     private String userPassword;
@@ -66,7 +60,7 @@ public class SignIn : MonoBehaviour
 
             Debug.Log("Json response :" + responseJson);
 
-            if (!responseJson.IsNullOrEmpty())
+            if (responseJson != "")
             {
               var user = JsonConvert.DeserializeObject<User>(responseJson);
 
@@ -81,32 +75,20 @@ public class SignIn : MonoBehaviour
                 if (isValidPassword)
                 {
                     Debug.Log("user connected");
-                    LoginPanel.SetActive(false);
-                    MainPanel.SetActive(true);
+                    //LoginPanel.SetActive(false);
+                    //MainPanel.SetActive(true);
                     fieldPassword.text=""; //on vide les champs pour que les identifiants ne soient pas "sauvegardés" par la page de connexion
                     fieldName.text = "";
-                    
-                    if (InfoText.enabled)
-                    {
-                        InfoText.gameObject.SetActive(false);
-                    }
+                    Animator_Canva_Main.Play("Fade_Login");
                 }
                 else
                 {
                     Debug.Log("wrong username or password");
-                    InfoText.text = "Nom d'utilisateur ou mot de passe incorrect";
-                    InfoText.color = Color.red;
-                    InfoText.enabled = true;
-                    InfoText.gameObject.SetActive(true);
                 }
             }
             else
             {
                 Debug.Log("wrong username or password");
-                InfoText.text = "Nom d'utilisateur ou mot de passe incorrect";
-                InfoText.color = Color.red;
-                InfoText.enabled = true;
-                InfoText.gameObject.SetActive(true);
             }
 
         }

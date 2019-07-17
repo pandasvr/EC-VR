@@ -1,7 +1,5 @@
 
 using UnityEngine;
-using System.Collections;
-using System.Runtime.InteropServices;
 
 
 namespace Photon.Voice.Unity

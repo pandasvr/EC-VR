@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace POpusCodec.Enums
+﻿namespace POpusCodec.Enums
 {
     /// <summary>
     /// Using a duration of less than 10 ms will prevent the encoder from using the LPC or hybrid modes. 

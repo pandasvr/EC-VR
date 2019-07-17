@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Numerics;
-using UnityEngine;
-using UnityEngine.UI;
-using System.Timers;
-using Photon.Pun;
-using Valve.VR.InteractionSystem;
-using Vector3 = UnityEngine.Vector3;
+﻿using UnityEngine;
 
 public class PlayerPrefs : MonoBehaviour
 {

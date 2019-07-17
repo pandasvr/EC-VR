@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using _1_Scripts.Class;
 using Newtonsoft.Json;
 using Photon.Pun;

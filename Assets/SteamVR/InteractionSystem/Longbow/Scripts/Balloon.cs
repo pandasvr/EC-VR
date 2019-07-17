@@ -4,8 +4,7 @@
 //
 //=============================================================================
 
-﻿using UnityEngine;
-using System.Collections;
+ using UnityEngine;
 
 namespace Valve.VR.InteractionSystem
 {

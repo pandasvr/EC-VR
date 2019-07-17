@@ -17,9 +17,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
-
-using ExitGames.Client.Photon;
-
 using Newtonsoft.Json;
 
 namespace Photon.Pun

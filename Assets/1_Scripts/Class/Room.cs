@@ -10,6 +10,8 @@ namespace _1_Scripts.Class
         public string mediaProjection { get; set; }
         public string chatNonVr { get; set; }
         public string environnement_id { get; set; }
+        
+        public string labelEnvironnement { get; set; }
         public string userCreatorName { get; set; }
     }
 }

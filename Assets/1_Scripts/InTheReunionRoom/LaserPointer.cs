@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using VRTK;
+﻿using UnityEngine;
 using Photon.Pun;
 
 public class LaserPointer :  MonoBehaviourPunCallbacks, IPunObservable

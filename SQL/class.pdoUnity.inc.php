@@ -1,10 +1,12 @@
 ﻿<?php
 class PdoUnity
 {   		
-      	private static $server='mysql:host=192.168.0.101';
+      	private static $server='mysql:host=127.0.0.1';
       	private static $bdd='dbname=ecvr_db';
-      	private static $user='ecvr_db';
-      	private static $pw='!CapgeminiPandas4';
+      	/*private static $user='ecvr_db';
+      	private static $pw='!CapgeminiPandas4';*/
+      	private static $user='root';
+      	private static $pw='';
 		private static $myPdo; //PHP Base de Données
 		private static $myPdoUnity = null;
 /**
@@ -97,6 +99,18 @@ class PdoUnity
 		return $lastId;
 	}
 
+    /**
+     * Fonction qui enregistre un compte-rendu
+     */
+    public function CreateReport($pathReport, $dateReport)
+    {
+        $resultat=PdoUnity::$myPdo->prepare("INSERT INTO report(pathReport, dateReport) VALUES (:pathReport, :dateReport)");
+        $resultat->bindParam(':pathReport', $pathReport);
+        $resultat->bindParam(':dateReport', $dateReport);
+        $resultat->execute();
+        $lastId = PdoUnity::$myPdo->lastInsertId();
+        return $lastId;
+    }
 
     /**
      * Fonction qui modifie une room
@@ -127,6 +141,19 @@ class PdoUnity
 		return $resultat;
 	}
 
+    /**
+     * Fonction qui enregiste les récepteurs d'un compte-rendu
+     */
+    public function CreateReceiver($idUser, $idReport)
+    {
+        $resultat=PdoUnity::$myPdo->prepare("INSERT INTO reportuser(idUser, idReport) VALUES
+			(:idUser, :idReport)");
+        $resultat->bindParam(':idUser', $idUser);
+        $resultat->bindParam(':idReport', $idReport);
+        $resultat->execute();
+        return $resultat;
+    }
+
 /**
  * Fonction qui récupère la liste des users
  */
@@ -150,12 +177,25 @@ class PdoUnity
 		return $return;
 	}
 
+
+    /**
+     * Fonction qui récupère la liste des users d'une room
+     */
+    public function GetAllUsersOfRoom($idRoom)
+    {
+        $resultat=PdoUnity::$myPdo->prepare("SELECT * FROM link_user_room WHERE idRoom = :idRoom");
+        $resultat->bindParam(':idRoom', $idRoom);
+        $resultat->execute();
+        $return = $resultat->fetchAll();
+        return $return;
+    }
+
 /**
  * Fonction qui récupère un salon
  */
     public function GetRoom($idRoom)
     {
-        $resultat=PdoUnity::$myPdo->prepare("SELECT room.idRoom, room.roomName, room.maxPlayerRoom, room.whiteboard, room.postIt, room.mediaProjection, room.chatNonVr, room.environnement_id, user.userName AS userCreatorName FROM room, user WHERE idRoom = :idRoom AND user.idUser = room.userCreator_id");
+        $resultat=PdoUnity::$myPdo->prepare("SELECT room.idRoom, room.roomName, room.maxPlayerRoom, room.whiteboard, room.postIt, room.mediaProjection, room.chatNonVr, room.environnement_id, environnement.labelEnvironnement, user.userName AS userCreatorName FROM room, user, environnement WHERE idRoom = :idRoom AND user.idUser = room.userCreator_id AND room.environnement_id = environnement.idEnvironnement");
         $resultat->bindParam(':idRoom', $idRoom);
         $resultat->execute();
         $return = $resultat->fetchAll();
@@ -171,6 +211,18 @@ class PdoUnity
         $resultat->bindParam(':roomName', $roomName);
         $resultat->execute();
         $return = $resultat->fetch();
+        return $return;
+    }
+
+    /**
+     * Fonction qui récupère un salon par son nom
+     */
+    public function GetReportByUser($idUser)
+    {
+        $resultat=PdoUnity::$myPdo->prepare("SELECT report.idReport, report.pathReport, report.dateReport FROM report, reportuser WHERE reportuser.idUser = :idUser AND report.idReport = reportuser.idReport");
+        $resultat->bindParam(':idUser', $idUser);
+        $resultat->execute();
+        $return = $resultat->fetchAll();
         return $return;
     }
 }
