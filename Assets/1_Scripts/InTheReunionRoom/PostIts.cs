@@ -20,15 +20,16 @@ public class PostIts : MonoBehaviour
     protected bool rightControllerExists;
     
     //Booléen servant à ne pas créer plus d'un post-it à la fois
-    protected bool isObjectInController;
-    
+    protected bool isObjectOnController;
+
+    protected GameObject[] RightControllerChildrens; 
     
     // Start is called before the first frame update
     void Start()
     {
         //au lancement de l'application, on n'a pas encore trouvé la manette
         rightControllerExists = false;
-        isObjectInController = false;
+        isObjectOnController = false;
     }
 
     
@@ -50,7 +51,7 @@ public class PostIts : MonoBehaviour
         {
             if (grabbingController.GetGrabbedObject() == null)
             {
-                isObjectInController = false;
+                isObjectOnController = false;
             }
         }
     }
@@ -64,7 +65,7 @@ public class PostIts : MonoBehaviour
     public void gerneratePostIt()
     {
         //condition pour ne pas créer plus d'un post-it à la fois
-        if (!isObjectInController)
+        if (!isObjectOnController)
         {
             //si on a trouvé la position de la main, alors on créée le post-it rattaché à celle-ci
             if (rightControllerExists) 
@@ -80,10 +81,31 @@ public class PostIts : MonoBehaviour
                 
 
                 //Il y a maintenant un post-it sur la manette, on passe ce bool à true.
-                isObjectInController = true;
+                isObjectOnController = true;
             }
         }
     }
     
+    
+    public void deletePostIt()
+    {
+        //condition pour ne pas créer plus d'un post-it à la fois
+        if (isObjectOnController)
+        {
+            //si on a trouvé la position de la main, alors on créée le post-it rattaché à celle-ci
+            if (rightControllerExists)
+            {
+                for (int i = 0; i < grabbingController.transform.childCount;)
+                {
+                    if (grabbingController.transform.GetChild(i).tag == "postit")
+                    {
+                        Destroy(grabbingController.transform.GetChild(i));
+                    }
+                }
+                //Il n'y a maintenant plus de post-it sur la manette, on passe ce bool à false.
+                isObjectOnController = false;
+            }
+        }
+    }
     
 }
