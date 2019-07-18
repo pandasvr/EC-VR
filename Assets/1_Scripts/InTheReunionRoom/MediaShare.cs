@@ -7,7 +7,6 @@ public class MediaShare : MonoBehaviour
 {
     [Header(("Vidéo projecteur"))]
     public GameObject videoProjecteur;
-    public Image imageProjecteur;
     public GameObject radialMenuProjecteur;
 
     [Header("Fake PowerPoint Slides")] 
@@ -21,7 +20,7 @@ public class MediaShare : MonoBehaviour
 
     private Color offScreenProjecteur;
     
-    private bool powerpointState;
+    private bool powerpointState = false;
     private Sprite image;
     private int pageNumber;
     private int pageNumberMax;
@@ -84,8 +83,7 @@ public class MediaShare : MonoBehaviour
     private void StartPowerPoint(PhotonMessageInfo info)
     {
         powerpointState = !powerpointState;
-        videoProjecteur.SetActive(false);
-        imageProjecteur.gameObject.SetActive(powerpointState);
+        videoProjecteur.SetActive(powerpointState);
 
         if (videoState)
         {
