@@ -14,6 +14,7 @@ public class PostIts : MonoBehaviour
     public GameObject postItBleu;
     public GameObject postItRouge;
     public GameObject postItVert;
+    public GameObject radialMenuPostIt;
 
     //variables servant à étudier la manette
     protected VRTK_InteractGrab grabbingController;
@@ -58,7 +59,7 @@ public class PostIts : MonoBehaviour
                 isObjectOnController = true;
             }
         }
-        Debug.Log(isObjectOnController);
+        radialMenuPostIt.SetActive(isObjectOnController);
     }
 
     /*PunRPC
