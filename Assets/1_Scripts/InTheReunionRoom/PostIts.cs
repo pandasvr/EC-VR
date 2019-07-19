@@ -14,21 +14,23 @@ public class PostIts : MonoBehaviour
     public GameObject postItBleu;
     public GameObject postItRouge;
     public GameObject postItVert;
+    public GameObject radialMenuPostIt;
 
     //variables servant à étudier la manette
     protected VRTK_InteractGrab grabbingController;
     protected bool rightControllerExists;
     
     //Booléen servant à ne pas créer plus d'un post-it à la fois
-    protected bool isObjectInController;
-    
+    protected bool isObjectOnController;
+
+    protected GameObject[] RightControllerChildrens; 
     
     // Start is called before the first frame update
     void Start()
     {
         //au lancement de l'application, on n'a pas encore trouvé la manette
         rightControllerExists = false;
-        isObjectInController = false;
+        isObjectOnController = false;
     }
 
     
@@ -37,7 +39,7 @@ public class PostIts : MonoBehaviour
     {
         if (grabbingController == null) 
         {
-             try
+            try
              {
                  grabbingController = VRTK_DeviceFinder.DeviceTransform(VRTK_DeviceFinder.Devices.RightController)
                     .gameObject.GetComponent<VRTK_InteractGrab>();
@@ -50,9 +52,14 @@ public class PostIts : MonoBehaviour
         {
             if (grabbingController.GetGrabbedObject() == null)
             {
-                isObjectInController = false;
+                isObjectOnController = false;
+            }
+            else 
+            {
+                isObjectOnController = true;
             }
         }
+        radialMenuPostIt.SetActive(isObjectOnController);
     }
 
     /*PunRPC
@@ -64,7 +71,7 @@ public class PostIts : MonoBehaviour
     public void gerneratePostIt()
     {
         //condition pour ne pas créer plus d'un post-it à la fois
-        if (!isObjectInController)
+        if (!isObjectOnController)
         {
             //si on a trouvé la position de la main, alors on créée le post-it rattaché à celle-ci
             if (rightControllerExists) 
@@ -75,15 +82,31 @@ public class PostIts : MonoBehaviour
                 grabbingController.GetComponent<VRTK_InteractTouch>().ForceTouch(postIt);
                 grabbingController.AttemptGrab();
                 
-                //postIts.transform.parent = rightControllerTransform;
-                
-                
-
-                //Il y a maintenant un post-it sur la manette, on passe ce bool à true.
-                isObjectInController = true;
+               //Il y a maintenant un post-it sur la manette, on passe ce bool à true.
+                isObjectOnController = true;
             }
         }
     }
     
+    /*PunRPC
+    public void synchronizeDeletePostIt()
+    {
+        photonView.RPC("deletePostIt", RpcTarget.All);
+    }*/
+    
+    public void deletePostIt()
+    {
+        //condition pour ne pas créer plus d'un post-it à la fois
+        if (isObjectOnController)
+        {
+            //si on a trouvé la position de la main, alors on créée le post-it rattaché à celle-ci
+            if (grabbingController.GetGrabbedObject().tag == "postit")
+                {
+                    Destroy(grabbingController.GetGrabbedObject());
+                }
+                //Il n'y a maintenant plus de post-it sur la manette, on passe ce bool à false.
+                isObjectOnController = false;
+        }
+    }
     
 }
