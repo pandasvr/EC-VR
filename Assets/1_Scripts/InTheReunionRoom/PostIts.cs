@@ -88,15 +88,17 @@ public class PostIts : MonoBehaviour
         }
     }
     
+    /*PunRPC
+    public void synchronizeDeletePostIt()
+    {
+        photonView.RPC("deletePostIt", RpcTarget.All);
+    }*/
     
     public void deletePostIt()
     {
-        Debug.Log(grabbingController.GetGrabbedObject());
         //condition pour ne pas créer plus d'un post-it à la fois
-        Debug.Log(isObjectOnController);
         if (isObjectOnController)
         {
-            Debug.Log(grabbingController.GetGrabbedObject().tag );
             //si on a trouvé la position de la main, alors on créée le post-it rattaché à celle-ci
             if (grabbingController.GetGrabbedObject().tag == "postit")
                 {
