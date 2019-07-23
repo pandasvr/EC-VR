@@ -4,14 +4,8 @@ public class Init_PanelMain : MonoBehaviour
 {
     public GameObject PanelLogin;
     public GameObject PanelMain;
-    public GameObject ButtonAdmin;
+    //public GameObject ButtonAdmin;
     
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
         //Check user connected
@@ -24,11 +18,12 @@ public class Init_PanelMain : MonoBehaviour
         //Check Level administration
         if (UnityEngine.PlayerPrefs.GetString("userLevel") == "3")
         {
-            ButtonAdmin.SetActive(true);
+            //TODO Code d'apparition de la page admin à revoir
+            //ButtonAdmin.SetActive(true);
         }
         else
         {
-            ButtonAdmin.SetActive(false);
+            //ButtonAdmin.SetActive(false);
         }
     }
 }
