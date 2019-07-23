@@ -5,7 +5,7 @@ using Photon.Pun;
 using UnityEngine;
 using VRTK;
 
-public class PostIts : MonoBehaviour
+public class GrabSettings : MonoBehaviour
 {
     public PhotonView photonView;
     
@@ -15,13 +15,21 @@ public class PostIts : MonoBehaviour
     public GameObject postItRouge;
     public GameObject postItVert;
     public GameObject radialMenuPostIt;
-
+    
+    //Prefabs du marqueur
+    public GameObject marker; 
+    public GameObject radialMenuMarker;
+    
+    protected GameObject Whiteboard;
+    
     //variables servant à étudier la manette
     protected VRTK_InteractGrab grabbingController;
     protected bool rightControllerExists;
     
-    //Booléen servant à ne pas créer plus d'un post-it à la fois
-    protected bool isObjectOnController;
+    //Booléen servant à traiter les objets présents sur la manette
+    public bool isObjectOnController;
+    public bool isPostItOnController;
+    public bool isMarkerOnController;
 
     protected GameObject[] RightControllerChildrens; 
     
@@ -57,11 +65,32 @@ public class PostIts : MonoBehaviour
             else 
             {
                 isObjectOnController = true;
+                if (grabbingController.GetGrabbedObject().tag == "Marker")
+                {
+                    radialMenuMarker.SetActive(true);
+                }
+                if (grabbingController.GetGrabbedObject().tag == "postit")
+                {
+                    radialMenuPostIt.SetActive(true);
+                }
             }
         }
-        radialMenuPostIt.SetActive(isObjectOnController);
+        
+        //Recherche du Whiteboard pour l'initialisation de cet objet
+        if (Whiteboard  == null) 
+        {
+            try
+            {
+                Whiteboard = GameObject.FindGameObjectWithTag("Whiteboard");
+            }
+            catch (NullReferenceException){}
+        }
     }
 
+    
+    /// ///////////////////////
+    /// Post-its
+    /// //////////////////////
     /*PunRPC
     public void synchronisationPostIt()
     {
@@ -106,6 +135,37 @@ public class PostIts : MonoBehaviour
                 }
                 //Il n'y a maintenant plus de post-it sur la manette, on passe ce bool à false.
                 isObjectOnController = false;
+        }
+    }
+    
+    
+    /// ///////////////////////////////////////
+    /// Marqueurs
+    /// /// //////////////////////
+  
+    /*PunRPC
+    public void synchronisationPostIt()
+    {
+        photonView.RPC("gerneratePostIt", RpcTarget.All);
+    }*/
+    
+    public void gernerateMarker()
+    {
+        //condition pour ne pas créer plus d'un post-it à la fois
+        if (!isObjectOnController)
+        {
+            //si on a trouvé la position de la main, alors on créée le post-it rattaché à celle-ci
+            if (rightControllerExists) 
+            {
+                GameObject instantiatedMarker = Instantiate(marker);
+                instantiatedMarker.transform.position = grabbingController.gameObject.transform.position+ new Vector3(0,0.08f,0);
+                instantiatedMarker.transform.rotation = new Quaternion(90.0f,0.0f,0.0f, 90.0f);
+                grabbingController.GetComponent<VRTK_InteractTouch>().ForceTouch(instantiatedMarker);
+                grabbingController.AttemptGrab();
+                
+                //Il y a maintenant un post-it sur la manette, on passe ce bool à true.
+                isObjectOnController = true;
+            }
         }
     }
     
