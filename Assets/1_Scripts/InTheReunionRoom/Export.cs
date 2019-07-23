@@ -27,7 +27,7 @@ public class Export : MonoBehaviour
 
         var date = DateTime.Today;
 
-        var pathName = Application.dataPath + "/Resources/Documents/Capture/" + date.ToString("yyyy-MM-ddTHH-mm-ss") + ".png";
+        var pathName = "Resources/Documents/Capture/" + date.ToString("yyyy-MM-ddTHH-mm-ss") + ".png";
         
         File.WriteAllBytes( pathName, bytes);
 
@@ -35,6 +35,17 @@ public class Export : MonoBehaviour
         
         Debug.Log("Capture enregistrée");
 
+    }
+    
+    public void ExportPPT()
+    {
+        var date = DateTime.Today;
+
+        var pathName = "Resources/Documents/Capture/Whiteboard.pptx";
+
+        StartCoroutine(SaveReport(pathName, date.ToString()));
+        
+        Debug.Log("PPT enregistrée");
     }
     
     public static IEnumerator SaveReport(string pathName, string date)

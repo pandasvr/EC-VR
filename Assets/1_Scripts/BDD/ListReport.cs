@@ -83,12 +83,20 @@ public class ListReport : MonoBehaviour
                     GameObject currentButtonDownload =
                         currentItem.transform.Find("Button_download").gameObject;
 
+                    
                     if (report.pathReport.Contains(".png"))
                     {
                         //valorisation des textes des game objects du prefab
-                        currentTextReportName.GetComponent<Text>().text = "Capture du " + report.dateReport;
+                        currentTextReportName.GetComponent<Text>().text = "Capture whiteboard du " + report.dateReport;
                     }
-                    else
+
+                    if (report.pathReport.Contains(".pptx"))
+                    {
+                        //valorisation des textes des game objects du prefab
+                        currentTextReportName.GetComponent<Text>().text = "Whiteboard du " + report.dateReport;
+                    }
+                    
+                    if (report.pathReport.Contains(".pdf"))
                     {
                         //valorisation des textes des game objects du prefab
                         currentTextReportName.GetComponent<Text>().text = "Compte rendu du " + report.dateReport;
