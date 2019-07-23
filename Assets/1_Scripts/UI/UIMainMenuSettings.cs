@@ -5,11 +5,6 @@ using UnityEngine;
 
 public class UIMainMenuSettings : MonoBehaviour
 {
-    public GameObject panel_Salon;
-    public GameObject panel_Admin;
-    public GameObject panel_Options;
-    public GameObject panel_Profil;
-
     private Animator anim;
     private String currentMenu = "salon";
     private String menuToSwitch;
@@ -31,18 +26,12 @@ public class UIMainMenuSettings : MonoBehaviour
                     switch (currentMenu)
                     {
                         case "admin":
-                            panel_Admin.GetComponent<UIFade>().FadeOut();
-                            panel_Salon.GetComponent<UIFade>().FadeIn();
                             anim.Play("Admin_to_Salon");
                             break;
                         case "options":
-                            panel_Options.GetComponent<UIFade>().FadeOut();
-                            panel_Salon.GetComponent<UIFade>().FadeIn();
                             anim.Play("Options_to_Salon");
                             break;
                         case "profil":
-                            panel_Profil.GetComponent<UIFade>().FadeOut();
-                            panel_Salon.GetComponent<UIFade>().FadeIn();
                             anim.Play("Profil_to_Salon");
                             break;
                     }
@@ -51,18 +40,12 @@ public class UIMainMenuSettings : MonoBehaviour
                     switch (currentMenu)
                     {
                         case "salon":
-                            panel_Salon.GetComponent<UIFade>().FadeOut();
-                            panel_Admin.GetComponent<UIFade>().FadeIn();
                             anim.Play("Salon_to_Admin");
                             break;
                         case "options":
-                            panel_Options.GetComponent<UIFade>().FadeOut();
-                            panel_Admin.GetComponent<UIFade>().FadeIn();
                             anim.Play("Options_to_Admin");
                             break;
                         case "profil":
-                            panel_Profil.GetComponent<UIFade>().FadeOut();
-                            panel_Admin.GetComponent<UIFade>().FadeIn();
                             anim.Play("Profil_to_Admin");
                             break;
                     }
@@ -71,18 +54,12 @@ public class UIMainMenuSettings : MonoBehaviour
                     switch (currentMenu)
                     {
                         case "salon":
-                            panel_Salon.GetComponent<UIFade>().FadeOut();
-                            panel_Options.GetComponent<UIFade>().FadeIn();
                             anim.Play("Salon_to_Options");
                             break;
                         case "admin":
-                            panel_Admin.GetComponent<UIFade>().FadeOut();
-                            panel_Options.GetComponent<UIFade>().FadeIn();
                             anim.Play("Admin_to_Options");
                             break;
                         case "profil":
-                            panel_Profil.GetComponent<UIFade>().FadeOut();
-                            panel_Options.GetComponent<UIFade>().FadeIn();
                             anim.Play("Profil_to_Options");
                             break;
                     }
@@ -91,18 +68,12 @@ public class UIMainMenuSettings : MonoBehaviour
                     switch (currentMenu)
                     {
                         case "salon":
-                            panel_Salon.GetComponent<UIFade>().FadeOut();
-                            panel_Profil.GetComponent<UIFade>().FadeIn();
                             anim.Play("Salon_to_Profil");
                             break;
                         case "admin":
-                            panel_Admin.GetComponent<UIFade>().FadeOut();
-                            panel_Profil.GetComponent<UIFade>().FadeIn();
                             anim.Play("Admin_to_Profil");
                             break;
                         case "options":
-                            panel_Options.GetComponent<UIFade>().FadeOut();
-                            panel_Profil.GetComponent<UIFade>().FadeIn();
                             anim.Play("Options_to_Profil");
                             break;
                     }
