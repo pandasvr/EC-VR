@@ -65,13 +65,17 @@ public class GrabSettings : MonoBehaviour
             else 
             {
                 isObjectOnController = true;
+                isMarkerOnController = false;
+                isPostItOnController = false;
                 if (grabbingController.GetGrabbedObject().tag == "Marker")
                 {
                     radialMenuMarker.SetActive(true);
+                    isMarkerOnController = true;
                 }
                 if (grabbingController.GetGrabbedObject().tag == "postit")
                 {
                     radialMenuPostIt.SetActive(true);
+                    isPostItOnController = true;
                 }
             }
         }
@@ -135,6 +139,7 @@ public class GrabSettings : MonoBehaviour
                 }
                 //Il n'y a maintenant plus de post-it sur la manette, on passe ce bool à false.
                 isObjectOnController = false;
+                isPostItOnController = false;
         }
     }
     
@@ -144,9 +149,9 @@ public class GrabSettings : MonoBehaviour
     /// /// //////////////////////
   
     /*PunRPC
-    public void synchronisationPostIt()
+    public void synchronisationMarker()
     {
-        photonView.RPC("gerneratePostIt", RpcTarget.All);
+        photonView.RPC("gernerateMarker", RpcTarget.All);
     }*/
     
     public void gernerateMarker()
@@ -166,6 +171,24 @@ public class GrabSettings : MonoBehaviour
                 //Il y a maintenant un post-it sur la manette, on passe ce bool à true.
                 isObjectOnController = true;
             }
+        }
+    }
+    
+    /*PunRPC
+    public void synchronizeDeletePostIt()
+    {
+        photonView.RPC("deletePostIt", RpcTarget.All);
+    }*/
+    
+    public void deleteMarker()
+    {
+        //condition pour ne pas créer plus d'un post-it à la fois
+        if (isMarkerOnController)
+        {
+            Destroy(GameObject.FindGameObjectWithTag("Marker"));
+            //Il n'y a maintenant plus de Marker sur la manette, on passe ce bool à false.
+            isObjectOnController = false;
+            isMarkerOnController = false;
         }
     }
     
