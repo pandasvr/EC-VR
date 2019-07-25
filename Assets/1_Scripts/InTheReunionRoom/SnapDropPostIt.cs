@@ -42,7 +42,7 @@ public class SnapDropPostIt : MonoBehaviour
             if (shadowPostIt.activeSelf)
             {
                 shadowPostIt.transform.position = new Vector3(gameObject.transform.position.x,
-                    gameObject.transform.position.y, postItBoard.transform.position.z + 0.052f);
+                    gameObject.transform.position.y, postItBoard.transform.position.z + 0.002f);
                 Quaternion target = Quaternion.Euler(-90f, 0, 180f);
                 shadowPostIt.transform.rotation = target;
             }
@@ -54,7 +54,7 @@ public class SnapDropPostIt : MonoBehaviour
             Debug.Log("placement du post-it...");
             isToReplace = false;
             gameObject.transform.position = new Vector3(gameObject.transform.position.x,
-                gameObject.transform.position.y, postItBoard.transform.position.z + 0.052f);
+                gameObject.transform.position.y, postItBoard.transform.position.z + 0.002f);
             Quaternion target = Quaternion.Euler(-90f, 0, 180f);
             gameObject.transform.rotation = target;
             

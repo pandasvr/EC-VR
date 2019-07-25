@@ -47,7 +47,18 @@ public class Export : MonoBehaviour
         
         Debug.Log("PPT enregistrée");
     }
-    
+
+    public void ExportExcel()
+    {
+        var date = DateTime.Today;
+
+        var pathName = "Resources/Documents/Capture/TodoList.xlsx";
+
+        StartCoroutine(SaveReport(pathName, date.ToString()));
+        
+        Debug.Log("Excel enregistrée");
+    }
+
     public static IEnumerator SaveReport(string pathName, string date)
     {
         string urlCreateReport = Adressing.GetCreateReportUrl();

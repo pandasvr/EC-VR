@@ -101,6 +101,12 @@ public class ListReport : MonoBehaviour
                         //valorisation des textes des game objects du prefab
                         currentTextReportName.GetComponent<Text>().text = "Compte rendu du " + report.dateReport;
                     }
+
+                    if (report.pathReport.Contains(".xlsx"))
+                    {
+                        //valorisation des textes des game objects du prefab
+                        currentTextReportName.GetComponent<Text>().text = "Kanban du " + report.dateReport;
+                    }
                     
                     //bouton rejoindre une salle
                     currentButtonDownload.gameObject.GetComponent<Button>().onClick.AddListener(delegate()
