@@ -38,13 +38,15 @@ public class SnapDropPostIt : MonoBehaviour
         if (isGrabbed)
         {
             isToReplace = true;
+            gameObject.transform.localScale = new Vector3(1,1,1);
             
             if (shadowPostIt.activeSelf)
             {
                 shadowPostIt.transform.position = new Vector3(gameObject.transform.position.x,
-                    gameObject.transform.position.y, postItBoard.transform.position.z + 0.052f);
+                    gameObject.transform.position.y, postItBoard.transform.position.z + 0.051f);
                 Quaternion target = Quaternion.Euler(-90f, 0, 180f);
                 shadowPostIt.transform.rotation = target;
+                shadowPostIt.transform.localScale = new Vector3(2,2,2);
             }
         }
         
@@ -54,9 +56,10 @@ public class SnapDropPostIt : MonoBehaviour
             Debug.Log("placement du post-it...");
             isToReplace = false;
             gameObject.transform.position = new Vector3(gameObject.transform.position.x,
-                gameObject.transform.position.y, postItBoard.transform.position.z + 0.052f);
+                gameObject.transform.position.y, postItBoard.transform.position.z + 0.051f);
             Quaternion target = Quaternion.Euler(-90f, 0, 180f);
             gameObject.transform.rotation = target;
+            gameObject.transform.localScale = new Vector3(2,2,2);
             
             shadowPostIt.SetActive(false);
         }
