@@ -2356,8 +2356,9 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 0}
-          m_MethodName: synchronisationPostIt
+        - m_Target: {fileID: 8924483719499944515, guid: 301e95d40e839424d9d4838d8d27333e,
+            type: 3}
+          m_MethodName: gerneratePostIt
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -2639,8 +2640,9 @@ MonoBehaviour:
     OnClick:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 8990337228742032171}
-          m_MethodName: ChangeRightControllerModel
+        - m_Target: {fileID: 8924483719499944515, guid: 301e95d40e839424d9d4838d8d27333e,
+            type: 3}
+          m_MethodName: gernerateMarker
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -19072,7 +19074,8 @@ MonoBehaviour:
   playersListMenu: {fileID: 279582047655082704}
   radialMenuPanel: {fileID: 1053121508256217689}
   radialMenuMediaShare: {fileID: 8961689084578950501}
-  handPointer: {fileID: 0}
+  handPointer: {fileID: 3536962009351073775, guid: 301e95d40e839424d9d4838d8d27333e,
+    type: 3}
   penModel: {fileID: 6459917129897167596, guid: 031792deb602a054b8192ddd7167ddce,
     type: 3}
 --- !u!1 &8980651107495279557

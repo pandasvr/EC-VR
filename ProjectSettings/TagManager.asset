@@ -10,6 +10,11 @@ TagManager:
   - PersonnalMenu
   - controllerLeft
   - controllerRight
+  - postit
+  - PostItBoard
+  - Marker
+  - paintReceiver
+  - Whiteboard
   layers:
   - Default
   - TransparentFX
