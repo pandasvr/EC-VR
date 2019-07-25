@@ -110,7 +110,6 @@ GameObject:
   - component: {fileID: 4485206451017432883}
   - component: {fileID: 2668730307206194856}
   - component: {fileID: 6994519876703878002}
-  - component: {fileID: 2112936923781963915}
   m_Layer: 0
   m_Name: BoardSurface
   m_TagString: PostItBoard
@@ -179,19 +178,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &2112936923781963915
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 255012417457127626}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1.5259771}
-  m_Center: {x: 0, y: 0, z: 1.219044}
 --- !u!1 &1776604686477023362
 GameObject:
   m_ObjectHideFlags: 0
@@ -450,6 +436,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8956363458295821588}
+  - component: {fileID: 4118308312963779398}
   m_Layer: 0
   m_Name: PostItBoard
   m_TagString: PostItBoard
@@ -473,6 +460,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &4118308312963779398
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4725645905008899858}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.29498, y: 1.9670646, z: 0.40483177}
+  m_Center: {x: 0, y: -0.012559295, z: 0.18594825}
 --- !u!1 &4782061338240665017
 GameObject:
   m_ObjectHideFlags: 0

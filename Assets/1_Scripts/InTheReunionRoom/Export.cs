@@ -52,7 +52,7 @@ public class Export : MonoBehaviour
     {
         var date = DateTime.Today;
 
-        var pathName = "Resources/Documents/Capture/TodoList.xlsx";
+        var pathName = "Resources/Documents/Kanban/Kanban.xlsx";
 
         StartCoroutine(SaveReport(pathName, date.ToString()));
         
