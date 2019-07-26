@@ -61,16 +61,25 @@ public class GrabSettings : MonoBehaviour
             else 
             {
                 isObjectOnController = true;
-                
                 if (grabbingController.GetGrabbedObject().tag == "Marker")
                 {
-                    radialMenuMarker.SetActive(true);
+                    isMarkerOnController = true;
+                }
+                else
+                {
+                    isMarkerOnController = false;
                 }
                 
                 if (grabbingController.GetGrabbedObject().tag == "postit")
                 {
-                    radialMenuPostIt.SetActive(true);
+                    isPostItOnController = true;
                 }
+                else
+                {
+                    isPostItOnController = false;
+                }
+                radialMenuMarker.SetActive(isMarkerOnController);
+                radialMenuPostIt.SetActive(isPostItOnController);
             }
         }
     }
@@ -164,6 +173,57 @@ public class GrabSettings : MonoBehaviour
     }*/
     
     public void deleteMarker()
+    {
+        //condition pour ne pas créer plus d'un post-it à la fois
+        if (isObjectOnController)
+        {
+            //si on a trouvé la position de la main, alors on créée le post-it rattaché à celle-ci
+            if (grabbingController.GetGrabbedObject().tag == "Marker")
+            {
+                Destroy(grabbingController.GetGrabbedObject());
+            }
+            //Il n'y a maintenant plus de post-it sur la manette, on passe ce bool à false.
+            isObjectOnController = false;
+        }
+    }
+    
+    /// ///////////////////////////////////////
+    /// Effaceur
+    /// /// //////////////////////
+  
+    /*PunRPC
+    public void synchronisationMarker()
+    {
+        photonView.RPC("gernerateMarker", RpcTarget.All);
+    }*/
+    
+    public void gernerateEraser()
+    {
+        //condition pour ne pas créer plus d'un post-it à la fois
+        if (!isObjectOnController)
+        {
+            //si on a trouvé la position de la main, alors on créée le post-it rattaché à celle-ci
+            if (rightControllerExists) 
+            {
+                GameObject instantiatedMarker = Instantiate(markerPrefab);
+                instantiatedMarker.transform.position = grabbingController.gameObject.transform.position+ new Vector3(0,0.08f,0);
+                instantiatedMarker.transform.rotation = new Quaternion(90.0f,0.0f,0.0f, 90.0f);
+                grabbingController.GetComponent<VRTK_InteractTouch>().ForceTouch(instantiatedMarker);
+                grabbingController.AttemptGrab();
+                
+                //Il y a maintenant un post-it sur la manette, on passe ce bool à true.
+                isObjectOnController = true;
+            }
+        }
+    }
+    
+    /*PunRPC
+    public void synchronizeDeleteMarker()
+    {
+        photonView.RPC("deleteMarker", RpcTarget.All);
+    }*/
+    
+    public void deleteEraser()
     {
         //condition pour ne pas créer plus d'un post-it à la fois
         if (isObjectOnController)
