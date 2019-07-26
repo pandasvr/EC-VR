@@ -26,16 +26,18 @@ public class RadialMenuSettings : MonoBehaviour
 
     public void Start()
     {
+        exitMenu = GameObject.FindGameObjectWithTag("ExitMenu");
+        playersListMenu = GameObject.FindGameObjectWithTag("PlayerListMenu");
+        radialMenuPanel = transform.GetChild(0).GetChild(0).gameObject;
+        handPointer = GameObject.FindGameObjectWithTag("controllerRight");
+        
         //récupération des différents components dans le radialMenu et le controller hand
         radialMenuScript = this.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.GetComponent<VRTK_RadialMenuController>();
         pointerScript = handPointer.GetComponent<VRTK_Pointer>();
         uiPointerScript = handPointer.GetComponent<VRTK_UIPointer>();
         straightPointerScript = handPointer.GetComponent<VRTK_StraightPointerRenderer>();
         
-        exitMenu = GameObject.FindGameObjectWithTag("ExitMenu");
-        playersListMenu = GameObject.FindGameObjectWithTag("PlayerMenuList");
-        radialMenuPanel = transform.GetChild(0).GetChild(0).gameObject;
-        handPointer = GameObject.FindGameObjectWithTag("controllerRight");
+
         
 
         //initialisation des Bool

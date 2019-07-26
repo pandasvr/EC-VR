@@ -15,6 +15,8 @@ TagManager:
   - Marker
   - paintReceiver
   - Whiteboard
+  - ExitMenu
+  - PlayerListMenu
   layers:
   - Default
   - TransparentFX
