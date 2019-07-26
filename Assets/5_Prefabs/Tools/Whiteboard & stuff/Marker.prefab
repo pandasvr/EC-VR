@@ -372,9 +372,10 @@ GameObject:
   - component: {fileID: 2800543834270832981}
   - component: {fileID: 6674161663177371699}
   - component: {fileID: 7829963267906268221}
+  - component: {fileID: 6415238011485240622}
   m_Layer: 0
   m_Name: Marker
-  m_TagString: Untagged
+  m_TagString: Marker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -410,7 +411,7 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.0275
-  m_Height: 0.3
+  m_Height: 0.315
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: -0.02}
 --- !u!54 &54184319975326730
@@ -427,8 +428,8 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 48
-  m_CollisionDetection: 0
+  m_Constraints: 0
+  m_CollisionDetection: 3
 --- !u!114 &114896228442229716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -470,8 +471,8 @@ MonoBehaviour:
   validDrop: 1
   grabOverrideButton: 0
   allowedGrabControllers: 0
-  grabAttachMechanicScript: {fileID: 0}
-  secondaryGrabActionScript: {fileID: 0}
+  grabAttachMechanicScript: {fileID: 6674161663177371699}
+  secondaryGrabActionScript: {fileID: 7829963267906268221}
   isUsable: 0
   holdButtonToUse: 1
   useOnlyIfGrabbed: 0
@@ -495,7 +496,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   precisionGrab: 1
   rightSnapHandle: {fileID: 6735066680700196564}
-  leftSnapHandle: {fileID: 0}
+  leftSnapHandle: {fileID: 6735066680700196564}
   throwVelocityWithAttachDistance: 0
   throwMultiplier: 1
   onGrabCollisionDelay: 0
@@ -511,6 +512,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 18055ba762aa3994f9c10208cd088bc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6415238011485240622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1838284071298380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de5f6dda5a374be8826ffd6200d35280, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1897782988483388
