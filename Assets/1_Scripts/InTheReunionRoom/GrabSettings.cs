@@ -201,11 +201,12 @@ public class GrabSettings : MonoBehaviour
     public void gernerateEraser()
     {
         //condition pour ne pas créer plus d'un post-it à la fois
-        if (!isObjectOnController)
+        if (rightControllerExists)
         {
             //si on a trouvé la position de la main, alors on créée le post-it rattaché à celle-ci
-            if (rightControllerExists) 
+            if (grabbingController.GetGrabbedObject().tag == "Marker") 
             {
+                deleteMarker();
                 GameObject instantiatedEraser = Instantiate(eraserPrefab);
                 instantiatedEraser.transform.position = grabbingController.gameObject.transform.position+ new Vector3(0,0.08f,0);
                 instantiatedEraser.transform.rotation = new Quaternion(90.0f,0.0f,0.0f, 90.0f);

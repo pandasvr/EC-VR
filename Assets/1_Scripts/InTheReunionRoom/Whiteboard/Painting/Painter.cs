@@ -37,7 +37,7 @@ public class Painter : MonoBehaviour
         stamp = new Stamp(brush);
         stamp.mode = paintMode;
 
-        paintReceiver = newPaintReceiver;
+        paintReceiver = GameObject.FindGameObjectWithTag("Paintreceiver").GetComponent<PaintReceiver>();
         paintReceiverCollider = newPaintReceiver.GetComponent<Collider>();
     }
 
