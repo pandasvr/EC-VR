@@ -11,6 +11,7 @@ public class GrabSettings : MonoBehaviour
     [Header("Fourniture Prefabs")]
     public GameObject[] postItPrefabs;
     public GameObject markerPrefab; 
+    public GameObject eraserPrefab; 
     
     //RadialMenus
     [Header("Fourniture Radial Menu")]
@@ -205,10 +206,10 @@ public class GrabSettings : MonoBehaviour
             //si on a trouvé la position de la main, alors on créée le post-it rattaché à celle-ci
             if (rightControllerExists) 
             {
-                GameObject instantiatedMarker = Instantiate(markerPrefab);
-                instantiatedMarker.transform.position = grabbingController.gameObject.transform.position+ new Vector3(0,0.08f,0);
-                instantiatedMarker.transform.rotation = new Quaternion(90.0f,0.0f,0.0f, 90.0f);
-                grabbingController.GetComponent<VRTK_InteractTouch>().ForceTouch(instantiatedMarker);
+                GameObject instantiatedEraser = Instantiate(eraserPrefab);
+                instantiatedEraser.transform.position = grabbingController.gameObject.transform.position+ new Vector3(0,0.08f,0);
+                instantiatedEraser.transform.rotation = new Quaternion(90.0f,0.0f,0.0f, 90.0f);
+                grabbingController.GetComponent<VRTK_InteractTouch>().ForceTouch(instantiatedEraser);
                 grabbingController.AttemptGrab();
                 
                 //Il y a maintenant un post-it sur la manette, on passe ce bool à true.
@@ -217,25 +218,6 @@ public class GrabSettings : MonoBehaviour
         }
     }
     
-    /*PunRPC
-    public void synchronizeDeleteMarker()
-    {
-        photonView.RPC("deleteMarker", RpcTarget.All);
-    }*/
     
-    public void deleteEraser()
-    {
-        //condition pour ne pas créer plus d'un post-it à la fois
-        if (isObjectOnController)
-        {
-            //si on a trouvé la position de la main, alors on créée le post-it rattaché à celle-ci
-            if (grabbingController.GetGrabbedObject().tag == "Marker")
-            {
-                Destroy(grabbingController.GetGrabbedObject());
-            }
-            //Il n'y a maintenant plus de post-it sur la manette, on passe ce bool à false.
-            isObjectOnController = false;
-        }
-    }
     
 }
