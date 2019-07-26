@@ -2320,13 +2320,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hoverEnterIconColor: {r: 1, g: 1, b: 1, a: 0.78431374}
   hoverExitIconColor: {r: 0, g: 0.6392157, b: 1, a: 0.78431374}
-  exitMenu: {fileID: 2825356075252890699}
-  playersListMenu: {fileID: 279582047655082704}
-  radialMenuPanel: {fileID: 1053121508256217689}
-  radialMenuMediaShare: {fileID: 831476925800874904}
   handPointer: {fileID: 0}
-  penModel: {fileID: 6459917129897167596, guid: 031792deb602a054b8192ddd7167ddce,
-    type: 3}
 --- !u!1 &831476926410683045
 GameObject:
   m_ObjectHideFlags: 0
@@ -2346,7 +2340,7 @@ GameObject:
   - component: {fileID: 1725221055956719895}
   m_Layer: 0
   m_Name: ScriptAlias_leftController
-  m_TagString: Untagged
+  m_TagString: controllerLeft
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17559,13 +17553,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hoverEnterIconColor: {r: 1, g: 1, b: 1, a: 0.78431374}
   hoverExitIconColor: {r: 0, g: 0.6392157, b: 1, a: 0.78431374}
-  exitMenu: {fileID: 2825356075252890699}
-  playersListMenu: {fileID: 279582047655082704}
-  radialMenuPanel: {fileID: 4769375456710636371}
-  radialMenuMediaShare: {fileID: 6369250569955248381}
   handPointer: {fileID: 0}
-  penModel: {fileID: 6459917129897167596, guid: 031792deb602a054b8192ddd7167ddce,
-    type: 3}
 --- !u!1 &6402098234278389891
 GameObject:
   m_ObjectHideFlags: 0
@@ -24666,13 +24654,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hoverEnterIconColor: {r: 1, g: 1, b: 1, a: 0.78431374}
   hoverExitIconColor: {r: 0, g: 0.6392157, b: 1, a: 0.78431374}
-  exitMenu: {fileID: 2825356075252890699}
-  playersListMenu: {fileID: 279582047655082704}
-  radialMenuPanel: {fileID: 1053121508256217689}
-  radialMenuMediaShare: {fileID: 8961689084578950501}
   handPointer: {fileID: 3536962009351073775, guid: 301e95d40e839424d9d4838d8d27333e,
-    type: 3}
-  penModel: {fileID: 6459917129897167596, guid: 031792deb602a054b8192ddd7167ddce,
     type: 3}
 --- !u!1 &8974324570590500415
 GameObject:

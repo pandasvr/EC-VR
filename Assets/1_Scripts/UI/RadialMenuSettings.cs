@@ -8,17 +8,12 @@ public class RadialMenuSettings : MonoBehaviour
     public Color hoverEnterIconColor;
     public Color hoverExitIconColor;
 
-    [Header("Les Menus")]
-    public GameObject exitMenu;
-    public GameObject playersListMenu;
-    public GameObject radialMenuPanel;
-    public GameObject radialMenuMediaShare;
-
+    //les Menus
+    private GameObject exitMenu;
+    private GameObject playersListMenu;
+    private GameObject radialMenuPanel;
     
-    public GameObject handPointer;
-
-    [Header("Pen Controller Model")] 
-    public GameObject penModel;
+    private GameObject handPointer;
 
     private bool isPenModelActive;
     private bool isPlayersListActive;
@@ -36,6 +31,12 @@ public class RadialMenuSettings : MonoBehaviour
         pointerScript = handPointer.GetComponent<VRTK_Pointer>();
         uiPointerScript = handPointer.GetComponent<VRTK_UIPointer>();
         straightPointerScript = handPointer.GetComponent<VRTK_StraightPointerRenderer>();
+        
+        exitMenu = GameObject.FindGameObjectWithTag("ExitMenu");
+        playersListMenu = GameObject.FindGameObjectWithTag("PlayerMenuList");
+        radialMenuPanel = transform.GetChild(0).GetChild(0).gameObject;
+        handPointer = GameObject.FindGameObjectWithTag("controllerRight");
+        
 
         //initialisation des Bool
         isPenModelActive = false;
