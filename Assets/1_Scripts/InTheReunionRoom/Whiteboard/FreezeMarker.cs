@@ -3,7 +3,7 @@
     using UnityEngine;
     using VRTK;
 
-    public class FreezeMarker
+    public class FreezeMarker : MonoBehaviour
     {
         private GameObject whiteboard;
         private GameObject marker;
