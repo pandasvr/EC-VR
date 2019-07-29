@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1719187555916255732}
   - component: {fileID: 187790386951841444}
   - component: {fileID: 6710766301085395678}
+  - component: {fileID: 4618028289918419725}
   m_Layer: 0
   m_Name: Vertical_Sticky_note_blue
   m_TagString: postit
@@ -145,6 +146,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shadowPostIt: {fileID: 2050391267314361679}
+--- !u!114 &4618028289918419725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1115619020883368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 0
+  OwnershipTransfer: 0
+  ObservedComponents: []
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1474665759482964471
 GameObject:
   m_ObjectHideFlags: 0
