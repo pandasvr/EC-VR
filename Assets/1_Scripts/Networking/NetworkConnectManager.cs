@@ -27,7 +27,7 @@ namespace Networking
         private VrSettings scriptVrSettings;
         private static bool isCreatingRoom = false;
         private bool isJoiningRoom = false;
-        private static string roomName;
+        private static string roomName = "Test_Multi_Coworking";
         private static string maxPlayer;
         private static string labelEnvironnement;
 

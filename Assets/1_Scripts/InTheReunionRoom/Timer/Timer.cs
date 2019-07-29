@@ -70,10 +70,11 @@ public class Timer : MonoBehaviour
     
     public void RPCResetTimer()
     {
-        photonView.RPC("ResetTimer", RpcTarget.All);
+        int intValue = dropdownTime.value;
+        string stringValue = dropdownTime.options[intValue].text;
+        photonView.RPC("ResetTimer", RpcTarget.All, stringValue);
     }
-    
-    [PunRPC]
+
     public void RPCPauseTimer()
     {
         photonView.RPC("PauseTimer", RpcTarget.All);
@@ -91,7 +92,7 @@ public class Timer : MonoBehaviour
     }
 
     [PunRPC]
-    private void ResetTimer()
+    private void ResetTimer(string min)
     {
         if (isTimerRunning)
         {
@@ -104,12 +105,11 @@ public class Timer : MonoBehaviour
             }   
         }   
         
-        int intValue = dropdownTime.value;
-        string stringValue = dropdownTime.options[intValue].text;
-        timerMinutes = int.Parse(stringValue.Substring(0, 2));
+        timerMinutes = int.Parse(min.Substring(0, 2));
         timerSecondes = 0;
     }
 	
+    [PunRPC]
     private void PauseTimer()
     {
         if (isTimerRunning)
