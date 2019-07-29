@@ -1,55 +1,56 @@
 
-    using System;
-    using UnityEngine;
-    using VRTK;
+using System;
+using UnityEngine;
+using VRTK;
 
-    public class FreezeWhiteboardTools : MonoBehaviour
+public class FreezeWhiteboardTools : MonoBehaviour
+{
+    private GameObject whiteboard;
+    private GameObject marker;
+    private bool markerIsGrabbed;
+    private bool whiteboardsIsFound;
+    private bool isNearWhiteboard;
+
+    void Start()
     {
-        private GameObject whiteboard;
-        private GameObject marker;
-        private GameObject eraser;
-        private bool markerIsGrabbed;
-        private bool eraserIsGrabbed;
-        private bool isNearWhiteboard;
-
-        void Update()
+        markerIsGrabbed = false;
+        whiteboardsIsFound = false;
+    }
+    
+    void Update()
+    {
+        if (whiteboard == null)
         {
-            if (whiteboard == null)
+            try
             {
-                try
-                {
-                    whiteboard = GameObject.FindWithTag("Whiteboard");
-                }
-                catch (NullReferenceException)
-                {
-                }
+                whiteboard = GameObject.FindWithTag("Whiteboard");
+                whiteboardsIsFound = true;
             }
-            
-            if (marker == null)
+            catch (NullReferenceException)
             {
-                try
-                {
-                    marker = GameObject.FindWithTag("Marker");
-                }
-                catch (NullReferenceException)
-                {
-                }
             }
-            if (eraser == null)
+        }
+        
+        if (marker == null)
+        {
+            try
             {
-                try
-                {
-                    marker = GameObject.FindWithTag("Eraser");
-                }
-                catch (NullReferenceException)
-                {
-                }
+                marker = GameObject.FindWithTag("Marker");
             }
+            catch (NullReferenceException)
+            {
+            }
+        }
 
+        try
+        {
+            markerIsGrabbed = (marker.GetComponent<VRTK_InteractableObject>().IsGrabbed())&&(GameObject.FindGameObjectWithTag("Marker")!=null);
+        }
+        catch(NullReferenceException){}
 
-            markerIsGrabbed = marker.GetComponent<VRTK_InteractableObject>().IsGrabbed();
-            eraserIsGrabbed = eraser.GetComponent<VRTK_InteractableObject>().IsGrabbed();
-
+        if (whiteboardsIsFound)
+        {
+            //Debug.Log("markerIsGrabbed value is "+markerIsGrabbed);
             if (markerIsGrabbed)
             {
                 float distance = Vector3.Distance(marker.transform.position, whiteboard.transform.position);
@@ -67,22 +68,8 @@
                     marker.GetComponent<Rigidbody>().freezeRotation = false;
                 }
             }
-            if (eraserIsGrabbed)
-            {
-                float distance = Vector3.Distance(eraser.transform.position, whiteboard.transform.position);
-
-                isNearWhiteboard = (distance < 3);
-
-                if (isNearWhiteboard)
-                {
-                    Quaternion target = Quaternion.Euler(0, 180, 0);
-                    eraser.GetComponent<Rigidbody>().rotation = target;
-                    eraser.GetComponent<Rigidbody>().freezeRotation = true;
-                }
-                else
-                {
-                    eraser.GetComponent<Rigidbody>().freezeRotation = false;
-                }
-            }
+            
         }
+        
     }
+}

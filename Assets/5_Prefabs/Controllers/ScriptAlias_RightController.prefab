@@ -73,7 +73,7 @@ MonoBehaviour:
   playersListMenu: {fileID: 0}
   radialMenuPanel: {fileID: 519634688197642110}
   radialMenuMediaShare: {fileID: 0}
-  handPointer: {fileID: 0}
+  handPointer: {fileID: 3536962009351073775}
   penModel: {fileID: 6459917129897167596, guid: 031792deb602a054b8192ddd7167ddce,
     type: 3}
 --- !u!1 &863380857019783239
@@ -1400,6 +1400,8 @@ MonoBehaviour:
   - {fileID: 1445205348632852, guid: cd545461a95448e4da083742a0b2adb3, type: 3}
   markerPrefab: {fileID: 1838284071298380, guid: 3e7262a123c4e4b4891746ac9dd5c70b,
     type: 3}
+  eraserPrefab: {fileID: 1699101443075094, guid: bc040fec7cb95764b88ad54ffb71cb22,
+    type: 3}
   radialMenuPostIt: {fileID: 8312499875632771413}
   radialMenuMarker: {fileID: 519634688197651564}
 --- !u!1 &4165488330104454069
@@ -2553,7 +2555,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11411068, guid: d5fe2f7f9d3e98a478d151422643620c, type: 3}
       propertyPath: buttons.Array.data[3].OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 11411068, guid: d5fe2f7f9d3e98a478d151422643620c, type: 3}
       propertyPath: buttons.Array.data[3].OnHoverEnter.m_PersistentCalls.m_Calls.Array.size
@@ -2909,7 +2911,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11411068, guid: d5fe2f7f9d3e98a478d151422643620c, type: 3}
       propertyPath: buttons.Array.data[2].OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: deleteMarker
+      value: deleteWhiteboardTool
       objectReference: {fileID: 0}
     - target: {fileID: 11411068, guid: d5fe2f7f9d3e98a478d151422643620c, type: 3}
       propertyPath: buttons.Array.data[2].OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
@@ -3191,6 +3193,26 @@ PrefabInstance:
       propertyPath: buttons.Array.data[2].OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
       objectReference: {fileID: 8924483719499944515}
+    - target: {fileID: 11411068, guid: d5fe2f7f9d3e98a478d151422643620c, type: 3}
+      propertyPath: buttons.Array.data[3].OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11411068, guid: d5fe2f7f9d3e98a478d151422643620c, type: 3}
+      propertyPath: buttons.Array.data[3].OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11411068, guid: d5fe2f7f9d3e98a478d151422643620c, type: 3}
+      propertyPath: buttons.Array.data[3].OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 8924483719499944515}
+    - target: {fileID: 11411068, guid: d5fe2f7f9d3e98a478d151422643620c, type: 3}
+      propertyPath: buttons.Array.data[3].OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: gernerateEraser
+      objectReference: {fileID: 0}
+    - target: {fileID: 11411068, guid: d5fe2f7f9d3e98a478d151422643620c, type: 3}
+      propertyPath: buttons.Array.data[3].OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5fe2f7f9d3e98a478d151422643620c, type: 3}
 --- !u!1 &519634688197651564 stripped

@@ -31,13 +31,20 @@ public class Painter : MonoBehaviour
     private Color color;
 
     private Vector2? lastDrawPosition = null;
+    public PaintReceiver newPaintReceiver;
+
+    private void Start()
+    {
+        newPaintReceiver = GameObject.FindGameObjectWithTag("paintReceiver").GetComponent<PaintReceiver>();
+        Initialize(newPaintReceiver);
+    }
 
     public void Initialize(PaintReceiver newPaintReceiver)
     {
         stamp = new Stamp(brush);
         stamp.mode = paintMode;
 
-        paintReceiver = GameObject.FindGameObjectWithTag("Paintreceiver").GetComponent<PaintReceiver>();
+        paintReceiver = newPaintReceiver;
         paintReceiverCollider = newPaintReceiver.GetComponent<Collider>();
     }
 
