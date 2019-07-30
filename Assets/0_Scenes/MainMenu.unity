@@ -6481,7 +6481,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PanelLogin: {fileID: 1067997245}
   PanelMain: {fileID: 250530594}
-  ButtonAdmin: {fileID: 217054128}
 --- !u!1 &256399316
 GameObject:
   m_ObjectHideFlags: 0
@@ -21797,9 +21796,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fieldName: {fileID: 4907242788506550294}
   fieldPassword: {fileID: 4391991068749987416}
-  LoginPanel: {fileID: 1067997245}
-  MainPanel: {fileID: 250530594}
-  InfoText: {fileID: 2074960206}
+  Animator_Canva_Main: {fileID: 1311983446}
 --- !u!114 &1067997250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26325,6 +26322,7 @@ GameObject:
   - component: {fileID: 1311983444}
   - component: {fileID: 1311983443}
   - component: {fileID: 1311983442}
+  - component: {fileID: 1311983446}
   m_Layer: 0
   m_Name: Canvas_Main
   m_TagString: Untagged
@@ -26437,6 +26435,25 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!95 &1311983446
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1311983440}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1313580932
 GameObject:
   m_ObjectHideFlags: 0
