@@ -1,12 +1,12 @@
 ﻿<?php
 class PdoUnity
 {   		
-      	private static $server='mysql:host=192.168.0.101';
+      	private static $server='mysql:host=127.0.0.1';
       	private static $bdd='dbname=ecvr_db';
-      	private static $user='ecvr_db';
-      	private static $pw='!CapgeminiPandas4';
-      	/*private static $user='root';
-      	private static $pw='';*/
+      	/*private static $user='ecvr_db';
+      	private static $pw='!CapgeminiPandas4';*/
+      	private static $user='root';
+      	private static $pw='';
 		private static $myPdo; //PHP Base de Données
 		private static $myPdoUnity = null;
 /**

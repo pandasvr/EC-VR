@@ -9,6 +9,7 @@ public class RadialMenuSettings : MonoBehaviour
     public Color hoverExitIconColor;
 
     [Header("Les Menus")]
+    public GameObject contextualMenu;
     public GameObject exitMenu;
     public GameObject playersListMenu;
     public GameObject radialMenuPanel;
@@ -70,7 +71,7 @@ public class RadialMenuSettings : MonoBehaviour
     }
 
     //Activation du menu contextuel
-    public void OpenMenu(GameObject menu)
+    public void OpenContextualMenu()
     {
         //on ferme le MenuPlayerList si il est activé
         if (isPlayersListActive)
@@ -82,16 +83,16 @@ public class RadialMenuSettings : MonoBehaviour
         radialMenuScript.enabled = false;
 
         radialMenuPanel.GetComponent<Animator>().SetInteger("isDisable", 1);
-        menu.GetComponent<Animator>().SetInteger("isEnable", 1);
+        contextualMenu.GetComponent<Animator>().SetInteger("isEnable", 1);
     }
 
     //Desactivation du menu contextuel
-    public void CloseMenu(GameObject menu)
+    public void CloseContextualMenu()
     {
         ChangeUiPointerState(false);
         radialMenuScript.enabled = true;
         
-        menu.GetComponent<Animator>().SetInteger("isEnable", 0);
+        contextualMenu.GetComponent<Animator>().SetInteger("isEnable", 0);
         radialMenuPanel.GetComponent<Animator>().SetInteger("isDisable", 0);
 
     }

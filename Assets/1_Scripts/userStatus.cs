@@ -61,6 +61,7 @@ public class userStatus : MonoBehaviour
         }
 
         statusSphereRenderer.material = currentMaterial;
+        Debug.Log(currentMaterial);
     }
     
     //Fonction qui définit s'il y a un l'utilisateur se déplace à partir de ses positions

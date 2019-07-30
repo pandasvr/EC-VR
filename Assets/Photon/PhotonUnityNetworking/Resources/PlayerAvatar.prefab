@@ -791,7 +791,7 @@ MonoBehaviour:
   rightHandModel: {fileID: 1207133069724046}
   leftHandModel: {fileID: 1266566000291760}
   label: {fileID: 1571070037516242}
-  statusLabel: {fileID: 1374070176632110199}
+  statusLabel: {fileID: 0}
 --- !u!114 &8819710247351578170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1443,6 +1443,7 @@ GameObject:
   - component: {fileID: 8535649970911910929}
   - component: {fileID: 4864513000937906816}
   - component: {fileID: 4740055589083428045}
+  - component: {fileID: 2612133549833738731}
   - component: {fileID: 2950049674300331282}
   m_Layer: 0
   m_Name: Sphere
@@ -1523,6 +1524,27 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2612133549833738731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1374070176632110199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6042f1f1988d44c49b72691a09ec9fdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statusSphere: {fileID: 1374070176632110199}
+  photonView: {fileID: 2950049674300331282}
+  ConnectedStatutMaterial: {fileID: 2100000, guid: 540b6b637967da04f9e3c4f95842cdb5,
+    type: 2}
+  AbsentStatutMaterial: {fileID: 2100000, guid: 1075e8d71df4b494fa69beac813f36ff,
+    type: 2}
+  InTheMenuStatutMaterial: {fileID: 2100000, guid: 243f14a9b5fa1bf4eb755eaa8a1fd049,
+    type: 2}
+  timer: 0
 --- !u!114 &2950049674300331282
 MonoBehaviour:
   m_ObjectHideFlags: 0

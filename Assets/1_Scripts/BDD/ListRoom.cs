@@ -151,8 +151,6 @@ public class ListRoom : MonoBehaviour
                     {
                         NetworkConnectManager.CreateNewRoom(room.roomName, room.maxPlayerRoom, room.labelEnvironnement);
                         UnityEngine.PlayerPrefs.SetString("idRoom", room.idRoom);
-                        UnityEngine.PlayerPrefs.SetString("whiteboard", room.whiteboard);
-                        UnityEngine.PlayerPrefs.SetString("postIt", room.postIt);
                     });
                     
                     //valorisation des textes des game objects du prefab

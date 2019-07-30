@@ -5,36 +5,26 @@ using Photon.Pun;
 
 public class MediaShare : MonoBehaviour
 {
-    [Header(("Vidéo projecteur"))]
     public GameObject videoProjecteur;
-    public GameObject radialMenuProjecteur;
+    public Image imageProjecteur;
 
-    [Header("Fake PowerPoint Slides")] 
-    public Texture[] slides;
-
-    [Header("Synchronisation Photon View")]
     public PhotonView photonView;
     
     private VideoPlayer video;
-    private bool videoState;
-
-    private Color offScreenProjecteur;
+    private bool videoIsOn;
     
-    private bool powerpointState = false;
+    private bool imageIsOn;
     private Sprite image;
     private int pageNumber;
     private int pageNumberMax;
 
     private void Start()
     {
-        //on désactive le statut du powerpoint et de la video
-        powerpointState = false;
-        videoState = false;
+        imageIsOn = false;
         //on récupère le videoplayer qu'on voudra allumer où éteindre à partir d'une UI
         video = videoProjecteur.gameObject.GetComponent<VideoPlayer>();
-        //couleur du projecteur eteint
-        offScreenProjecteur = Color.black;
-        
+        //pageNumberMax = Directory.GetFiles("Assets/Resources/MediaShare", "*.jpg", SearchOption.TopDirectoryOnly).Length;
+        pageNumberMax = 4;
     }
 
     public void SynchronisationVideo()
@@ -45,33 +35,32 @@ public class MediaShare : MonoBehaviour
     
     
     [PunRPC]
-    //cette fonction permet que l'appui sur le bouton "vidéo" Lance ou Stop la vidéo selectionnée
+    //cette fonction permet que l'appui sur le bouton "vidéo" lance la vidéo enregistrée dans l'objet videoplayer
     private void PlayVideo(PhotonMessageInfo info) 
-    {     
-        videoState = !videoState; 
-
-        if (powerpointState)
-        {
-            powerpointState = false;
-            radialMenuProjecteur.SetActive(false);
-            videoProjecteur.GetComponent<Renderer>().material.SetTexture(null, null);
-        }
+    {
+        //lorsque le bouton est cliqué, le bouléen "on met la vidéo comme média" change de valeur
+        //si la vidéo est mise comme média, on active son support
+        //si la vidéo est mise comme média, on la met en play
         
-        if (videoState)
+        videoIsOn = !videoIsOn; 
+        videoProjecteur.SetActive(videoIsOn); 
+        imageProjecteur.gameObject.SetActive(false);
+        if (videoIsOn)
         {
-            video.Play();
-            videoProjecteur.GetComponent<Renderer>().material.color = Color.white;
+            video.Play(); 
         }
 
-        videoProjecteur.SetActive(videoState); //si la vidéo est mise comme média, on active son support
+        videoProjecteur.SetActive(videoIsOn); //si la vidéo est mise comme média, on active son support
 
 
-        if (videoState)
+        if (videoIsOn)
         {
             video.Play(); //si la vidéo est mise comme média, on active son support, on la met en play
         }
         Debug.Log(string.Format("Info: {0} {1} {2}", info.Sender, info.photonView, info.timestamp));
     }
+    
+    
     
     public void SynchronisationPowerpoint()
     {
@@ -82,25 +71,14 @@ public class MediaShare : MonoBehaviour
     [PunRPC]
     private void StartPowerPoint(PhotonMessageInfo info)
     {
-        powerpointState = !powerpointState;
-        videoProjecteur.SetActive(powerpointState);
+        imageIsOn = !imageIsOn;
+        videoProjecteur.SetActive(false);
+        imageProjecteur.gameObject.SetActive(imageIsOn);
 
-        if (videoState)
+        if (imageIsOn)
         {
-            videoState = false;
-            video.Stop();
-        }
-
-        if (powerpointState)
-        {
-            videoProjecteur.GetComponent<Renderer>().material.color = Color.white;
-            videoProjecteur.GetComponent<Renderer>().material.SetTexture("_MainTex", slides[0]);  
-            pageNumber = 0;
-        }
-        else
-        {
-            videoProjecteur.GetComponent<Renderer>().material.SetTexture(null, null);
-            videoProjecteur.GetComponent<Renderer>().material.color = offScreenProjecteur;
+            imageProjecteur.sprite = Resources.Load <Sprite> ("MediaShare/Presentation1");
+            pageNumber = 1;
         }
         Debug.Log(string.Format("Info: {0} {1} {2}", info.Sender, info.photonView, info.timestamp));
     }
@@ -122,10 +100,11 @@ public class MediaShare : MonoBehaviour
     [PunRPC]
     private void SwipeRight(PhotonMessageInfo info)
     {
-        if (pageNumber != slides.Length-1)
+        if (pageNumber != pageNumberMax)
         {
             pageNumber++;
-            videoProjecteur.GetComponent<Renderer>().material.SetTexture("_MainTex",  slides[pageNumber]);
+            var path = "MediaShare/Presentation" + pageNumber;
+            imageProjecteur.sprite = Resources.Load <Sprite> (path);
             
             Debug.Log(string.Format("Info: {0} {1} {2}", info.Sender, info.photonView, info.timestamp));
         }
@@ -134,10 +113,11 @@ public class MediaShare : MonoBehaviour
     [PunRPC]
     private void SwipeLeft(PhotonMessageInfo info)
     {
-        if (pageNumber != 0)
+        if (pageNumber != 1)
         {
             pageNumber--;
-            videoProjecteur.GetComponent<Renderer>().material.SetTexture("_MainTex",  slides[pageNumber]);
+            var path = "MediaShare/Presentation" + pageNumber;
+            imageProjecteur.sprite = Resources.Load <Sprite> (path);
             
             Debug.Log(string.Format("Info: {0} {1} {2}", info.Sender, info.photonView, info.timestamp));
         }
