@@ -20,7 +20,7 @@ public class Eraser : MonoBehaviour
         {
             renderer.material.color = color;
         }
-
+        paintReceiver = GameObject.FindGameObjectWithTag("paintReceiver").GetComponent<PaintReceiver>();
         painter.Initialize(paintReceiver);
         painter.ChangeColour(color);
     }
