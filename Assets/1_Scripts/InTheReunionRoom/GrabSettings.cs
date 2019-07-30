@@ -113,7 +113,7 @@ public class GrabSettings : MonoBehaviour
             //si on a trouvé la position de la main, alors on créée le post-it rattaché à celle-ci
             if (grabbingController.GetGrabbedObject().tag == "postit")
                 {
-                    Destroy(grabbingController.GetGrabbedObject());
+                    PhotonNetwork.Destroy(grabbingController.GetGrabbedObject());
                 }
                 //Il n'y a maintenant plus de post-it sur la manette, on passe ce bool à false.
                 isObjectOnController = false;

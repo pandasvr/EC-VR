@@ -325,8 +325,8 @@ MonoBehaviour:
   paintMode: 0
   paintingTransform: {fileID: 4531899323020270}
   raycastLength: 0.01
-  brush: {fileID: 2800000, guid: deca7de0b5b178a4c8c7d32ee710942f, type: 3}
-  spacing: 0.5
+  brush: {fileID: 2800000, guid: e4ec1f831ce89fd439a67aa3960f28b9, type: 3}
+  spacing: 0.1
 --- !u!1 &1671179696074738
 GameObject:
   m_ObjectHideFlags: 0
