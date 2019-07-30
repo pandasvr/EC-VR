@@ -150,22 +150,39 @@ public class GrabSettings : MonoBehaviour
     public void gernerateMarker()
     {
         //condition pour ne pas créer plus d'un post-it à la fois
-        if (!isObjectOnController)
+        if (rightControllerExists)
         {
-            //si on a trouvé la position de la main, alors on créée le post-it rattaché à celle-ci
-            if (rightControllerExists) 
+            if (grabbingController.GetGrabbedObject() != null)
             {
-                GameObject instantiatedMarker = Instantiate(markerPrefab);
-                instantiatedMarker.transform.position = grabbingController.gameObject.transform.position+ new Vector3(0,0.08f,0);
-                instantiatedMarker.transform.rotation = new Quaternion(90.0f,0.0f,0.0f, 90.0f);
-                grabbingController.GetComponent<VRTK_InteractTouch>().ForceTouch(instantiatedMarker);
-                grabbingController.AttemptGrab();
-                instantiatedMarker.transform.rotation = new Quaternion(90.0f,0.0f,0.0f, 90.0f);
-                
+                if (grabbingController.GetGrabbedObject().tag == "Eraser")
+                {
+                    deleteWhiteboardTool();
+                    createMarker();
+                    //Il y a maintenant un post-it sur la manette, on passe ce bool à true.
+                    isObjectOnController = true;
+                }
+            }
+            else
+            {
+                Debug.Log("dis program reaches here too2");
+                createMarker();
                 //Il y a maintenant un post-it sur la manette, on passe ce bool à true.
                 isObjectOnController = true;
             }
+
         }
+    }
+
+    public void createMarker()
+    {
+        GameObject instantiatedMarker = Instantiate(markerPrefab);
+        instantiatedMarker.transform.position =
+            grabbingController.gameObject.transform.position + new Vector3(0, 0.08f, 0);
+        instantiatedMarker.transform.rotation = new Quaternion(90.0f, 0.0f, 0.0f, 90.0f);
+        grabbingController.GetComponent<VRTK_InteractTouch>().ForceTouch(instantiatedMarker);
+        grabbingController.AttemptGrab();
+        instantiatedMarker.transform.rotation = new Quaternion(90.0f, 0.0f, 0.0f, 90.0f);
+
     }
     
     /*PunRPC
@@ -209,12 +226,11 @@ public class GrabSettings : MonoBehaviour
             {
                 deleteWhiteboardTool();
                 GameObject instantiatedEraser = Instantiate(eraserPrefab);
-                instantiatedEraser.transform.position = grabbingController.gameObject.transform.position+ new Vector3(0,0.08f,0);
+                instantiatedEraser.transform.position = grabbingController.gameObject.transform.position;
                 instantiatedEraser.transform.rotation = new Quaternion(90.0f,0.0f,0.0f, 90.0f);
                 grabbingController.GetComponent<VRTK_InteractTouch>().ForceTouch(instantiatedEraser);
                 grabbingController.AttemptGrab();
                 instantiatedEraser.transform.rotation = new Quaternion(90.0f,0.0f,0.0f, 90.0f);
-                instantiatedEraser.transform.position += new Vector3(0,0.08f,0);
                 //Il y a maintenant un post-it sur la manette, on passe ce bool à true.
                 isObjectOnController = true;
             }
