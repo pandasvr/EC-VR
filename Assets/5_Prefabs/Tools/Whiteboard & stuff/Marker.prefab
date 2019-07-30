@@ -327,6 +327,7 @@ MonoBehaviour:
   raycastLength: 0.01
   brush: {fileID: 2800000, guid: deca7de0b5b178a4c8c7d32ee710942f, type: 3}
   spacing: 0.5
+  newPaintReceiver: {fileID: 0}
 --- !u!1 &1671179696074738
 GameObject:
   m_ObjectHideFlags: 0
@@ -480,7 +481,7 @@ MonoBehaviour:
   isGrabbable: 1
   holdButtonToGrab: 0
   stayGrabbedOnTeleport: 1
-  validDrop: 1
+  validDrop: 0
   grabOverrideButton: 0
   allowedGrabControllers: 0
   grabAttachMechanicScript: {fileID: 6674161663177371699}

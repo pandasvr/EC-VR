@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Painter : MonoBehaviour
 {
@@ -33,19 +34,19 @@ public class Painter : MonoBehaviour
     private Vector2? lastDrawPosition = null;
     public PaintReceiver newPaintReceiver;
 
-    private void Start()
-    {
-        newPaintReceiver = GameObject.FindGameObjectWithTag("paintReceiver").GetComponent<PaintReceiver>();
-        Initialize(newPaintReceiver);
-    }
+    
 
     public void Initialize(PaintReceiver newPaintReceiver)
     {
-        stamp = new Stamp(brush);
-        stamp.mode = paintMode;
-
-        paintReceiver = newPaintReceiver;
-        paintReceiverCollider = newPaintReceiver.GetComponent<Collider>();
+        try 
+        {
+            stamp = new Stamp(brush);
+            stamp.mode = paintMode;
+            //newPaintReceiver = GameObject.FindGameObjectWithTag("paintReceiver").GetComponent<PaintReceiver>();
+            paintReceiver = newPaintReceiver;
+            paintReceiverCollider = newPaintReceiver.GetComponent<Collider>();
+        }
+        catch(NullReferenceException){}
     }
 
     private void Update()

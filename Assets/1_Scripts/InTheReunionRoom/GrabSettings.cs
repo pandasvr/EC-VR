@@ -214,7 +214,7 @@ public class GrabSettings : MonoBehaviour
                 grabbingController.GetComponent<VRTK_InteractTouch>().ForceTouch(instantiatedEraser);
                 grabbingController.AttemptGrab();
                 instantiatedEraser.transform.rotation = new Quaternion(90.0f,0.0f,0.0f, 90.0f);
-                
+                instantiatedEraser.transform.position += new Vector3(0,0.08f,0);
                 //Il y a maintenant un post-it sur la manette, on passe ce bool à true.
                 isObjectOnController = true;
             }

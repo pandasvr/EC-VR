@@ -240,7 +240,7 @@ GameObject:
   - component: {fileID: 4785967342520735783}
   - component: {fileID: 7745726427425671021}
   - component: {fileID: 4966023050842122023}
-  - component: {fileID: 4864313386508358062}
+  - component: {fileID: 4711870337133694382}
   m_Layer: 0
   m_Name: Eraser
   m_TagString: Eraser
@@ -255,8 +255,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1699101443075094}
-  m_LocalRotation: {x: -0.24842314, y: -0.08458046, z: 0.37458804, w: 0.8892783}
-  m_LocalPosition: {x: 1.161, y: 0.693, z: 0.274}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4081767015448980}
@@ -265,7 +265,7 @@ Transform:
   - {fileID: 4108613205395322374}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -22.239, y: -21.321001, z: 49.922}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &65555821154982174
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -389,7 +389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fef8bec52b555c24c8ac026afeaca640, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eraser_rigidbody: {fileID: 0}
+  eraser_rigidbody: {fileID: 54459786399209938}
 --- !u!135 &4966023050842122023
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -403,7 +403,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.075
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4864313386508358062
+--- !u!114 &4711870337133694382
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -412,26 +412,32 @@ MonoBehaviour:
   m_GameObject: {fileID: 1699101443075094}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b1a318d5f3204c4aaea5ecb316eaf4c, type: 3}
+  m_Script: {fileID: 11500000, guid: 73caffd546f90194babc0be53abf0893, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnPointerDirectionIndicatorPositionSet:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1880382986308128, guid: 8be863897c2440c41b41b875dbfc4894,
-          type: 3}
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: VRTK.UnityEventHelper.VRTK_PointerDirectionIndicator_UnityEvents+PointerDirectionIndicatorEvent,
-      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  precisionGrab: 1
+  rightSnapHandle: {fileID: 0}
+  leftSnapHandle: {fileID: 0}
+  throwVelocityWithAttachDistance: 0
+  throwMultiplier: 1
+  onGrabCollisionDelay: 0
+  detachDistance: 1
+  trackingSpeed: 25
+  forceKinematicOnGrab: 1
+  releaseDecelerationDamper: 5
+  resetToOrignOnReleaseSpeed: 5
+  xAxisLimits:
+    minimum: 1000
+    maximum: 1000
+  yAxisLimits:
+    minimum: 1000
+    maximum: 1000
+  zAxisLimits:
+    minimum: 0
+    maximum: 0
+  minMaxThreshold: 0.01
+  minMaxNormalizedThreshold: 0.01
+  localOrigin: {x: 0, y: 0, z: 0}
 --- !u!1 &1997725547299250
 GameObject:
   m_ObjectHideFlags: 0

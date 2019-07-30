@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using  VRTK;
+using VRTK.GrabAttachMechanics;
+
 public class FreezeEraser : MonoBehaviour
 {
     private GameObject whiteboard;
@@ -42,16 +44,14 @@ public class FreezeEraser : MonoBehaviour
         ///////////////
         //Whiteboard
         if (whiteboard == null)
+        {
+            try
             {
-                try
-                {
-                    whiteboard = GameObject.FindWithTag("Whiteboard");
-                    whiteboardsIsFound = true;
-                }
-                catch (NullReferenceException)
-                {
-                }
+                whiteboard = GameObject.FindWithTag("Whiteboard");
+                whiteboardsIsFound = true;
             }
+            catch (NullReferenceException){}
+        }
         ///////////////
         /// Eraser
         if (eraser == null)
@@ -61,47 +61,45 @@ public class FreezeEraser : MonoBehaviour
                 eraser = GameObject.FindGameObjectWithTag("Eraser");
                 Debug.Log("eraser found!");
             }
-            catch (NullReferenceException)
-            {
-            }
+            catch (NullReferenceException){}
         }
-
+        
+        //on regarde sur la manette si elle exite, la présence de la gomme
         if (rightControllerExists)
         {
             if (grabbingController.GetGrabbedObject() != null )
             {
                 eraserIsGrabbed = (grabbingController.GetGrabbedObject().tag == "Eraser"); 
             }
-            else
+            //s'il n'y a pas d'objet sur la manette il n'y a pas de gomme
+            else 
             {
                 eraserIsGrabbed = false;
             }
         }
-
+        
+        //si le whiteboard existe
         if (whiteboardsIsFound)
         {
-            //Debug.Log("markerIsGrabbed value is "+markerIsGrabbed);
-            
+            //si la gomme est dans la main
             if (eraserIsGrabbed)
             {
-                Debug.Log("reached here!");
+                //on calcule sa distance avec le tableau
                 float distance = Vector3.Distance(eraser.transform.position, whiteboard.transform.position);
-                isNearWhiteboard = true;//(distance < 3);
+                //si elle est proche du tableau
+                isNearWhiteboard = (distance < 3);
                 if (isNearWhiteboard)
                 {
-                    Quaternion target = Quaternion.Euler(130, 180, 0);
-                    Debug.Log("it should have worked!");
-                    //eraser.transform.rotation = target;
+                    //on change sa rotation
+                    Quaternion target = Quaternion.Euler(0, 180, 0);
                     eraser_rigidbody = eraser.GetComponent<Rigidbody>();
-                    eraser_rigidbody.rotation *= target * grabbingController.transform.rotation;//Quaternion.Euler(-grabbingController.transform.rotation.x,grabbingController.transform.rotation.y, grabbingController.transform.rotation.z );
+                    eraser_rigidbody.rotation = target;
                     eraser_rigidbody.freezeRotation = true;
-                    Debug.Log("until the end...");
-                    
                 }
                 else
                 {
-                    eraser.GetComponent<Rigidbody>().freezeRotation = false;
-                    Debug.Log("well, it didn't work");
+                    //Sinon, elle suit la manette
+                    eraser_rigidbody.freezeRotation = false;
                 }
             }
         }
