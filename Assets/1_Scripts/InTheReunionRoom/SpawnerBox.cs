@@ -1,13 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Photon.Pun;
 using UnityEngine;
 using VRTK;
 
 public class SpawnerBox : MonoBehaviour
 {
-    [Tooltip("Entrer le nom de la prefab en question")]
-    public string stringPostItToSpawn;
+    public GameObject ObjToSpawn;
 
     public float spawnDelay = 1f;
 
@@ -29,7 +27,7 @@ public class SpawnerBox : MonoBehaviour
         //On continue le script si l'objet en collision est une manette, qu'il peut grab un objet, que le delais d'attente avec le spawn précédent est passé et qu'il reste encore des objets à spawn
         if (CanGrab(grabbingController) && Time.time >= spawnDelayTimer)
         {
-            GameObject currentObj = PhotonNetwork.Instantiate(stringPostItToSpawn, new Vector3(0, 0, 0), Quaternion.identity, 0);
+            GameObject currentObj = Instantiate(ObjToSpawn);
 
             grabbingController.GetComponent<VRTK_InteractTouch>().ForceTouch(currentObj);
             grabbingController.AttemptGrab();

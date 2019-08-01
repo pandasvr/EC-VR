@@ -729,7 +729,7 @@ GameObject:
   - component: {fileID: 6372026174957946348}
   m_Layer: 0
   m_Name: PlayersListMenu
-  m_TagString: PlayerListMenu
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2320,6 +2320,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hoverEnterIconColor: {r: 1, g: 1, b: 1, a: 0.78431374}
   hoverExitIconColor: {r: 0, g: 0.6392157, b: 1, a: 0.78431374}
+  exitMenu: {fileID: 2825356075252890699}
+  playersListMenu: {fileID: 279582047655082704}
+  radialMenuPanel: {fileID: 1053121508256217689}
+  radialMenuMediaShare: {fileID: 831476925800874904}
+  handPointer: {fileID: 0}
+  penModel: {fileID: 6459917129897167596, guid: 031792deb602a054b8192ddd7167ddce,
+    type: 3}
 --- !u!1 &831476926410683045
 GameObject:
   m_ObjectHideFlags: 0
@@ -2339,7 +2346,7 @@ GameObject:
   - component: {fileID: 1725221055956719895}
   m_Layer: 0
   m_Name: ScriptAlias_leftController
-  m_TagString: controllerLeft
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6950,7 +6957,7 @@ GameObject:
   - component: {fileID: 1609256008143213554}
   m_Layer: 0
   m_Name: ExitMenu
-  m_TagString: ExitMenu
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7702,7 +7709,7 @@ Transform:
   m_GameObject: {fileID: 3114171305011063133}
   m_LocalRotation: {x: 0.68186426, y: -0, z: -0, w: 0.73147875}
   m_LocalPosition: {x: 0, y: 0.0292, z: -0.0508}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 8546681245585916105}
   m_Father: {fileID: 831476926410683044}
@@ -14135,10 +14142,10 @@ RectTransform:
   m_Father: {fileID: 8201642008588614690}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -360.13907, y: -0.004091263}
-  m_SizeDelta: {x: -770.2782, y: -69.987015}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 40, y: 0}
+  m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8382013774545433426
 CanvasRenderer:
@@ -15169,10 +15176,10 @@ RectTransform:
   m_Father: {fileID: 2159942408972861330}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -359.94794, y: 0.01582551}
-  m_SizeDelta: {x: -769.8959, y: -70.03165}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 40, y: 0}
+  m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2850841622835328235
 CanvasRenderer:
@@ -17464,10 +17471,10 @@ RectTransform:
   m_Father: {fileID: 673972843288981221}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -359.9234, y: 0.0010471344}
-  m_SizeDelta: {x: -769.8468, y: -69.996796}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 40, y: 0}
+  m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &549157736876329961
 CanvasRenderer:
@@ -17552,6 +17559,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hoverEnterIconColor: {r: 1, g: 1, b: 1, a: 0.78431374}
   hoverExitIconColor: {r: 0, g: 0.6392157, b: 1, a: 0.78431374}
+  exitMenu: {fileID: 2825356075252890699}
+  playersListMenu: {fileID: 279582047655082704}
+  radialMenuPanel: {fileID: 4769375456710636371}
+  radialMenuMediaShare: {fileID: 6369250569955248381}
+  handPointer: {fileID: 0}
+  penModel: {fileID: 6459917129897167596, guid: 031792deb602a054b8192ddd7167ddce,
+    type: 3}
 --- !u!1 &6402098234278389891
 GameObject:
   m_ObjectHideFlags: 0
@@ -24652,6 +24666,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hoverEnterIconColor: {r: 1, g: 1, b: 1, a: 0.78431374}
   hoverExitIconColor: {r: 0, g: 0.6392157, b: 1, a: 0.78431374}
+  exitMenu: {fileID: 2825356075252890699}
+  playersListMenu: {fileID: 279582047655082704}
+  radialMenuPanel: {fileID: 1053121508256217689}
+  radialMenuMediaShare: {fileID: 8961689084578950501}
+  handPointer: {fileID: 3536962009351073775, guid: 301e95d40e839424d9d4838d8d27333e,
+    type: 3}
+  penModel: {fileID: 6459917129897167596, guid: 031792deb602a054b8192ddd7167ddce,
+    type: 3}
 --- !u!1 &8974324570590500415
 GameObject:
   m_ObjectHideFlags: 0
