@@ -39,5 +39,10 @@ MonoBehaviour:
   - updateUserStatus
   - updateStatusSphereMaterial
   - gerneratePostIt
+  - PauseTimer
+  - ResetTimer
+  - StartTimer
+  - RPCPauseTimer
+  - deletePostIt
   DisableAutoOpenWizard: 1
   ShowSettings: 1
