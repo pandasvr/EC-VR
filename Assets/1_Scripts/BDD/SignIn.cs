@@ -10,10 +10,10 @@ public class SignIn : MonoBehaviour
     //champs noms et password récupérés depuis l'UI d'unity
     public InputField fieldName;
     public InputField fieldPassword;
+    public Animator Animator_Canva_Main;
     
-    public GameObject LoginPanel;
-    public GameObject MainPanel;
-    public Text InfoText;
+    //public GameObject LoginPanel;
+    //public GameObject MainPanel;
 
     private bool isValidPassword;
     private String userPassword;
@@ -75,32 +75,20 @@ public class SignIn : MonoBehaviour
                 if (isValidPassword)
                 {
                     Debug.Log("user connected");
-                    LoginPanel.SetActive(false);
-                    MainPanel.SetActive(true);
+                    //LoginPanel.SetActive(false);
+                    //MainPanel.SetActive(true);
                     fieldPassword.text=""; //on vide les champs pour que les identifiants ne soient pas "sauvegardés" par la page de connexion
                     fieldName.text = "";
-                    
-                    if (InfoText.enabled)
-                    {
-                        InfoText.gameObject.SetActive(false);
-                    }
+                    Animator_Canva_Main.Play("Login_to_MainMenu");
                 }
                 else
                 {
                     Debug.Log("wrong username or password");
-                    InfoText.text = "Nom d'utilisateur ou mot de passe incorrect";
-                    InfoText.color = Color.red;
-                    InfoText.enabled = true;
-                    InfoText.gameObject.SetActive(true);
                 }
             }
             else
             {
                 Debug.Log("wrong username or password");
-                InfoText.text = "Nom d'utilisateur ou mot de passe incorrect";
-                InfoText.color = Color.red;
-                InfoText.enabled = true;
-                InfoText.gameObject.SetActive(true);
             }
 
         }
