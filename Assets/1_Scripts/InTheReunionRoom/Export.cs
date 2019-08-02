@@ -29,7 +29,7 @@ public class Export : MonoBehaviour
 
         var pathName = "Resources/Documents/Capture/" + date.ToString("yyyy-MM-ddTHH-mm-ss") + ".png";
         
-        File.WriteAllBytes( pathName, bytes);
+        File.WriteAllBytes( Application.dataPath + pathName, bytes);
 
         StartCoroutine(SaveReport(pathName, date.ToString()));
         
