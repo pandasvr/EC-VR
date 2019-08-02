@@ -10674,7 +10674,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 022f1014f4c40b84bba79bca7cb5d2e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ipAddress: 192.168.0.101
+  ipAddress: 127.0.0.1
 --- !u!1 &577542000
 GameObject:
   m_ObjectHideFlags: 0
@@ -21771,50 +21771,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: Play
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Exit Panel In
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1311983443}
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 577394111}
-        m_MethodName: CreateNewRoom
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1272822516
@@ -30166,7 +30122,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f687d68a0851e0d499d85ee4c14876e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text_Info: {fileID: 0}
   Panel_Main: {fileID: 250530594}
   Panel_CreateRoom: {fileID: 1769275835}
   Field_RoomName: {fileID: 104038085}
@@ -30438,7 +30393,7 @@ MonoBehaviour:
   m_Content: {fileID: 1654876742}
   m_Horizontal: 0
   m_Vertical: 1
-  m_MovementType: 1
+  m_MovementType: 0
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
