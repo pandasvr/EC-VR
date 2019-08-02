@@ -86,6 +86,12 @@ public class GrabSettings : MonoBehaviour
                 radialMenuPostIt.SetActive(isPostItOnController);
             }
         }
+        try
+        {
+            instantiatedEraser.tag = "Eraser";
+            
+        }
+        catch(NullReferenceException){}
     }
 
     
@@ -168,7 +174,6 @@ public class GrabSettings : MonoBehaviour
             }
             else
             {
-                Debug.Log("dis program reaches here too2");
                 createTool(markerPrefab, out instantiatedMarker);
                 grabTool(instantiatedMarker);
                 //Il y a maintenant un post-it sur la manette, on passe ce bool à true.
@@ -236,6 +241,7 @@ public class GrabSettings : MonoBehaviour
             {
                 deleteWhiteboardTool();
                 createTool(eraserPrefab, out instantiatedEraser);
+                Debug.Log("instantiatedEraser " + instantiatedEraser.tag);
                 grabTool(instantiatedEraser);
                 //Il y a maintenant un post-it sur la manette, on passe ce bool à true.
                 isObjectOnController = true;
