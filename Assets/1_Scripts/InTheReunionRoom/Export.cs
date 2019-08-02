@@ -25,13 +25,13 @@ public class Export : MonoBehaviour
         // Encode texture into PNG
         byte[] bytes = tex.EncodeToPNG();
 
-        var date = DateTime.Today;
+        var date = DateTime.Now;
 
         var pathName = "Resources/Documents/Capture/" + date.ToString("yyyy-MM-ddTHH-mm-ss") + ".png";
         
-        File.WriteAllBytes( Application.dataPath + pathName, bytes);
+        File.WriteAllBytes( Path.Combine(Application.dataPath, pathName), bytes);
 
-        StartCoroutine(SaveReport(pathName, date.ToString()));
+        StartCoroutine(SaveReport(pathName));
         
         Debug.Log("Capture enregistrée");
 
@@ -39,29 +39,29 @@ public class Export : MonoBehaviour
     
     public void ExportPPT()
     {
-        var date = DateTime.Today;
+        var date = DateTime.Now;
 
         var pathName = "Resources/Documents/Capture/Whiteboard.pptx";
 
-        StartCoroutine(SaveReport(pathName, date.ToString()));
+        StartCoroutine(SaveReport(pathName));
         
         Debug.Log("PPT enregistrée");
     }
 
     public void ExportExcel()
     {
-        var date = DateTime.Today;
-
         var pathName = "Resources/Documents/Kanban/Kanban.xlsx";
 
-        StartCoroutine(SaveReport(pathName, date.ToString()));
+        StartCoroutine(SaveReport(pathName));
         
         Debug.Log("Excel enregistrée");
     }
 
-    public static IEnumerator SaveReport(string pathName, string date)
+    public static IEnumerator SaveReport(string pathName)
     {
         string urlCreateReport = Adressing.GetCreateReportUrl();
+        
+        var date = DateTime.Now.ToString();
 
         //Create form values for send
         form = new WWWForm();
