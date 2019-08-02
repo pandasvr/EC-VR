@@ -91,6 +91,7 @@ public class GrabSettings : MonoBehaviour
             instantiatedEraser.tag = "Eraser";
             
         }
+        catch(MissingReferenceException){}
         catch(NullReferenceException){}
     }
 
