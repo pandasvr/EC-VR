@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Photon.Pun;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,15 +20,51 @@ public class Timer : MonoBehaviour
     private bool isBlinkinkStart;
     private bool isTimerRunning;
     
-    private PhotonView photonView;
-    
     void Start ()
     {
         isTimerEnd = false;
         isTimerRunning = false;
-
-        photonView = GetComponent<PhotonView>();
     }
+    
+    public void StartTimer()
+    {
+        if (!isTimerRunning)
+        {
+            isTimerEnd = false;
+            StartCoroutine("UpdateTime");
+            Time.timeScale = 1; //Just making sure that the timeScale is right 
+        }
+    }
+
+    public void ResetTimer()
+    {
+        if (isTimerRunning)
+        {
+            StopCoroutine("UpdateTime");
+            isTimerRunning = false;
+            timerText.color = Color.white; 
+            if (timerText.enabled == false)
+            {
+                timerText.enabled = true;
+            }   
+        }   
+        
+        int intValue = dropdownTime.value;
+        string stringValue = dropdownTime.options[intValue].text;
+        timerMinutes = int.Parse(stringValue.Substring(0, 2));
+        timerSecondes = 0;
+    }
+	
+    public void PauseTimer()
+    {
+        if (isTimerRunning)
+        {
+            StopCoroutine("UpdateTime");
+            isTimerRunning = false;
+        }
+		
+	}
+
     
     void Update ()
     {
@@ -62,64 +97,7 @@ public class Timer : MonoBehaviour
             }
         }
     }
-
-    public void RPCStartTimer()
-    {
-        photonView.RPC("StartTimer", RpcTarget.All);
-    }
     
-    public void RPCResetTimer()
-    {
-        int intValue = dropdownTime.value;
-        string stringValue = dropdownTime.options[intValue].text;
-        photonView.RPC("ResetTimer", RpcTarget.All, stringValue);
-    }
-
-    public void RPCPauseTimer()
-    {
-        photonView.RPC("PauseTimer", RpcTarget.All);
-    }
-
-    [PunRPC]
-    private void StartTimer()
-    {
-        if (!isTimerRunning)
-        {
-            isTimerEnd = false;
-            StartCoroutine("UpdateTime");
-            Time.timeScale = 1; //Just making sure that the timeScale is right 
-        }
-    }
-
-    [PunRPC]
-    private void ResetTimer(string min)
-    {
-        if (isTimerRunning)
-        {
-            StopCoroutine("UpdateTime");
-            isTimerRunning = false;
-            timerText.color = Color.white; 
-            if (timerText.enabled == false)
-            {
-                timerText.enabled = true;
-            }   
-        }   
-        
-        timerMinutes = int.Parse(min.Substring(0, 2));
-        timerSecondes = 0;
-    }
-	
-    [PunRPC]
-    private void PauseTimer()
-    {
-        if (isTimerRunning)
-        {
-            StopCoroutine("UpdateTime");
-            isTimerRunning = false;
-        }
-		
-	}
-
     IEnumerator UpdateTime()
     {
         isTimerRunning = true;

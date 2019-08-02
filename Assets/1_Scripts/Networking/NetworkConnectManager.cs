@@ -27,7 +27,7 @@ namespace Networking
         private VrSettings scriptVrSettings;
         private static bool isCreatingRoom = false;
         private bool isJoiningRoom = false;
-        private static string roomName = "Test_Multi_Coworking";
+        private static string roomName;
         private static string maxPlayer;
         private static string labelEnvironnement;
 
@@ -106,7 +106,7 @@ namespace Networking
             {
                 //Création d'un nouveau salon
                 isCreatingRoom = false;
-                PhotonNetwork.JoinOrCreateRoom(roomName, new RoomOptions { MaxPlayers = Byte.Parse(maxPlayer) }, TypedLobby.Default, null);
+                PhotonNetwork.CreateRoom(roomName, new RoomOptions { MaxPlayers = Byte.Parse(maxPlayer) });
                 Debug.Log("Création du salon : " + roomName);
                 Debug.Log("Max players : " + maxPlayer);
             }

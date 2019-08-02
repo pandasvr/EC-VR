@@ -9,7 +9,8 @@ using Random = UnityEngine.Random;
 public class CreateRoom : MonoBehaviour
 {
     #region Public Fields
-    
+
+    public Text Text_Info;
     public GameObject Panel_Main;
     public GameObject Panel_CreateRoom;
     
@@ -49,6 +50,7 @@ public class CreateRoom : MonoBehaviour
         if (listinvites.Count == 0 )
         {
             Debug.Log("Erreur, pas d'utilisateurs invités");
+            Text_Info.text = "Erreur, vous n'avez pas invité d'utilisateurs";
         }
         else
         {
@@ -213,6 +215,7 @@ public class CreateRoom : MonoBehaviour
         }
         
         Debug.Log("création réussie");
+        Text_Info.text = "Création du salon réussie";
         Panel_Main.SetActive(true);
         Panel_CreateRoom.SetActive(false);
     }

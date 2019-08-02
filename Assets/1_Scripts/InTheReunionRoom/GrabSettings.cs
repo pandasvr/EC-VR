@@ -86,12 +86,24 @@ public class GrabSettings : MonoBehaviour
                 radialMenuPostIt.SetActive(isPostItOnController);
             }
         }
+        try
+        {
+            instantiatedEraser.tag = "Eraser";
+            
+        }
+        catch(NullReferenceException){}
     }
 
     
     /// ///////////////////////
     /// Post-its
     /// //////////////////////
+    /*PunRPC
+    public void synchronisationPostIt()
+    {
+        GetComponent<PhotonView>().RPC("gerneratePostIt", RpcTarget.All);
+    }*/
+    
     public void gerneratePostIt()
     {
         //condition pour ne pas créer plus d'un post-it à la fois
@@ -100,7 +112,7 @@ public class GrabSettings : MonoBehaviour
             //si on a trouvé la position de la main, alors on créée le post-it rattaché à celle-ci
             if (rightControllerExists) 
             {
-                GameObject postIt = PhotonNetwork.Instantiate("Vertical_Sticky_note_yellow", new Vector3(0, 0, 0), Quaternion.identity, 0);
+                GameObject postIt = Instantiate(postItPrefabs[0]);
                 postIt.transform.position = grabbingController.gameObject.transform.position+ new Vector3(0,0.08f,0);
                 postIt.transform.rotation = new Quaternion(90.0f,0.0f,0.0f, 90.0f);
                 grabbingController.GetComponent<VRTK_InteractTouch>().ForceTouch(postIt);
@@ -126,7 +138,7 @@ public class GrabSettings : MonoBehaviour
             //si on a trouvé la position de la main, alors on créée le post-it rattaché à celle-ci
             if (grabbingController.GetGrabbedObject().tag == "postit")
                 {
-                    PhotonNetwork.Destroy(grabbingController.GetGrabbedObject());
+                    Destroy(grabbingController.GetGrabbedObject());
                 }
                 //Il n'y a maintenant plus de post-it sur la manette, on passe ce bool à false.
                 isObjectOnController = false;
@@ -162,7 +174,6 @@ public class GrabSettings : MonoBehaviour
             }
             else
             {
-                Debug.Log("dis program reaches here too2");
                 createTool(markerPrefab, out instantiatedMarker);
                 grabTool(instantiatedMarker);
                 //Il y a maintenant un post-it sur la manette, on passe ce bool à true.
@@ -230,6 +241,7 @@ public class GrabSettings : MonoBehaviour
             {
                 deleteWhiteboardTool();
                 createTool(eraserPrefab, out instantiatedEraser);
+                Debug.Log("instantiatedEraser " + instantiatedEraser.tag);
                 grabTool(instantiatedEraser);
                 //Il y a maintenant un post-it sur la manette, on passe ce bool à true.
                 isObjectOnController = true;
