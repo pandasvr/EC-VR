@@ -2326,7 +2326,7 @@ MonoBehaviour:
   playersListMenu: {fileID: 0}
   radialMenuPanel: {fileID: 8312499875632765511}
   radialMenuMediaShare: {fileID: 0}
-  handPointer: {fileID: 0}
+  handPointer: {fileID: 3536962009351073775}
   penModel: {fileID: 6459917129897167596, guid: 031792deb602a054b8192ddd7167ddce,
     type: 3}
 --- !u!1 &8524944841369330483
