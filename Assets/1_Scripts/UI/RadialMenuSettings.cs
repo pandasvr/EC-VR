@@ -40,6 +40,7 @@ public class RadialMenuSettings : MonoBehaviour
         //initialisation des Bool
         isPenModelActive = false;
         isPlayersListActive = false;
+        playersListMenu.SetActive(isPlayersListActive);
     }
 
     //Change la couleur de l'icone en Hover Enter
@@ -146,11 +147,9 @@ public class RadialMenuSettings : MonoBehaviour
         {
             isActive = 0;
         }
-        
         ChangeUiPointerState(isPlayersListActive);
+        playersListMenu.SetActive(isPlayersListActive);
         playersListMenu.GetComponent<Animator>().SetInteger("isEnable",isActive);
-        
-
     }
 
     //Change le type de pointer entre le bezier (pour la téléportation) et le straight (pointer UI)
