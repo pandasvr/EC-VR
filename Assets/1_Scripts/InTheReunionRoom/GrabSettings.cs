@@ -188,7 +188,7 @@ public class GrabSettings : MonoBehaviour
     {
         tool = Instantiate(prefab);
         tool.transform.position =
-            grabbingController.gameObject.transform.position + new Vector3(0, 0.08f, 0);
+            grabbingController.gameObject.transform.position + new Vector3(0, -0.08f, 0);
         tool.transform.rotation = new Quaternion(90.0f, 0.0f, 0.0f, 90.0f);
         
 
