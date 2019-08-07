@@ -325,7 +325,7 @@ MonoBehaviour:
   paintMode: 0
   paintingTransform: {fileID: 4531899323020270}
   raycastLength: 0.01
-  brush: {fileID: 2800000, guid: deca7de0b5b178a4c8c7d32ee710942f, type: 3}
+  brush: {fileID: 2800000, guid: 6adc60fb2725fae42acab58a326e084e, type: 3}
   spacing: 0.5
   newPaintReceiver: {fileID: 0}
 --- !u!1 &1671179696074738
