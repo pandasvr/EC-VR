@@ -66,6 +66,7 @@ public class ListReport : MonoBehaviour
                 GameObject currentItem;
 
                 
+                
                 //affichage des donnés dans l'UI
                 foreach (var report in listReport)
                 {
@@ -111,6 +112,7 @@ public class ListReport : MonoBehaviour
                     //bouton rejoindre une salle
                     currentButtonDownload.gameObject.GetComponent<Button>().onClick.AddListener(delegate()
                     {
+                        Debug.Log("Path : "+Path.Combine(Application.dataPath,report.pathReport));
                         Process.Start(Path.Combine(Application.dataPath,report.pathReport));
                     });
                     
