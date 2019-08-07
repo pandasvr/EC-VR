@@ -8251,6 +8251,36 @@ PrefabInstance:
       propertyPath: InstantiationId
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 9060427448605212712, guid: 301e95d40e839424d9d4838d8d27333e,
+        type: 3}
+      propertyPath: exitMenu
+      value: 
+      objectReference: {fileID: 1601488011319605685}
+    - target: {fileID: 9060427448605212712, guid: 301e95d40e839424d9d4838d8d27333e,
+        type: 3}
+      propertyPath: playersListMenu
+      value: 
+      objectReference: {fileID: 1601488011319605684}
+    - target: {fileID: 9060427448605212712, guid: 301e95d40e839424d9d4838d8d27333e,
+        type: 3}
+      propertyPath: radialMenuMediaShare
+      value: 
+      objectReference: {fileID: 1601488011319605683}
+    - target: {fileID: 273977700961290356, guid: 301e95d40e839424d9d4838d8d27333e,
+        type: 3}
+      propertyPath: exitMenu
+      value: 
+      objectReference: {fileID: 1601488011319605685}
+    - target: {fileID: 273977700961290356, guid: 301e95d40e839424d9d4838d8d27333e,
+        type: 3}
+      propertyPath: playersListMenu
+      value: 
+      objectReference: {fileID: 1601488011319605684}
+    - target: {fileID: 273977700961290356, guid: 301e95d40e839424d9d4838d8d27333e,
+        type: 3}
+      propertyPath: radialMenuMediaShare
+      value: 
+      objectReference: {fileID: 1601488011319605683}
     - target: {fileID: 519634688186386138, guid: 301e95d40e839424d9d4838d8d27333e,
         type: 3}
       propertyPath: buttons.Array.data[2].OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
@@ -11615,6 +11645,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 73c5a3ea116ea0a4bb9489d3d4336805, type: 3}
+--- !u!1 &1601488011319605683 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 831476925800874904, guid: 73c5a3ea116ea0a4bb9489d3d4336805,
+    type: 3}
+  m_PrefabInstance: {fileID: 1601488011319605682}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1601488011319605684 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 279582047655082704, guid: 73c5a3ea116ea0a4bb9489d3d4336805,
+    type: 3}
+  m_PrefabInstance: {fileID: 1601488011319605682}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1601488011319605685 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2825356075252890699, guid: 73c5a3ea116ea0a4bb9489d3d4336805,
+    type: 3}
+  m_PrefabInstance: {fileID: 1601488011319605682}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2135815600224716768
 PrefabInstance:
   m_ObjectHideFlags: 0
