@@ -180,7 +180,13 @@ public class GrabSettings : MonoBehaviour
                 //Il y a maintenant un post-it sur la manette, on passe ce bool à true.
                 isObjectOnController = true;
             }
-
+            foreach (Transform child in instantiatedMarker.transform)
+            {
+                if (child.tag == "markerColouredParts")
+                {
+                    child.GetComponent<MeshRenderer>().material.color = Color.blue;
+                }
+            }
         }
     }
 

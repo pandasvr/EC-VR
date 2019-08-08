@@ -4,7 +4,6 @@ using UnityEngine.UI;
 public class Marker : MonoBehaviour
 {
     public GameObject paintingHead;
-    private Image paintingHeadImage;
     
     static public Color color;
 
@@ -27,11 +26,10 @@ public class Marker : MonoBehaviour
         paintReceiver = GameObject.FindGameObjectWithTag("paintReceiver").GetComponent<PaintReceiver>();
         painter.Initialize(paintReceiver);
         painter.ChangeColour(color);
-        paintingHeadImage = paintingHead.GetComponent<Image>();
+
     }
 
     private void Update()
     {
-        color = paintingHeadImage.color;
     }
 }
