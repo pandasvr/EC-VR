@@ -17,6 +17,7 @@ TagManager:
   - Whiteboard
   - Eraser
   - markerColouredParts
+  - doNotChangeColor
   layers:
   - Default
   - TransparentFX
