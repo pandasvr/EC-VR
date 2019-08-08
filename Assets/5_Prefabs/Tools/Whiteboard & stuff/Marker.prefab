@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 23964781365866088}
   m_Layer: 0
   m_Name: Cylinder
-  m_TagString: Untagged
+  m_TagString: markerColouredParts
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -167,7 +167,7 @@ GameObject:
   - component: {fileID: 23209495669898576}
   m_Layer: 0
   m_Name: Cylinder
-  m_TagString: Untagged
+  m_TagString: markerColouredParts
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -245,7 +245,7 @@ GameObject:
   - component: {fileID: 114131231495460612}
   m_Layer: 0
   m_Name: PaintingHead
-  m_TagString: Untagged
+  m_TagString: markerColouredParts
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -443,7 +443,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5b7ec9e60f4d134ea647044cc191eda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: {r: 1, g: 0, b: 0, a: 1}
+  color: {r: 0, g: 0.012959003, b: 1, a: 1}
   colouredParts:
   - {fileID: 23964781365866088}
   - {fileID: 23209495669898576}
