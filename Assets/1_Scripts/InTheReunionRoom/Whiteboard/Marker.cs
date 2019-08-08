@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class Marker : MonoBehaviour
 {
-    [SerializeField]
-    private Color color;
+    public GameObject paintingHead;
+    private Image paintingHeadImage;
+    
+    static public Color color;
 
     [SerializeField]
-    private MeshRenderer[] colouredParts;
+    public MeshRenderer[] colouredParts;
 
     [SerializeField]
     private Painter painter;
@@ -24,5 +27,11 @@ public class Marker : MonoBehaviour
         paintReceiver = GameObject.FindGameObjectWithTag("paintReceiver").GetComponent<PaintReceiver>();
         painter.Initialize(paintReceiver);
         painter.ChangeColour(color);
+        paintingHeadImage = paintingHead.GetComponent<Image>();
+    }
+
+    private void Update()
+    {
+        color = paintingHeadImage.color;
     }
 }

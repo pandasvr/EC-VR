@@ -19,7 +19,7 @@ public class GrabSettings : MonoBehaviour
     public GameObject radialMenuMarker;
 
     //variables servant à étudier la manette
-    protected VRTK_InteractGrab grabbingController;
+    public VRTK_InteractGrab grabbingController;
     protected bool rightControllerExists;
     
     //Booléen servant à traiter les objets présents sur la manette

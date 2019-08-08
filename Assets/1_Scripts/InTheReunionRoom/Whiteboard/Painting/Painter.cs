@@ -29,7 +29,9 @@ public class Painter : MonoBehaviour
 
     private Stamp stamp;
 
-    private Color color;
+    public GameObject paintinghead;
+    [SerializeField]
+    public Color color;
 
     private Vector2? lastDrawPosition = null;
     public PaintReceiver newPaintReceiver;
@@ -51,6 +53,7 @@ public class Painter : MonoBehaviour
 
     private void Update()
     {
+        
         currentAngle = -transform.rotation.eulerAngles.z;
 
         Ray ray = new Ray(paintingTransform.position, paintingTransform.forward);
@@ -60,6 +63,14 @@ public class Painter : MonoBehaviour
 
         try
         {
+            if (paintinghead == null)
+            {
+                paintinghead = GameObject.FindGameObjectWithTag("markerColouredParts");
+            }
+
+            color = new Color();
+            color = paintinghead.GetComponent<Painter>().color;
+            
             if (paintReceiverCollider.Raycast(ray, out hit, raycastLength))
             {
                 if (lastDrawPosition.HasValue && lastDrawPosition.Value != hit.textureCoord)
