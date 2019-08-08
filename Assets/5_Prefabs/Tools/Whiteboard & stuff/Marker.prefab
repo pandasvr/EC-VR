@@ -445,7 +445,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5b7ec9e60f4d134ea647044cc191eda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  paintingHead: {fileID: 0}
+  paintingHead: {fileID: 1634699966999316}
   colouredParts:
   - {fileID: 23964781365866088}
   - {fileID: 23209495669898576}

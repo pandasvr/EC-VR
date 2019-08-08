@@ -1425,6 +1425,7 @@ MonoBehaviour:
   - {fileID: 4565291926114981270}
   grabbingController: {fileID: 3536962009351073779}
   rightControllerExists: 0
+  photonView: {fileID: 1282526811843658178}
 --- !u!1 &4165488330104454069
 GameObject:
   m_ObjectHideFlags: 0
@@ -2153,7 +2154,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 0.78431374}
-    m_HighlightedColor: {r: 0.5613208, g: 0.8417314, b: 1, a: 0.78431374}
+    m_HighlightedColor: {r: 0, g: 0.8584906, b: 0.016833097, a: 1}
     m_PressedColor: {r: 1, g: 1, b: 1, a: 0.78431374}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -2168,7 +2169,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 8966697846275245659}
+  m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
@@ -3532,7 +3533,7 @@ PrefabInstance:
       objectReference: {fileID: 953941375064866745}
     - target: {fileID: 11411068, guid: d5fe2f7f9d3e98a478d151422643620c, type: 3}
       propertyPath: buttons.Array.data[0].OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: changeColor
+      value: synchronisationMarkerColor
       objectReference: {fileID: 0}
     - target: {fileID: 11411068, guid: d5fe2f7f9d3e98a478d151422643620c, type: 3}
       propertyPath: buttons.Array.data[0].OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
