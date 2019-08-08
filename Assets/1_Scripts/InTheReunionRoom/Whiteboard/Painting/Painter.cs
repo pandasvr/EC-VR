@@ -69,7 +69,7 @@ public class Painter : MonoBehaviour
             }
 
             color = new Color();
-            color = paintinghead.GetComponent<Painter>().color;
+            color = paintinghead.GetComponent<Renderer>().material.color;
             
             if (paintReceiverCollider.Raycast(ray, out hit, raycastLength))
             {
