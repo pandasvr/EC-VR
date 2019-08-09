@@ -70,31 +70,36 @@ public class Painter : MonoBehaviour
 
             color = new Color();
             color = paintinghead.GetComponent<Renderer>().material.color;
-            Debug.Log("paintinghead.GetComponent<Renderer>().material.color" + paintinghead.GetComponent<Renderer>().material.color);
-            Debug.Log("color" + color);
-            
-            if (paintReceiverCollider.Raycast(ray, out hit, raycastLength))
+        }
+        catch (UnityException)
+        {
+            color = new Color(0, 0, 0, 0);
+        }
+        catch (NullReferenceException)
+        {
+            color = new Color(0, 0, 0, 0);
+        }
+
+        if (paintReceiverCollider.Raycast(ray, out hit, raycastLength))
+        {
+            if (lastDrawPosition.HasValue && lastDrawPosition.Value != hit.textureCoord)
             {
-                if (lastDrawPosition.HasValue && lastDrawPosition.Value != hit.textureCoord)
-                {
-                    paintReceiver.DrawLine(stamp, lastDrawPosition.Value, hit.textureCoord, lastAngle, currentAngle,
-                        color, spacing);
-                }
-                else
-                {
-                    paintReceiver.CreateSplash(hit.textureCoord, stamp, color, currentAngle);
-                }
-
-                lastAngle = currentAngle;
-
-                lastDrawPosition = hit.textureCoord;
+                paintReceiver.DrawLine(stamp, lastDrawPosition.Value, hit.textureCoord, lastAngle, currentAngle,
+                    color, spacing);
             }
             else
             {
-                lastDrawPosition = null;
+                paintReceiver.CreateSplash(hit.textureCoord, stamp, color, currentAngle);
             }
+
+            lastAngle = currentAngle;
+
+            lastDrawPosition = hit.textureCoord;
         }
-        catch(NullReferenceException){}
+        else
+        {
+            lastDrawPosition = null;
+        }
     }
 
     public void ChangeColour(Color newColor)
