@@ -32,12 +32,13 @@ public class MarkerColor : MonoBehaviour
 
     
     
-    /*public void synchronisationMarkerColor()
+    public void synchronisationMarkerColor()
     {
         photonView.RPC("changeMarkerColor", RpcTarget.All);
-    }*/
+    }
    
-    public void changeMarkerColor()
+    [PunRPC]
+    private void changeMarkerColor()
     {
         if (grabbingController.GetGrabbedObject().tag == "Marker")
         {
@@ -59,11 +60,6 @@ public class MarkerColor : MonoBehaviour
                 else
                 {
                     ButtonIcons[i].transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
-                }
-
-                if (i == 3)
-                {
-                    ButtonIcons[i].GetComponent<Image>().color = new Color(1,200,5,255);
                 }
             }
 
