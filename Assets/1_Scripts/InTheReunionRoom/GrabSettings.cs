@@ -19,7 +19,7 @@ public class GrabSettings : MonoBehaviour
     public GameObject radialMenuMarker;
 
     //variables servant à étudier la manette
-    protected VRTK_InteractGrab grabbingController;
+    public VRTK_InteractGrab grabbingController;
     protected bool rightControllerExists;
     
     //Booléen servant à traiter les objets présents sur la manette
@@ -180,7 +180,13 @@ public class GrabSettings : MonoBehaviour
                 //Il y a maintenant un post-it sur la manette, on passe ce bool à true.
                 isObjectOnController = true;
             }
-
+            foreach (Transform child in instantiatedMarker.transform)
+            {
+                if (child.tag == "markerColouredParts")
+                {
+                    child.GetComponent<MeshRenderer>().material.color = Color.blue;
+                }
+            }
         }
     }
 
