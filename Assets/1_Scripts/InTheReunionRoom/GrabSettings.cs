@@ -221,7 +221,9 @@ public class GrabSettings : MonoBehaviour
             //si on a trouvé la position de la main, alors on créée le post-it rattaché à celle-ci
             if ((grabbingController.GetGrabbedObject().tag == "Marker")|(grabbingController.GetGrabbedObject().tag == "Eraser"))
             {
-                Destroy(grabbingController.GetGrabbedObject());
+                GameObject grabbedObject = grabbingController.GetGrabbedObject();
+                grabbingController.ForceRelease();
+                Destroy(grabbedObject);
             }
             //Il n'y a maintenant plus de post-it sur la manette, on passe ce bool à false.
             isObjectOnController = false;
@@ -248,7 +250,6 @@ public class GrabSettings : MonoBehaviour
             {
                 deleteWhiteboardTool();
                 createTool(eraserPrefab, out instantiatedEraser);
-                Debug.Log("instantiatedEraser " + instantiatedEraser.tag);
                 grabTool(instantiatedEraser);
                 //Il y a maintenant un post-it sur la manette, on passe ce bool à true.
                 isObjectOnController = true;
