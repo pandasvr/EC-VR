@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 
 public class Painter : MonoBehaviour
@@ -70,6 +70,8 @@ public class Painter : MonoBehaviour
 
             color = new Color();
             color = paintinghead.GetComponent<Renderer>().material.color;
+            Debug.Log("paintinghead.GetComponent<Renderer>().material.color" + paintinghead.GetComponent<Renderer>().material.color);
+            Debug.Log("color" + color);
             
             if (paintReceiverCollider.Raycast(ray, out hit, raycastLength))
             {
