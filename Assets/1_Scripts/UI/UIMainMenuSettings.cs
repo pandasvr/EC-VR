@@ -34,6 +34,9 @@ public class UIMainMenuSettings : MonoBehaviour
                         case "profil":
                             anim.Play("Profil_to_Salon");
                             break;
+                        /*case"salon":
+                            anim.Play("Salon_to_Salon");
+                            break;*/
                     }
                     break;
                 case "admin":
