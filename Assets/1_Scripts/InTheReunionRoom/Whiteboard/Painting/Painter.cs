@@ -80,26 +80,34 @@ public class Painter : MonoBehaviour
             color = new Color(0, 0, 0, 0);
         }
 
-        if (paintReceiverCollider.Raycast(ray, out hit, raycastLength))
+        try
         {
-            if (lastDrawPosition.HasValue && lastDrawPosition.Value != hit.textureCoord)
+            if (paintReceiverCollider.Raycast(ray, out hit, raycastLength))
             {
-                paintReceiver.DrawLine(stamp, lastDrawPosition.Value, hit.textureCoord, lastAngle, currentAngle,
-                    color, spacing);
+                if (lastDrawPosition.HasValue && lastDrawPosition.Value != hit.textureCoord)
+                {
+                    paintReceiver.DrawLine(stamp, lastDrawPosition.Value, hit.textureCoord, lastAngle, currentAngle,
+                        color, spacing);
+                }
+                else
+                {
+                    paintReceiver.CreateSplash(hit.textureCoord, stamp, color, currentAngle);
+                }
+
+                lastAngle = currentAngle;
+
+                lastDrawPosition = hit.textureCoord;
             }
             else
             {
-                paintReceiver.CreateSplash(hit.textureCoord, stamp, color, currentAngle);
+                lastDrawPosition = null;
             }
-
-            lastAngle = currentAngle;
-
-            lastDrawPosition = hit.textureCoord;
         }
-        else
+        catch (NullReferenceException)
         {
-            lastDrawPosition = null;
+            
         }
+        
     }
 
     public void ChangeColour(Color newColor)
