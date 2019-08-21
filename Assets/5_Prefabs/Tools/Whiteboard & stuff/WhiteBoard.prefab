@@ -634,6 +634,7 @@ GameObject:
   - component: {fileID: 64936179162660800}
   - component: {fileID: 23914136199674008}
   - component: {fileID: 114136108983000328}
+  - component: {fileID: 4971770496607016882}
   m_Layer: 0
   m_Name: PaintingReceiver
   m_TagString: paintReceiver
@@ -727,3 +728,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialTexture: {fileID: 2800000, guid: f28781d269b80f84cad8d911fbb0f642, type: 3}
+  photonView: {fileID: 4971770496607016882}
+--- !u!114 &4971770496607016882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966253842479998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 0
+  OwnershipTransfer: 0
+  ObservedComponents: []
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
