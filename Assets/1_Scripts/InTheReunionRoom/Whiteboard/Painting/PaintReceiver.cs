@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
 using System.IO;
+using Photon.Pun;
 
 [RequireComponent(typeof(MeshRenderer))]
 public class PaintReceiver : MonoBehaviour
@@ -18,6 +19,8 @@ public class PaintReceiver : MonoBehaviour
 	private int textureHeight;
 
     private bool wasModified = false;
+
+    public PhotonView photonView;
 
     private void Awake()
     {
@@ -43,11 +46,22 @@ public class PaintReceiver : MonoBehaviour
     {
         if(wasModified)
         {
-            newTexture.SetPixels32(currentTexture);
-            newTexture.Apply();
+            updateWhiteboardTexture();
 
             wasModified = false;
         }
+    }
+
+    public void updateWhiteboardTexture()
+    {
+        photonView.RPC("privateUpdateWhiteboardTexture", RpcTarget.All);
+    }
+    
+    [PunRPC]
+    private void privateUpdateWhiteboardTexture()
+    {
+        newTexture.SetPixels32(currentTexture);
+        newTexture.Apply();
     }
 
     /// <summary>
