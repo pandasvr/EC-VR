@@ -10674,7 +10674,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 022f1014f4c40b84bba79bca7cb5d2e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ipAddress: 192.168.0.101
+  ipAddress: 192.168.0.100
 --- !u!1 &577542000
 GameObject:
   m_ObjectHideFlags: 0
@@ -16835,7 +16835,7 @@ PrefabInstance:
     - target: {fileID: 3655189118741789948, guid: bb2f023c289a6f64ba2b55435cb408ea,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 317.1
+      value: 317.09998
       objectReference: {fileID: 0}
     - target: {fileID: 3655189118741789948, guid: bb2f023c289a6f64ba2b55435cb408ea,
         type: 3}
