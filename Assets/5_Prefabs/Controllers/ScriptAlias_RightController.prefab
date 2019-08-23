@@ -1164,7 +1164,7 @@ GameObject:
   - component: {fileID: 953941375064866745}
   m_Layer: 0
   m_Name: ScriptAlias_RightController
-  m_TagString: Untagged
+  m_TagString: controllerRight
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1395,7 +1395,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   postItPrefabs:
-  - {fileID: 1662342756697416, guid: 78ac3b9fd550d7540be3fbaa9e196a9b, type: 3}
+  - {fileID: 1662342756697416, guid: b8cf4a33dd186b048905048157e6003b, type: 3}
   - {fileID: 1115619020883368, guid: 3d7d64c7b6b02264eb809bf8deed526e, type: 3}
   - {fileID: 1204388543534328, guid: 4d72cff73973adb4ca94e746293939b7, type: 3}
   - {fileID: 1445205348632852, guid: cd545461a95448e4da083742a0b2adb3, type: 3}

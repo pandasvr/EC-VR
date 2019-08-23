@@ -113,7 +113,7 @@ public class GrabSettings : MonoBehaviour
             //si on a trouvé la position de la main, alors on créée le post-it rattaché à celle-ci
             if (rightControllerExists) 
             {
-                GameObject postIt = Instantiate(postItPrefabs[0]);
+                GameObject postIt = PhotonNetwork.Instantiate("Vertical_Sticky_note_yellow", new Vector3(0, 0, 0), Quaternion.identity, 0);
                 postIt.transform.position = grabbingController.gameObject.transform.position+ new Vector3(0,0.08f,0);
                 postIt.transform.rotation = new Quaternion(90.0f,0.0f,0.0f, 90.0f);
                 grabbingController.GetComponent<VRTK_InteractTouch>().ForceTouch(postIt);
@@ -139,7 +139,7 @@ public class GrabSettings : MonoBehaviour
             //si on a trouvé la position de la main, alors on créée le post-it rattaché à celle-ci
             if (grabbingController.GetGrabbedObject().tag == "postit")
                 {
-                    Destroy(grabbingController.GetGrabbedObject());
+                    PhotonNetwork.Destroy(grabbingController.GetGrabbedObject());
                 }
                 //Il n'y a maintenant plus de post-it sur la manette, on passe ce bool à false.
                 isObjectOnController = false;
