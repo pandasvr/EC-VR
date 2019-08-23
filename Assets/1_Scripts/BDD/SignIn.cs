@@ -79,7 +79,7 @@ public class SignIn : MonoBehaviour
                     //MainPanel.SetActive(true);
                     fieldPassword.text=""; //on vide les champs pour que les identifiants ne soient pas "sauvegardés" par la page de connexion
                     fieldName.text = "";
-                    Animator_Canva_Main.Play("Fade_Login");
+                    Animator_Canva_Main.Play("Login_to_MainMenu");
                 }
                 else
                 {

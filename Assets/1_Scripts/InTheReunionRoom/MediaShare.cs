@@ -7,7 +7,7 @@ public class MediaShare : MonoBehaviour
 {
     [Header(("Vidéo projecteur"))]
     public GameObject videoProjecteur;
-    public Image imageProjecteur;
+    public GameObject radialMenuProjecteur;
 
     [Header("Fake PowerPoint Slides")] 
     public Texture[] slides;
@@ -20,7 +20,7 @@ public class MediaShare : MonoBehaviour
 
     private Color offScreenProjecteur;
     
-    private bool powerpointState;
+    private bool powerpointState = false;
     private Sprite image;
     private int pageNumber;
     private int pageNumberMax;
@@ -63,10 +63,10 @@ public class MediaShare : MonoBehaviour
             videoProjecteur.GetComponent<Renderer>().material.color = Color.white;
         }
 
-        videoProjecteur.SetActive(videoIsOn); //si la vidéo est mise comme média, on active son support
+        videoProjecteur.SetActive(videoState); //si la vidéo est mise comme média, on active son support
 
 
-        if (videoIsOn)
+        if (videoState)
         {
             video.Play(); //si la vidéo est mise comme média, on active son support, on la met en play
         }
@@ -82,9 +82,8 @@ public class MediaShare : MonoBehaviour
     [PunRPC]
     private void StartPowerPoint(PhotonMessageInfo info)
     {
-        imageIsOn = !imageIsOn;
-        videoProjecteur.SetActive(false);
-        imageProjecteur.gameObject.SetActive(imageIsOn);
+        powerpointState = !powerpointState;
+        videoProjecteur.SetActive(powerpointState);
 
         if (videoState)
         {

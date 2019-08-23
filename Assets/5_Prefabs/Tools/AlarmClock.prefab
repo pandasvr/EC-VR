@@ -188,6 +188,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6947124522278593285}
   - component: {fileID: 4881595058688258241}
+  - component: {fileID: 8374327160846548172}
   m_Layer: 0
   m_Name: AlarmClock
   m_TagString: Untagged
@@ -206,7 +207,7 @@ Transform:
   m_LocalPosition: {x: 275.2465, y: 1.0969522, z: 188.47894}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 3859576059563314784}
+  - {fileID: 741293401299671154}
   - {fileID: 2033627000256512832}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -226,6 +227,59 @@ MonoBehaviour:
   timerText: {fileID: 2225912269864127470}
   timerMinutes: 1
   timerSecondes: 0
+  dropdownTime: {fileID: 0}
+--- !u!114 &8374327160846548172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1397606303389924827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 0
+  OwnershipTransfer: 0
+  ObservedComponents: []
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!1 &3361460830402505466
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 3859576059562923232}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 741293401299671154}
+  m_Layer: 0
+  m_Name: Clock (Missing Prefab)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &741293401299671154
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 3859576059562923232}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3361460830402505466}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 3859576059563314784}
+  m_Father: {fileID: 6947124522278593285}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4255948541666578843
 GameObject:
   m_ObjectHideFlags: 0
@@ -301,6 +355,37 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!1 &6810249908498415397
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 3859576059562923232}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3859576059563314784}
+  m_Layer: 0
+  m_Name: Missing Prefab (Dummy)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3859576059563314784
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 400000, guid: 15af12ba7d2f66c4490159c254667aa5,
+    type: 3}
+  m_PrefabInstance: {fileID: 3859576059562923232}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6810249908498415397}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 741293401299671154}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &3859576059562923232
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -308,10 +393,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6947124522278593285}
     m_Modifications:
-    - target: {fileID: 100000, guid: 15af12ba7d2f66c4490159c254667aa5, type: 3}
-      propertyPath: m_Name
-      value: Clock
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 15af12ba7d2f66c4490159c254667aa5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -368,6 +449,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 15af12ba7d2f66c4490159c254667aa5, type: 3}
+      propertyPath: m_Name
+      value: Clock
+      objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: 15af12ba7d2f66c4490159c254667aa5, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -378,9 +463,3 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: edbbca0b9f54b0a43be5309c16d247f1, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 15af12ba7d2f66c4490159c254667aa5, type: 3}
---- !u!4 &3859576059563314784 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 400000, guid: 15af12ba7d2f66c4490159c254667aa5,
-    type: 3}
-  m_PrefabInstance: {fileID: 3859576059562923232}
-  m_PrefabAsset: {fileID: 0}

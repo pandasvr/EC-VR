@@ -19,7 +19,7 @@ MonoBehaviour:
     AppVersion: 
     UseNameServer: 0
     FixedRegion: 
-    Server: 127.0.0.1
+    Server: 192.168.0.100
     Port: 5055
     Protocol: 0
     EnableLobbyStatistics: 1
@@ -39,5 +39,9 @@ MonoBehaviour:
   - updateUserStatus
   - updateStatusSphereMaterial
   - gerneratePostIt
+  - changeMarkerColor
+  - PauseTimer
+  - ResetTimer
+  - StartTimer
   DisableAutoOpenWizard: 1
   ShowSettings: 1
