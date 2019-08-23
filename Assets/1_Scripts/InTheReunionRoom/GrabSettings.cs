@@ -55,6 +55,8 @@ public class GrabSettings : MonoBehaviour
         }
         else
         {
+            rightControllerExists = true;
+                
             if (grabbingController.GetGrabbedObject() == null)
             {
                 isObjectOnController = false;
