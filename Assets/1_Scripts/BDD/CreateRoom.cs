@@ -70,7 +70,7 @@ public class CreateRoom : MonoBehaviour
             roomName = "Salon#" + Random.Range(1, 9999);
         }
         
-        switch (Slider_UserNumber.value)
+        /*switch (Slider_UserNumber.value)
         {
             case 1:
                 userNumber = 5;
@@ -89,6 +89,15 @@ public class CreateRoom : MonoBehaviour
         postIt = Toggle_PostIt.isOn.ToString();
         mediaProjection = Toggle_MediaProjection.isOn.ToString();
         chatNonVr = Toggle_ChatNonVr.isOn.ToString();
+        */
+        //TODO intégration temporaire des données
+        userNumber = 15;
+        whiteboard = "true";
+        postIt = "true";
+        mediaProjection = "true";
+        chatNonVr = "true";
+        //TODO End
+        
         environnement_id = Dropdown_Environnement.value + 1;
         userCreator_id = int.Parse(UnityEngine.PlayerPrefs.GetString("userId"));
         
