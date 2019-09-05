@@ -49,7 +49,7 @@ public class AddUserRoom : MonoBehaviour
 
             if (!string.IsNullOrEmpty(responseJson))
             {
-                float posY = 0;
+                float posY = 250;
                 GameObject currentToggleUser;
                 togglesList = new Dictionary<int, GameObject>();
                 
@@ -65,9 +65,9 @@ public class AddUserRoom : MonoBehaviour
                     //On vérifie si le userId correspond à l'Id de l'utilisateur connecté. Si oui, on n'ajoute pas son nom à la liste
                     if (int.Parse(r_idUser) != int.Parse(UnityEngine.PlayerPrefs.GetString("userId")))
                     {
-                        posY += init_posY;
+                        posY -= init_posY;
                         currentToggleUser = Instantiate(prefab_ToggleUser,scrollviewContent.transform);
-                        currentToggleUser.GetComponent<RectTransform>().anchoredPosition = new Vector2(50,posY);
+                        currentToggleUser.GetComponent<RectTransform>().anchoredPosition = new Vector2(0,posY);
                         GameObject currentTextName = currentToggleUser.transform.Find("Label").gameObject;
                         currentTextName.GetComponent<Text>().text = r_userLastName + ", " + r_userFirstName;
                     
