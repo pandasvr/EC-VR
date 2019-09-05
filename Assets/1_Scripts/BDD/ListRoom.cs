@@ -146,6 +146,8 @@ public class ListRoom : MonoBehaviour
                         currentItem.transform.Find("Label_owner").gameObject;
                     GameObject currentButtonJoinRoom =
                         currentItem.transform.Find("ButtonValidate").gameObject;
+                    GameObject currentTextNbrUser =
+                        currentItem.transform.Find("Label_nbrUsers").gameObject;
                     
                     //bouton rejoindre une salle
                     currentButtonJoinRoom.gameObject.GetComponent<Button>().onClick.AddListener(delegate()
@@ -159,6 +161,7 @@ public class ListRoom : MonoBehaviour
                     //valorisation des textes des game objects du prefab
                     currentTextNameRoom.GetComponent<Text>().text = room.roomName;
                     currentTextCreatorName.GetComponent<Text>().text = room.userCreatorName;
+                    currentTextNbrUser.GetComponent<Text>().text = room.maxPlayerRoom;
 
                     //activation du bouton modifier si on est le créateur de la salle
                     if (room.userCreatorName == UnityEngine.PlayerPrefs.GetString("userName"))
