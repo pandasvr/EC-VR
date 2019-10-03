@@ -10,17 +10,20 @@ public class CreateRoom : MonoBehaviour
 {
     #region Public Fields
     
-    public GameObject Panel_Main;
-    public GameObject Panel_CreateRoom;
-    
+    [Header("Options room")]
     public InputField Field_RoomName;
-    public Slider Slider_UserNumber;
+    public Dropdown Dropdown_Environnement;
+
+    [Header("Toggles option")] 
+    public Toggle Toggle_maxUser_1_5;
+    public Toggle Toggle_maxUser_6_10;
+    public Toggle Toggle_maxUser_11_15;
     public Toggle Toggle_Whiteboard;
     public Toggle Toggle_PostIt;
     public Toggle Toggle_MediaProjection;
     public Toggle Toggle_ChatNonVr;
-    public Dropdown Dropdown_Environnement;
-
+    
+    [Header("Script AddUserRoom")]
     public AddUserRoom AddUserRoomScript;
     
     #endregion
@@ -69,26 +72,26 @@ public class CreateRoom : MonoBehaviour
         {
             roomName = "Salon#" + Random.Range(1, 9999);
         }
-        
-        switch (Slider_UserNumber.value)
+
+        if (Toggle_maxUser_1_5.isOn)
         {
-            case 1:
-                userNumber = 5;
-                break;
-            case 2:
-                userNumber = 10;
-                break;
-            case 3:
-                userNumber = 15;
-                break;
-            default:
-                userNumber = 5;
-                break;
+            userNumber = 5;
         }
+        else if (Toggle_maxUser_6_10.isOn)
+        {
+            userNumber = 10;
+        }
+        else
+        {
+            userNumber = 15;
+        }
+        
         whiteboard = Toggle_Whiteboard.isOn.ToString();
         postIt = Toggle_PostIt.isOn.ToString();
         mediaProjection = Toggle_MediaProjection.isOn.ToString();
         chatNonVr = Toggle_ChatNonVr.isOn.ToString();
+        
+        
         environnement_id = Dropdown_Environnement.value + 1;
         userCreator_id = int.Parse(UnityEngine.PlayerPrefs.GetString("userId"));
         
@@ -213,7 +216,5 @@ public class CreateRoom : MonoBehaviour
         }
         
         Debug.Log("création réussie");
-        Panel_Main.SetActive(true);
-        Panel_CreateRoom.SetActive(false);
     }
 }

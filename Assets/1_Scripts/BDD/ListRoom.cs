@@ -127,24 +127,27 @@ public class ListRoom : MonoBehaviour
                     }
                 }
 
+                posY = -50;
+                RectTransform rt = scrollviewContent.GetComponent<RectTransform>();
+                
                 //affichage des donnés dans l'UI
                 foreach (var room in listRoom)
                 {
-                    posY -= 80;
-                    
                     //instanciation du prefab
                     currentItem = Instantiate(itemListRoom, scrollviewContent.transform);
                     
                     //placement du prefab
-                    currentItem.GetComponent<RectTransform>().anchoredPosition = new Vector2(-40, posY);
+                    currentItem.GetComponent<RectTransform>().anchoredPosition = new Vector2(-570, posY);
                     
                     //récupération des game objects du prefab
                     GameObject currentTextNameRoom =
-                        currentItem.transform.Find("Title_RoomName/Label").gameObject;
+                        currentItem.transform.Find("Label_room").gameObject;
                     GameObject currentTextCreatorName =
-                        currentItem.transform.Find("Title_CreatorName/Label").gameObject;
+                        currentItem.transform.Find("Label_owner").gameObject;
                     GameObject currentButtonJoinRoom =
-                        currentItem.transform.Find("Button_joinRoom").gameObject;
+                        currentItem.transform.Find("ButtonValidate").gameObject;
+                    GameObject currentTextNbrUser =
+                        currentItem.transform.Find("Label_nbrUsers").gameObject;
                     
                     //bouton rejoindre une salle
                     currentButtonJoinRoom.gameObject.GetComponent<Button>().onClick.AddListener(delegate()
@@ -158,14 +161,18 @@ public class ListRoom : MonoBehaviour
                     //valorisation des textes des game objects du prefab
                     currentTextNameRoom.GetComponent<Text>().text = room.roomName;
                     currentTextCreatorName.GetComponent<Text>().text = room.userCreatorName;
+                    currentTextNbrUser.GetComponent<Text>().text = room.maxPlayerRoom;
 
                     //activation du bouton modifier si on est le créateur de la salle
                     if (room.userCreatorName == UnityEngine.PlayerPrefs.GetString("userName"))
                     {
                         GameObject currentButtonModify =
-                            currentItem.transform.Find("Button_modify").gameObject;
+                            currentItem.transform.Find("ButtonOptions").gameObject;
                         currentButtonModify.SetActive(true);
                     }
+                    
+                    posY -= 100;
+                    rt.sizeDelta = new Vector2 (rt.sizeDelta.x, rt.sizeDelta.y + 100);
                 }
             }
         }

@@ -34,6 +34,12 @@ public class UIMainMenuSettings : MonoBehaviour
                         case "profil":
                             anim.Play("Profil_to_Salon");
                             break;
+                        case "joinRoom":
+                            anim.Play("JoinRoom_to_Salon");
+                            break;
+                        /*case"salon":
+                            anim.Play("Salon_to_Salon");
+                            break;*/
                     }
                     break;
                 case "admin":
@@ -77,6 +83,14 @@ public class UIMainMenuSettings : MonoBehaviour
                             anim.Play("Options_to_Profil");
                             break;
                     }
+                    break;
+                
+                case "createRoom":
+                    anim.Play("Salon_to_CreateRoom");
+                    break;
+                
+                case "joinRoom":
+                    anim.Play("Salon_to_JoinRoom");
                     break;
             }
             
