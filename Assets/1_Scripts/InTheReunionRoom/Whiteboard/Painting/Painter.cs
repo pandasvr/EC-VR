@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 
 public class Painter : MonoBehaviour
@@ -29,7 +29,9 @@ public class Painter : MonoBehaviour
 
     private Stamp stamp;
 
-    private Color color;
+    public GameObject paintinghead;
+    [SerializeField]
+    public Color color;
 
     private Vector2? lastDrawPosition = null;
     public PaintReceiver newPaintReceiver;
@@ -51,12 +53,32 @@ public class Painter : MonoBehaviour
 
     private void Update()
     {
+        
         currentAngle = -transform.rotation.eulerAngles.z;
 
         Ray ray = new Ray(paintingTransform.position, paintingTransform.forward);
         RaycastHit hit;
 
         Debug.DrawRay(ray.origin, ray.direction * raycastLength);
+
+        try
+        {
+            if (paintinghead == null)
+            {
+                paintinghead = GameObject.FindGameObjectWithTag("markerColouredParts");
+            }
+
+            color = new Color();
+            color = paintinghead.GetComponent<Renderer>().material.color;
+        }
+        catch (UnityException)
+        {
+            color = new Color(0, 0, 0, 0);
+        }
+        catch (NullReferenceException)
+        {
+            color = new Color(0, 0, 0, 0);
+        }
 
         try
         {
@@ -81,7 +103,11 @@ public class Painter : MonoBehaviour
                 lastDrawPosition = null;
             }
         }
-        catch(NullReferenceException){}
+        catch (NullReferenceException)
+        {
+            
+        }
+        
     }
 
     public void ChangeColour(Color newColor)

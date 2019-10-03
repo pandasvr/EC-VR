@@ -16,6 +16,8 @@ TagManager:
   - paintReceiver
   - Whiteboard
   - Eraser
+  - markerColouredParts
+  - doNotChangeColor
   layers:
   - Default
   - TransparentFX

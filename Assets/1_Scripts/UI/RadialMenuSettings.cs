@@ -46,15 +46,22 @@ public class RadialMenuSettings : MonoBehaviour
     //Change la couleur de l'icone en Hover Enter
     public void HoverEnterColorIcon(Image icon)
     {
-        icon.color = new Color();
-        icon.color = hoverEnterIconColor;
+        if (icon.tag != "doNotChangeColor")
+        {
+            icon.color = new Color();
+            icon.color = hoverEnterIconColor;
+        }
+        
     }
     
     //Change la couleur de l'icone en Hover Exit
     public void HoverExitColorIcon(Image icon)
     {
-        icon.color = new Color();
-        icon.color = hoverExitIconColor;
+        if (icon.tag != "doNotChangeColor")
+        {
+            icon.color = new Color();
+            icon.color = hoverExitIconColor;
+        }
     }
 
     //Effectue une animation de l'Arc button en Hover Enter
